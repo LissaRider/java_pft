@@ -2,14 +2,34 @@ apply plugin: 'java'
 apply plugin: 'application'
 mainClassName = "ru.stqa.pft.sandbox.MyFirstProgram"
 
-repositories {
-    mavenCentral()
-}
+/**
+ * Repositories
+ */
+repositories.mavenCentral()
 
-dependencies {
-    implementation group: 'org.testng', name: 'testng', version: '7.1.0'
-}
+/**
+ * Dependencies
+ */
+dependencies.implementation group: 'org.testng', name: 'testng', version: '7.1.0'
 
-test {
-    useTestNG()
-}
+/**
+ * Test Framework
+ */
+test.useTestNG()
+
+/**
+ * 1st approach: Setting encoding during compilation in Java and Test classes
+ */
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+/**
+ * 2nd approach: Setting encoding during compilation in Java and Test classes
+ *
+ tasks.withType(JavaCompile) {
+ options.encoding = "UTF-8"
+ }
+ tasks.withType(Test) {
+ systemProperty "file.encoding", "UTF-8"
+ }
+ */
