@@ -30,7 +30,7 @@ public class GroupCreationTests {
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     baseUrl = "http://localhost/addressbook";
     driver.get(baseUrl);
-    login("admin","secret");
+    login(new LoginData("admin", "secret"));
   }
 
   @Test
@@ -68,8 +68,8 @@ public class GroupCreationTests {
   //endregion
 
   //region Login methods
-  public void login(String username, String password) {
-    fillLoginForm(username, password);
+  public void login(LoginData loginData) {
+    fillLoginForm(loginData.getUsername(), loginData.getPassword());
     submitLogin();
   }
 
