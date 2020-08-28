@@ -37,12 +37,12 @@ public class GroupCreationTests {
   public void testGroupCreation() {
     goToGroupsPage();
     initGroupCreation();
-    fillGroupForm(
+    fillGroupForm(new GroupData(
             "Relatives",
             "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
             "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
                     "target=\"_self\">add group</a>"
-    );
+    ));
     submitGroupCreation();
     returnToGroupsPage();
   }
@@ -95,10 +95,10 @@ public class GroupCreationTests {
     getAnyElement(addGroupBtnLoc).click(); /*любая кнопка из найденных*/
   }
 
-  private void fillGroupForm(String name, String header, String footer) {
-    clearAndType(groupNameLoc, name);
-    clearAndType(groupHeaderLoc, header);
-    clearAndType(groupFooterLoc, footer);
+  private void fillGroupForm(GroupData groupData) {
+    clearAndType(groupNameLoc, groupData.getName());
+    clearAndType(groupHeaderLoc, groupData.getHeader());
+    clearAndType(groupFooterLoc, groupData.getFooter());
   }
   //endregion
 
