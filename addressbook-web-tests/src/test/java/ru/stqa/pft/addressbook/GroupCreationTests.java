@@ -18,7 +18,7 @@ public class GroupCreationTests {
 
   @BeforeClass(alwaysRun = true)
   public void setUp() {
-    
+
     driver = new FirefoxDriver();
 
 //    driver = new ChromeDriver();
@@ -33,20 +33,18 @@ public class GroupCreationTests {
     login("admin","secret");
   }
 
-
   @Test
   public void testGroupCreation() {
-    getElement(groupsPageNavLinkLoc).click();
-//    getElement(topAddGroupBtnLoc).click(); /*только верхняя кнопка*/
-//    getElement(bottomAddGroupBtnLoc).click(); /*только нижняя кнопка*/
-//    getFirstElement(addGroupBtnLoc).click(); /*первая кнопка из найденных*/
-    getAnyElement(addGroupBtnLoc).click(); /*любая кнопка из найденных*/
-    clearAndType(groupNameLoc, "Relatives");
-    clearAndType(groupHeaderLoc, "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>");
-    clearAndType(groupFooterLoc, "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
-            "target=\"_self\">add group</a>");
-    getElement(createGroupBtnLoc).click();
-    getElement(returnToGroupsPageBtnLoc).click();
+    goToGroupsPage();
+    initGroupCreation();
+    fillGroupForm(
+            "Relatives",
+            "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
+            "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
+                    "target=\"_self\">add group</a>"
+    );
+    submitGroupCreation();
+    returnToGroupsPage();
   }
 
   @AfterClass(alwaysRun = true)
@@ -69,32 +67,49 @@ public class GroupCreationTests {
   public By returnToGroupsPageBtnLoc = By.cssSelector("#content a[href='group.php']");
   //endregion
 
-  //region Helper methods
+  //region Login methods
   public void login(String username, String password) {
-    getElement(usernameLoc).click();
-    getElement(usernameLoc).clear();
-    getElement(usernameLoc).sendKeys(username);
+    fillLoginForm(username, password);
+    submitLogin();
+  }
+
+  private void fillLoginForm(String username, String password) {
+    clearAndType(usernameLoc, username);
     clearAndType(passwordLoc,password);
-    getElement(loginBtnLoc).click();
+  }
+
+  private void submitLogin() { getElement(loginBtnLoc).click(); }
+  //endregion
+
+  //region Group methods
+  private void returnToGroupsPage() { getElement(returnToGroupsPageBtnLoc).click(); }
+
+  private void submitGroupCreation() { getElement(createGroupBtnLoc).click(); }
+
+  private void goToGroupsPage() { getElement(groupsPageNavLinkLoc).click(); }
+
+  private void initGroupCreation() {
+//    getElement(topAddGroupBtnLoc).click(); /*только верхняя кнопка*/
+//    getElement(bottomAddGroupBtnLoc).click(); /*только нижняя кнопка*/
+//    getFirstElement(addGroupBtnLoc).click(); /*первая кнопка из найденных*/
+    getAnyElement(addGroupBtnLoc).click(); /*любая кнопка из найденных*/
+  }
+
+  private void fillGroupForm(String name, String header, String footer) {
+    clearAndType(groupNameLoc, name);
+    clearAndType(groupHeaderLoc, header);
+    clearAndType(groupFooterLoc, footer);
   }
   //endregion
 
   // region Base methods
-  public WebElement getElement(By by) {
-    return driver.findElement(by);
-  }
+  public WebElement getElement(By by) { return driver.findElement(by); }
 
-  public List<WebElement> getElements(By by) {
-    return driver.findElements(by);
-  }
+  public List<WebElement> getElements(By by) { return driver.findElements(by); }
 
-  public WebElement getAnyElement(By by) {
-    return getElements(by).stream().findAny().get();
-  }
+  public WebElement getAnyElement(By by) { return getElements(by).stream().findAny().get(); }
 
-  public WebElement getFirstElement(By by) {
-    return getElements(by).stream().findFirst().get();
-  }
+  public WebElement getFirstElement(By by) { return getElements(by).stream().findFirst().get(); }
 
   public void clearAndType(By by, String value) {
     getElement(by).click();
