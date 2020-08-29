@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class ContactCreationTests {
+public class ContactCreationTests extends TestBase{
 
   private WebDriver driver;
   private String baseUrl;
@@ -40,7 +40,7 @@ public class ContactCreationTests {
   }
 
   @Test
-  public void testContactCreation() throws InterruptedException {
+  public void testContactCreation() {
     openEditContactPage();
     System.out.println(System.getProperty("user.dir").replace("\\", "/") +
                     "/src/test/resources/dark_alice.jpg");

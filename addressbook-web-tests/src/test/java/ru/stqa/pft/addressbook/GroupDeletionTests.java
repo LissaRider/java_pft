@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class GroupDeletionTests {
+public class GroupDeletionTests extends TestBase {
 
   private WebDriver driver;
   private String baseUrl;

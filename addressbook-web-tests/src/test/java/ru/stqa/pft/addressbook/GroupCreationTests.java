@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class GroupCreationTests {
+public class GroupCreationTests extends TestBase {
 
   private WebDriver driver;
   private String baseUrl;
