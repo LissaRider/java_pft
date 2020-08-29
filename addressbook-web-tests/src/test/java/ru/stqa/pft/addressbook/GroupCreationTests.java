@@ -19,6 +19,7 @@ public class GroupCreationTests {
   @BeforeClass(alwaysRun = true)
   public void setUp() {
 
+    //region Drivers
     driver = new FirefoxDriver();
 
 //    driver = new ChromeDriver();
@@ -26,10 +27,13 @@ public class GroupCreationTests {
 //    InternetExplorerOptions ieOptions = new InternetExplorerOptions();
 //    ieOptions.disableNativeEvents();
 //    driver = new InternetExplorerDriver(ieOptions);
+    //endregion
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
     baseUrl = "http://localhost/addressbook";
     driver.get(baseUrl);
+
     login(new LoginData("admin", "secret"));
   }
 
