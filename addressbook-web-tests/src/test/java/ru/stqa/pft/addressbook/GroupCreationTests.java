@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class GroupCreationTests {
+
   private WebDriver driver;
   private String baseUrl;
 
@@ -52,9 +53,7 @@ public class GroupCreationTests {
   }
 
   @AfterClass(alwaysRun = true)
-  public void tearDown() {
-    driver.quit();
-  }
+  public void tearDown() { driver.quit(); }
 
   //region Locators
   public By passwordLoc = By.name("pass");
@@ -62,13 +61,13 @@ public class GroupCreationTests {
   public By loginBtnLoc = By.cssSelector("input[type=submit]");
   public By groupsPageNavLinkLoc = By.cssSelector("#nav a[href='group.php']");
   public By addGroupBtnLoc = By.name("new");
-  //  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
+//  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
 //  public By bottomAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(2)");
   public By groupNameLoc = By.name("group_name");
   public By groupHeaderLoc = By.name("group_header");
   public By groupFooterLoc = By.name("group_footer");
   public By createGroupBtnLoc = By.name("submit");
-  public By returnToGroupsPageBtnLoc = By.cssSelector("#content a[href='group.php']");
+  public By returnToGroupsPageLinkLoc = By.cssSelector("#content a[href='group.php']");
   //endregion
 
   //region Login methods
@@ -77,29 +76,29 @@ public class GroupCreationTests {
     submitLogin();
   }
 
-  private void fillLoginForm(String username, String password) {
+  public void fillLoginForm(String username, String password) {
     clearAndType(usernameLoc, username);
     clearAndType(passwordLoc,password);
   }
 
-  private void submitLogin() { getElement(loginBtnLoc).click(); }
+  public void submitLogin() { getElement(loginBtnLoc).click(); }
   //endregion
 
   //region Group methods
-  private void returnToGroupsPage() { getElement(returnToGroupsPageBtnLoc).click(); }
+  public void returnToGroupsPage() { getElement(returnToGroupsPageLinkLoc).click(); }
 
-  private void submitGroupCreation() { getElement(createGroupBtnLoc).click(); }
+  public void submitGroupCreation() { getElement(createGroupBtnLoc).click(); }
 
-  private void goToGroupsPage() { getElement(groupsPageNavLinkLoc).click(); }
+  public void goToGroupsPage() { getElement(groupsPageNavLinkLoc).click(); }
 
-  private void initGroupCreation() {
+  public void initGroupCreation() {
 //    getElement(topAddGroupBtnLoc).click(); /*только верхняя кнопка*/
 //    getElement(bottomAddGroupBtnLoc).click(); /*только нижняя кнопка*/
 //    getFirstElement(addGroupBtnLoc).click(); /*первая кнопка из найденных*/
     getAnyElement(addGroupBtnLoc).click(); /*любая кнопка из найденных*/
   }
 
-  private void fillGroupForm(GroupData groupData) {
+  public void fillGroupForm(GroupData groupData) {
     clearAndType(groupNameLoc, groupData.getName());
     clearAndType(groupHeaderLoc, groupData.getHeader());
     clearAndType(groupFooterLoc, groupData.getFooter());

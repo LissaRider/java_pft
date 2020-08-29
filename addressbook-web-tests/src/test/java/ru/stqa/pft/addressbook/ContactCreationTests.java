@@ -1,130 +1,213 @@
 package ru.stqa.pft.addressbook;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+//import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ContactCreationTests {
+
   private WebDriver driver;
   private String baseUrl;
 
   @BeforeClass(alwaysRun = true)
   public void setUp() {
-    driver = new FirefoxDriver();
-    baseUrl = "https://www.google.com/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+    //region Drivers
+//    driver = new FirefoxDriver();
+
+    driver = new ChromeDriver();
+
+//    InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+//    ieOptions.disableNativeEvents();
+//    driver = new InternetExplorerDriver(ieOptions);
+    //endregion
+
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+    baseUrl = "http://localhost/addressbook";
+    driver.get(baseUrl);
+
+    login(new LoginData("admin", "secret"));
   }
 
   @Test
-  public void testContactCreation() {
-    driver.get("https://localhost/addressbook");
-    driver.findElement(By.name("user")).click();
-    driver.findElement(By.name("user")).clear();
-    driver.findElement(By.name("user")).sendKeys("admin");
-    driver.findElement(By.name("pass")).click();
-    driver.findElement(By.name("pass")).clear();
-    driver.findElement(By.name("pass")).sendKeys("secret");
-    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-    driver.findElement(By.linkText("add new")).click();
-    driver.findElement(By.name("firstname")).click();
-    driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name("firstname")).sendKeys("Alice");
-    driver.findElement(By.name("middlename")).click();
-    driver.findElement(By.name("middlename")).clear();
-    driver.findElement(By.name("middlename")).sendKeys("Batkovna");
-    driver.findElement(By.name("lastname")).click();
-    driver.findElement(By.name("lastname")).clear();
-    driver.findElement(By.name("lastname")).sendKeys("Fabler");
-    driver.findElement(By.name("nickname")).click();
-    driver.findElement(By.name("nickname")).clear();
-    driver.findElement(By.name("nickname")).sendKeys("LisAnieL");
-    driver.findElement(By.name("photo")).click();
-    driver.findElement(By.name("photo")).clear();
-    driver.findElement(By.name("photo")).sendKeys("C:\\fakepath\\dark_alice.jpg");
-    driver.findElement(By.name("title")).click();
-    driver.findElement(By.name("title")).clear();
-    driver.findElement(By.name("title")).sendKeys("Middle QA Automation Engineer");
-    driver.findElement(By.name("company")).click();
-    driver.findElement(By.name("company")).clear();
-    driver.findElement(By.name("company")).sendKeys("Bank");
-    driver.findElement(By.name("address")).click();
-    driver.findElement(By.name("address")).clear();
-    driver.findElement(By.name("address")).sendKeys("Moscow, Chertanovo Tsentralnoye District");
-    driver.findElement(By.name("theform")).click();
-    driver.findElement(By.name("home")).click();
-    driver.findElement(By.name("home")).clear();
-    driver.findElement(By.name("home")).sendKeys("8(495) 000-00-00");
-    driver.findElement(By.name("mobile")).click();
-    driver.findElement(By.name("mobile")).clear();
-    driver.findElement(By.name("mobile")).sendKeys("8(999) 000-00-00");
-    driver.findElement(By.name("work")).click();
-    driver.findElement(By.name("work")).clear();
-    driver.findElement(By.name("work")).sendKeys("8(800) 888-88-88");
-    driver.findElement(By.name("fax")).click();
-    driver.findElement(By.name("fax")).clear();
-    driver.findElement(By.name("fax")).sendKeys("8(800) 888-88-80");
-    driver.findElement(By.name("email")).click();
-    driver.findElement(By.name("email")).clear();
-    driver.findElement(By.name("email")).sendKeys("lissarider@gmail.com");
-    driver.findElement(By.name("email2")).click();
-    driver.findElement(By.name("email2")).clear();
-    driver.findElement(By.name("email2")).sendKeys("lisaniel.lisaniel@gmail.com");
-    driver.findElement(By.name("email3")).click();
-    driver.findElement(By.name("email3")).clear();
-    driver.findElement(By.name("email3")).sendKeys("lisaniel@mail.ru");
-    driver.findElement(By.name("homepage")).click();
-    driver.findElement(By.name("homepage")).clear();
-    driver.findElement(By.name("homepage")).sendKeys("www.fairytales.com");
-    driver.findElement(By.name("bday")).click();
-    new Select(driver.findElement(By.name("bday"))).selectByVisibleText("8");
-    driver.findElement(By.name("bday")).click();
-    driver.findElement(By.name("bmonth")).click();
-    new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText("March");
-    driver.findElement(By.name("bmonth")).click();
-    driver.findElement(By.name("byear")).click();
-    driver.findElement(By.name("byear")).clear();
-    driver.findElement(By.name("byear")).sendKeys("1996");
-    driver.findElement(By.name("aday")).click();
-    new Select(driver.findElement(By.name("aday"))).selectByVisibleText("8");
-    driver.findElement(By.name("aday")).click();
-    driver.findElement(By.name("amonth")).click();
-    new Select(driver.findElement(By.name("amonth"))).selectByVisibleText("March");
-    driver.findElement(By.name("amonth")).click();
-    driver.findElement(By.name("ayear")).click();
-    driver.findElement(By.name("ayear")).clear();
-    driver.findElement(By.name("ayear")).sendKeys("2026");
-    driver.findElement(By.name("new_group")).click();
-    new Select(driver.findElement(By.name("new_group"))).selectByVisibleText("Relatives");
-    driver.findElement(By.name("new_group")).click();
-    driver.findElement(By.name("address2")).click();
-    driver.findElement(By.name("address2")).clear();
-    driver.findElement(By.name("address2")).sendKeys("Moscow, Biryulyovo Zapadnoye District");
-    driver.findElement(By.name("phone2")).click();
-    driver.findElement(By.name("phone2")).clear();
-    driver.findElement(By.name("phone2")).sendKeys("8(909) 999-99-99");
-    driver.findElement(By.name("notes")).click();
-    driver.findElement(By.name("notes")).clear();
-    driver.findElement(By.name("notes")).sendKeys("\"'Who in the world am I?' Ah, that's the great puzzle!\"");
-    driver.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
-    driver.findElement(By.linkText("home page")).click();
+  public void testContactCreation() throws InterruptedException {
+    openEditContactPage();
+    System.out.println(System.getProperty("user.dir").replace("\\", "/") +
+                    "/src/test/resources/dark_alice.jpg");
+    fillContactForm(new ContactData(
+            "Alice",
+            "Batkovna",
+            "Fabler",
+            "LisAnieL",
+            System.getProperty("user.dir").replace("\\", "/") +
+                    "/src/test/resources/dark_alice.jpg",
+            "Middle QA Automation Engineer",
+            "Bank",
+            "Moscow, Chertanovo Tsentralnoye District",
+            "8(495) 000-00-00",
+            "8(999) 000-00-00",
+            "8(800) 888-88-88",
+            "8(800) 888-88-80",
+            "lissarider@gmail.com",
+            "lisaniel.lisaniel@gmail.com",
+            "lisaniel@mail.ru",
+            "www.fairytales.com",
+            9,
+            "March",
+            "1996",
+            "8",
+            "March",
+            "2026",
+            "Moscow, Biryulyovo Zapadnoye District",
+            "8(909) 999-99-99",
+            "\"Who in the world am I?\" Ah, that is the great puzzle!"));
+    submitContactCreation();
+    returnToHomePage();
+//    returnToEditContactPage();
   }
 
   @AfterClass(alwaysRun = true)
   public void tearDown() { driver.quit(); }
 
-  private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
+  //region Locators
+  public By passwordLoc = By.name("pass");
+  public By usernameLoc = By.name("user");
+  public By loginBtnLoc = By.cssSelector("input[type=submit]");
+  public By editContactPageLinkLoc = By.cssSelector("#nav [href='edit.php']");
+  public By firstNameLoc = By.name("firstname");
+  public By middleNameLoc = By.name("middlename");
+  public By lastNameLoc = By.name("lastname");
+  public By nicknameLoc = By.name("nickname");
+  public By inputFileLoc = By.name("photo");
+  public By jobTitleLoc = By.name("title");
+  public By companyNameLoc = By.name("company");
+  public By mainAddressLoc = By.name("address");
+  public By homePhoneLoc = By.name("home");
+  public By mobilePhoneLoc = By.name("mobile");
+  public By workPhoneLoc = By.name("work");
+  public By faxNumberLoc = By.name("fax");
+  public By emailLoc = By.name("email");
+  public By email2Loc = By.name("email2");
+  public By email3Loc = By.name("email3");
+  public By webSiteLoc = By.name("homepage");
+  public By birthDayLoc = By.name("bday");
+  public By birthMonthLoc = By.name("bmonth");
+  public By birthYearLoc = By.name("byear");
+  public By anniversaryDayLoc = By.name("aday");
+  public By anniversaryMonthLoc = By.name("amonth");
+  public By anniversaryYearLoc = By.name("ayear");
+  public By contactsGroupLoc = By.name("new_group");
+  public By groupsListLoc = By.cssSelector("select[name=new_group] option");
+  public By adAddressLoc = By.name("address2");
+  public By adPhoneLoc = By.name("phone2");
+  public By notesLoc = By.name("notes");
+//  public By topCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(1)");
+//  public By bottomCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(2)");
+  public By createContactBtnLoc = By.name("submit");
+  public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
+//  public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
+  //endregion
+
+  //region Login methods
+  public void login(LoginData loginData) {
+    fillLoginForm(loginData.getUsername(), loginData.getPassword());
+    submitLogin();
   }
+
+  private void fillLoginForm(String username, String password) {
+    clearAndType(usernameLoc, username);
+    clearAndType(passwordLoc,password);
+  }
+
+  private void submitLogin() { getElement(loginBtnLoc).click(); }
+  //endregion
+
+  //region Contact methods
+  public void openEditContactPage() { getElement(editContactPageLinkLoc).click(); }
+
+  public void fillContactForm(ContactData contactData) {
+    clearAndType(firstNameLoc, contactData.getFirstName());
+    clearAndType(middleNameLoc, contactData.getMiddleName());
+    clearAndType(lastNameLoc, contactData.getLastName());
+    clearAndType(nicknameLoc, contactData.getNickname());
+    uploadFile(inputFileLoc, contactData.getFilePath());
+    clearAndType(jobTitleLoc, contactData.getJobTitle());
+    clearAndType(companyNameLoc, contactData.getCompanyName());
+    clearAndType(mainAddressLoc, contactData.getMainAddress());
+    clearAndType(homePhoneLoc, contactData.getHomePhone());
+    clearAndType(mobilePhoneLoc, contactData.getMobilePhone());
+    clearAndType(workPhoneLoc, contactData.getWorkPhone());
+    clearAndType(faxNumberLoc, contactData.getFaxNumber());
+    clearAndType(emailLoc, contactData.getEmail());
+    clearAndType(email2Loc, contactData.getEmail2());
+    clearAndType(email3Loc, contactData.getEmail3());
+    clearAndType(webSiteLoc, contactData.getWebSite());
+    selectByIndex(birthDayLoc, contactData.getBirthDay());
+    selectByText(birthMonthLoc, contactData.getBirthMonth());
+    clearAndType(birthYearLoc, contactData.getBirthYear());
+    selectByValue(anniversaryDayLoc, contactData.getAnniversaryDay());
+    selectByValue(anniversaryMonthLoc, contactData.getAnniversaryMonth());
+    clearAndType(anniversaryYearLoc, contactData.getAnniversaryYear());
+//    selectByValue(contactsGroupLoc, "[none]");
+//    selectByText(contactsGroupLoc, "[none]");
+//    selectByIndex(contactsGroupLoc, 0);
+    clearAndType(adAddressLoc, contactData.getAdAddress());
+    clearAndType(adPhoneLoc, contactData.getAdPhone());
+    clearAndType(notesLoc, contactData.getNotes());
+  }
+
+  public void submitContactCreation() {
+//    getElement(topCreateContactBtnLoc).click(); /*только верхняя кнопка*/
+//    getElement(bottomCreateContactBtnLoc).click(); /*только нижняя кнопка*/
+//    getFirstElement(createContactBtnLoc).click(); /*первая кнопка из найденных*/
+    getAnyElement(createContactBtnLoc).click(); /*любая кнопка из найденных*/
+  }
+
+  public void returnToHomePage() { getElement(returnToHomePageLinkLoc).click(); }
+
+//  public void returnToEditContactPage() { getElement(returnToEditContactPageLinkLoc).click(); }
+  //endregion
+
+  // region Base methods
+  public WebElement getElement(By by) { return driver.findElement(by); }
+
+  public List<WebElement> getElements(By by) { return driver.findElements(by); }
+
+  public WebElement getAnyElement(By by) { return getElements(by).stream().findAny().get(); }
+
+//  public WebElement getFirstElement(By by) { return getElements(by).stream().findFirst().get(); }
+
+  public void clearAndType(By by, String value) {
+    getElement(by).click();
+    getElement(by).clear();
+    getElement(by).sendKeys(value);
+  }
+
+  public void uploadFile(By by, String path) { getElement(by).sendKeys(path); }
+
+  public void selectByText(By by, String text) { new Select(getElement(by)).selectByVisibleText(text); }
+
+  public void selectByValue(By by, String value) { new Select(getElement(by)).selectByValue(value); }
+
+  public void selectByIndex(By by, int index) { new Select(getElement(by)).selectByIndex(index); }
+
+//  public boolean isElementPresent(By by) {
+//    try {
+//      driver.findElement(by);
+//      return true;
+//    } catch (NoSuchElementException e) {
+//      return false;
+//    }
+//  }
+  //endregion
 }
