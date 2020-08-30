@@ -1,6 +1,7 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.models.ContactData;
 
 public class ContactCreationTests extends TestBase {
 
@@ -12,8 +13,6 @@ public class ContactCreationTests extends TestBase {
             "Batkovna",
             "Fabler",
             "LisAnieL",
-//            System.getProperty("user.dir").replace("\\", "/") +
-//                    "/src/test/resources/dark_alice.jpg",
             System.getProperty("user.dir") + "\\src\\test\\resources\\dark_alice.jpg",
             "Middle QA Automation Engineer",
             "Bank",
