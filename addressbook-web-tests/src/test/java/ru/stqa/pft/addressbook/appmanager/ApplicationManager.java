@@ -43,37 +43,35 @@ public class ApplicationManager {
   public By anniversaryDayLoc = By.name("aday");
   public By anniversaryMonthLoc = By.name("amonth");
   public By anniversaryYearLoc = By.name("ayear");
-  public By contactsGroupLoc = By.name("new_group");
-  public By groupsListLoc = By.cssSelector("select[name=new_group] option");
+  //  public By contactsGroupLoc = By.name("new_group");
+//  public By groupsListLoc = By.cssSelector("select[name=new_group] option");
   public By adAddressLoc = By.name("address2");
   public By adPhoneLoc = By.name("phone2");
   public By notesLoc = By.name("notes");
-  public By topCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(1)");
-  public By bottomCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(2)");
+  //  public By topCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(1)");
+//  public By bottomCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(2)");
   public By createContactBtnLoc = By.name("submit");
   public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
-  public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
+//  public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
   //</editor-fold>
 
   //<editor-fold desc="Group locators">
   public By groupsPageNavLinkLoc = By.cssSelector("#nav a[href='group.php']");
   public By addGroupBtnLoc = By.name("new");
-  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
-  public By bottomAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(2)");
+  //  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
+//  public By bottomAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(2)");
   public By groupNameLoc = By.name("group_name");
   public By groupHeaderLoc = By.name("group_header");
   public By groupFooterLoc = By.name("group_footer");
   public By createGroupBtnLoc = By.name("submit");
   public By returnToGroupsPageLinkLoc = By.cssSelector("#content a[href='group.php']");
-  public By topDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(1)");
-  public By bottomDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(2)");
+  //  public By topDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(1)");
+//  public By bottomDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(2)");
   public By groupCheckboxLoc = By.name("selected[]");
   public By deleteGroupBtnLoc = By.name("delete");
   //</editor-fold>
 
   private WebDriver driver;
-  private String baseUrl;
-  private String state;
 
   public void init() {
 
@@ -88,10 +86,10 @@ public class ApplicationManager {
     //</editor-fold>
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-    baseUrl = "http://localhost/addressbook";
+    String baseUrl = "http://localhost/addressbook";
     driver.get(baseUrl);
-    WaitForPageLoad();
 
     login(new LoginData("admin", "secret"));
   }
@@ -110,17 +108,15 @@ public class ApplicationManager {
     clearAndType(usernameLoc, username);
     clearAndType(passwordLoc, password);
   }
+  //</editor-fold>
 
   public void submitLogin() {
     getElement(loginBtnLoc).click();
-    WaitForPageLoad();
   }
-  //</editor-fold>
 
   //<editor-fold desc="Group methods">
   public void goToGroupsPage() {
     getElement(groupsPageNavLinkLoc).click();
-    WaitForPageLoad();
   }
 
   public void initGroupCreation() {
@@ -128,7 +124,6 @@ public class ApplicationManager {
 //    getElement(bottomAddGroupBtnLoc).click(); /*только нижняя кнопка*/
 //    getFirstElement(addGroupBtnLoc).click(); /*первая кнопка из найденных*/
     getAnyElement(addGroupBtnLoc).click(); /*любая кнопка из найденных*/
-    WaitForPageLoad();
   }
 
   public void fillGroupForm(GroupData groupData) {
@@ -139,7 +134,6 @@ public class ApplicationManager {
 
   public void submitGroupCreation() {
     getElement(createGroupBtnLoc).click();
-    WaitForPageLoad();
   }
 
   public void selectAnyGroup() {
@@ -151,19 +145,16 @@ public class ApplicationManager {
 //    getElement(bottomDeleteGroupBtnLoc).click(); /*только нижняя кнопка*/
 //    getFirstElement(deleteGroupBtnLoc).click(); /*первая кнопка из найденных*/
     getAnyElement(deleteGroupBtnLoc).click();
-    WaitForPageLoad();
   }
+  //</editor-fold>
 
   public void returnToGroupsPage() {
     getElement(returnToGroupsPageLinkLoc).click();
-    WaitForPageLoad();
   }
-  //</editor-fold>
 
   //<editor-fold desc="Contact methods">
   public void openEditContactPage() {
     getElement(editContactPageLinkLoc).click();
-    WaitForPageLoad();
   }
 
   public void fillContactForm(ContactData contactData) {
@@ -202,19 +193,16 @@ public class ApplicationManager {
 //    getElement(bottomCreateContactBtnLoc).click(); /*только нижняя кнопка*/
 //    getFirstElement(createContactBtnLoc).click(); /*первая кнопка из найденных*/
     getAnyElement(createContactBtnLoc).click(); /*любая кнопка из найденных*/
-    WaitForPageLoad();
   }
+
+/*  public void returnToEditContactPage() {
+    getElement(returnToEditContactPageLinkLoc).click();
+  }*/
+  //</editor-fold>
 
   public void returnToHomePage() {
     getElement(returnToHomePageLinkLoc).click();
-    WaitForPageLoad();
   }
-
-  public void returnToEditContactPage() {
-    getElement(returnToEditContactPageLinkLoc).click();
-    WaitForPageLoad();
-  }
-  //</editor-fold>
 
   //<editor-fold desc="Base methods">
   public WebElement getElement(By by) {
@@ -225,12 +213,12 @@ public class ApplicationManager {
     return driver.findElements(by);
   }
 
-  public WebElement getAnyElement(By by) {
-    return getElements(by).stream().findAny().get();
-  }
+//  public WebElement getFirstElement(By by) {
+//    return getElements(by).stream().findFirst().get();
+//  }
 
-  public WebElement getFirstElement(By by) {
-    return getElements(by).stream().findFirst().get();
+  public WebElement getAnyElement(By by) {
+    return getElements(by).stream().findAny().orElse(null);
   }
 
   public void clearAndType(By by, String value) {
@@ -251,23 +239,24 @@ public class ApplicationManager {
     new Select(getElement(by)).selectByValue(value);
   }
 
-  public void selectByIndex(By by, int index) {
-    new Select(getElement(by)).selectByIndex(index);
-  }
-
-  public boolean isElementPresent(By by) {
+/*  public boolean isElementPresent(By by) {
     try {
       getElement(by);
       return true;
     } catch (NoSuchElementException e) {
       return false;
     }
+  }*/
+
+  public void selectByIndex(By by, int index) {
+    new Select(getElement(by)).selectByIndex(index);
   }
 
-  public void WaitForPageLoad() {
-    int time = 30;
+  private String state;
+
+  public void WaitForPageLoad(int timeOutInSeconds) {//
     try {
-      WebDriverWait wait = new WebDriverWait(driver, time);
+      WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
       //Checks every 500 ms whether predicate returns true
       //if returns exit otherwise keep trying till it returns true
       wait.until(driver -> {
@@ -283,14 +272,9 @@ public class ApplicationManager {
         //In IE7 there are chances we may get state as loaded instead of complete
         return (state.equalsIgnoreCase("complete") || state.equalsIgnoreCase("loaded"));
       });
-    } catch (TimeoutException exception) {
+    } catch (TimeoutException | NullPointerException exception) {
       //sometimes Page remains in Interactive mode and never becomes Complete,
       // then we can still try to access the controls
-      if (!state.equalsIgnoreCase("interactive"))
-        throw exception;
-    } catch (NullPointerException exception) {
-      //sometimes Page remains in Interactive mode and never becomes Complete,
-      //then we can still try to access the controls
       if (!state.equalsIgnoreCase("interactive"))
         throw exception;
     } catch (WebDriverException exception) {
