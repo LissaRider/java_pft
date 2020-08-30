@@ -14,6 +14,7 @@ public class ApplicationManager {
   private ContactHelper contactHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
+  private HelperBase helperBase;
 
   public void init() {
 
@@ -37,6 +38,7 @@ public class ApplicationManager {
     navigationHelper = new NavigationHelper(driver);
     contactHelper = new ContactHelper(driver);
     loginHelper = new LoginHelper(driver);
+    helperBase = new HelperBase(driver);
 
     loginHelper.login(new LoginData("admin", "secret"));
   }
@@ -59,5 +61,9 @@ public class ApplicationManager {
 
   public LoginHelper login() {
     return loginHelper;
+  }
+
+  public HelperBase base() {
+    return helperBase;
   }
 }

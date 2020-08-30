@@ -39,6 +39,8 @@ public class ContactHelper extends HelperBase {
   public By createContactBtnLoc = By.name("submit");
   public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
 //  public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
+  public By contactCheckboxLoc = By.name("selected[]");
+  public By deleteContactBtnLoc = By.cssSelector("[onclick='DeleteSel()']");
   //</editor-fold>
 
   public ContactHelper(WebDriver driver) {
@@ -90,6 +92,14 @@ public class ContactHelper extends HelperBase {
 
   public void returnToHomePage() {
     getElement(returnToHomePageLinkLoc).click();
+  }
+
+  public void selectAnyContact() {
+    getAnyElement(contactCheckboxLoc).click();
+  }
+
+  public void initContactDeletion() {
+    getElement(deleteContactBtnLoc).click();
   }
   //</editor-fold>
 }

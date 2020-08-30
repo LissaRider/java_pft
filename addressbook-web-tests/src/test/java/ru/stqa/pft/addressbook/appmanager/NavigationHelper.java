@@ -8,6 +8,7 @@ public class NavigationHelper extends HelperBase {
   //<editor-fold desc="Locators">
   public By groupsPageLinkLoc = By.cssSelector("#nav a[href='group.php']");
   public By editContactPageLinkLoc = By.cssSelector("#nav [href='edit.php']");
+  public By homePageLinkLoc = By.cssSelector("#nav [href='./']");
   //</editor-fold>
 
   public NavigationHelper(WebDriver driver) {
@@ -21,6 +22,10 @@ public class NavigationHelper extends HelperBase {
 
   public void goToEditContactPage() {
     getElement(editContactPageLinkLoc).click();
+  }
+
+  public void goToHomePage() {
+    getElement(homePageLinkLoc).click();
   }
   //</editor-fold>
 }
