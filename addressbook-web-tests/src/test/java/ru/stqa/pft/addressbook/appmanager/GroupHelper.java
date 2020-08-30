@@ -19,6 +19,10 @@ public class GroupHelper extends HelperBase {
 //  public By bottomDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(2)");
   public By groupCheckboxLoc = By.name("selected[]");
   public By deleteGroupBtnLoc = By.name("delete");
+  public By editGroupBtnLoc = By.name("edit");
+//  public By topEditGroupBtnLoc = By.cssSelector("input[name=edit]:nth-child(1)");
+//  public By bottomEditGroupBtnLoc = By.cssSelector("input[name=edit]:nth-child(2)");
+  public By updateGroupBtnLoc = By.name("update");
   //</editor-fold>
 
   public GroupHelper(WebDriver driver) {
@@ -56,6 +60,17 @@ public class GroupHelper extends HelperBase {
 
   public void returnToGroupsPage() {
     getElement(returnToGroupsPageLinkLoc).click();
+  }
+
+  public void initGroupModification() {
+//    getElement(topEditGroupBtnLoc).click(); /*только верхняя кнопка*/
+//    getElement(bottomEditGroupBtnLoc).click(); /*только нижняя кнопка*/
+//    getFirstElement(editGroupBtnLoc).click(); /*первая кнопка из найденных*/
+    getAnyElement(editGroupBtnLoc).click(); /*любая кнопка из найденных*/
+  }
+
+  public void submitGroupModification() {
+    getElement(updateGroupBtnLoc).click();
   }
   //</editor-fold>
 }
