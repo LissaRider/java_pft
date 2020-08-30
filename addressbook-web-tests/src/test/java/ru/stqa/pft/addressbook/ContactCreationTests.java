@@ -6,8 +6,8 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() {
-    openEditContactPage();
-    fillContactForm(new ContactData(
+    app.openEditContactPage();
+    app.fillContactForm(new ContactData(
             "Alice",
             "Batkovna",
             "Fabler",
@@ -35,8 +35,8 @@ public class ContactCreationTests extends TestBase {
             "Moscow, Biryulyovo Zapadnoye District",
             "8(909) 999-99-99",
             "\"Who in the world am I?\" Ah, that is the great puzzle!"));
-    submitContactCreation();
-    returnToHomePage();
+    app.submitContactCreation();
+    app.returnToHomePage();
 //    returnToEditContactPage();
   }
 }

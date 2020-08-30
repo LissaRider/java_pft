@@ -3,15 +3,17 @@ package ru.stqa.pft.addressbook;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-public class TestBase extends ApplicationManager {
+public class TestBase {
+
+  protected final ApplicationManager app = new ApplicationManager();
 
   @BeforeClass(alwaysRun = true)
   public void setUp() {
-    init();
+    app.init();
   }
 
   @AfterClass(alwaysRun = true)
   public void tearDown() {
-    stop();
+    app.stop();
   }
 }
