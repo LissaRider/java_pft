@@ -5,7 +5,7 @@ import ru.stqa.pft.addressbook.models.GroupData;
 
 public class GroupCreationTests extends TestBase {
 
-  @Test
+  @Test(testName = "Проверка создание группы")
   public void testGroupCreation() {
     app.nav().goToGroupsPage();
     app.group().initGroupCreation();

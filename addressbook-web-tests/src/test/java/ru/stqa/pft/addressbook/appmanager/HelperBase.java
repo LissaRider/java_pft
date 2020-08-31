@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class HelperBase {
 
@@ -55,12 +56,25 @@ public class HelperBase {
     new Select(getElement(by)).selectByIndex(index);
   }
 
+  public String getFilePath(String source) {
+    return System.getProperty("user.dir") + "\\src\\test\\resources\\" + source;
+  }
+
   public boolean isElementPresent(By by) {
     try {
       getElement(by);
       return true;
     } catch (NoSuchElementException e) {
       return false;
+    }
+  }
+
+  public boolean IsAnyElementPresent(By by) {
+    try {
+      driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      return getElements(by).size() > 0;
+    } finally {
+      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
   }
 

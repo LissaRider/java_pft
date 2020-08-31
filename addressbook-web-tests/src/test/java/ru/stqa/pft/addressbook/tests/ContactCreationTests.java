@@ -5,7 +5,7 @@ import ru.stqa.pft.addressbook.models.ContactData;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test
+  @Test(testName = "Проверка создания контакта")
   public void testContactCreation() {
     app.nav().goToEditContactPage();
     app.contact().fillContactForm(new ContactData(
@@ -13,7 +13,7 @@ public class ContactCreationTests extends TestBase {
             "Batkovna",
             "Fabler",
             "LisAnieL",
-            System.getProperty("user.dir") + "\\src\\test\\resources\\dark_alice.jpg",
+            "dark_alice.jpg",
             "Middle QA Automation Engineer",
             "Bank",
             "Moscow, Chertanovo Tsentralnoye District",
@@ -35,7 +35,6 @@ public class ContactCreationTests extends TestBase {
             "8(909) 999-99-99",
             "\"Who in the world am I?\" Ah, that is the great puzzle!"));
     app.contact().submitContactCreation();
-    app.contact().returnToHomePage();
-//    returnToEditContactPage();
+    app.contact().returnToEditContactPage();
   }
 }

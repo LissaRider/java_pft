@@ -38,9 +38,15 @@ public class ContactHelper extends HelperBase {
 //  public By bottomCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(2)");
   public By createContactBtnLoc = By.name("submit");
   public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
-//  public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
-  public By contactCheckboxLoc = By.name("selected[]");
-  public By deleteContactBtnLoc = By.cssSelector("[onclick='DeleteSel()']");
+  public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
+  public By contactCheckboxLoc = By.cssSelector("#maintable [name='selected[]']");
+  public By deleteContactBtnHomePageLoc = By.cssSelector("input[onclick='DeleteSel()']");
+  public By editContactBtnLoc = By.cssSelector("#maintable a[href^='edit.php']");
+  public By viewContactBtnLoc = By.cssSelector("#maintable a[href^='view.php']");
+  public By updateContactBtnLoc = By.cssSelector("[name=update][value=Update]");
+  public By selectAllCheckboxLoc = By.id("MassCB");
+  public By deleteContactBtnEditPageLoc = By.cssSelector("[name=update][value=Delete]");
+  public By modifyContactBtnLoc = By.name("modifiy");
   //</editor-fold>
 
   public ContactHelper(WebDriver driver) {
@@ -53,7 +59,7 @@ public class ContactHelper extends HelperBase {
     clearAndType(middleNameLoc, contactData.getMiddleName());
     clearAndType(lastNameLoc, contactData.getLastName());
     clearAndType(nicknameLoc, contactData.getNickname());
-    uploadFile(inputFileLoc, contactData.getFilePath());
+    uploadFile(inputFileLoc, getFilePath(contactData.getSource()));
     clearAndType(jobTitleLoc, contactData.getJobTitle());
     clearAndType(companyNameLoc, contactData.getCompanyName());
     clearAndType(mainAddressLoc, contactData.getMainAddress());
@@ -71,9 +77,10 @@ public class ContactHelper extends HelperBase {
     selectByValue(anniversaryDayLoc, contactData.getAnniversaryDay());
     selectByValue(anniversaryMonthLoc, contactData.getAnniversaryMonth());
     clearAndType(anniversaryYearLoc, contactData.getAnniversaryYear());
-    selectByValue(contactsGroupLoc, "[none]");
-//    selectByText(contactsGroupLoc, "[none]");
-//    selectByIndex(contactsGroupLoc, 0);
+    if (IsAnyElementPresent(contactsGroupLoc))
+      selectByValue(contactsGroupLoc, "[none]");
+//      selectByText(contactsGroupLoc, "[none]");
+//      selectByIndex(contactsGroupLoc, 0);
     clearAndType(adAddressLoc, contactData.getAdAddress());
     clearAndType(adPhoneLoc, contactData.getAdPhone());
     clearAndType(notesLoc, contactData.getNotes());
@@ -86,9 +93,9 @@ public class ContactHelper extends HelperBase {
     getAnyElement(createContactBtnLoc).click(); /*любая кнопка из найденных*/
   }
 
-/*  public void returnToEditContactPage() {
+  public void returnToEditContactPage() {
     getElement(returnToEditContactPageLinkLoc).click();
-  }*/
+  }
 
   public void returnToHomePage() {
     getElement(returnToHomePageLinkLoc).click();
@@ -98,8 +105,32 @@ public class ContactHelper extends HelperBase {
     getAnyElement(contactCheckboxLoc).click();
   }
 
-  public void initContactDeletion() {
-    getElement(deleteContactBtnLoc).click();
+  public void initContactDeletionOnHomePage() {
+    getElement(deleteContactBtnHomePageLoc).click();
+  }
+
+  public void initAnyContactModification() {
+    getAnyElement(editContactBtnLoc).click();
+  }
+
+  public void viewAnyContact() {
+    getAnyElement(viewContactBtnLoc).click();
+  }
+
+  public void submitContactModification() {
+    getElement(updateContactBtnLoc).click();
+  }
+
+  public void selectAllContacts() {
+    getElement(selectAllCheckboxLoc).click();
+  }
+
+  public void initContactDeletionOnEditContactPage() {
+    getElement(deleteContactBtnEditPageLoc).click();
+  }
+
+  public void initContactModification() {
+    getElement(modifyContactBtnLoc).click();
   }
   //</editor-fold>
 }

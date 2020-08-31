@@ -5,7 +5,7 @@ public class ContactData {
   private final String middleName;
   private final String lastName;
   private final String nickname;
-  private final String filePath;
+  private final String source;
   private final String jobTitle;
   private final String companyName;
   private final String mainAddress;
@@ -38,7 +38,7 @@ public class ContactData {
     this.middleName = middleName;
     this.lastName = lastName;
     this.nickname = nickname;
-    this.filePath = filePath;
+    this.source = filePath;
     this.jobTitle = jobTitle;
     this.companyName = companyName;
     this.mainAddress = mainAddress;
@@ -77,8 +77,8 @@ public class ContactData {
     return nickname;
   }
 
-  public String getFilePath() {
-    return filePath;
+  public String getSource() {
+    return source;
   }
 
   public String getJobTitle() {

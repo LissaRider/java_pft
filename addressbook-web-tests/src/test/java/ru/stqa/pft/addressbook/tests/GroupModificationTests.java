@@ -5,7 +5,7 @@ import ru.stqa.pft.addressbook.models.GroupData;
 
 public class GroupModificationTests extends TestBase {
 
-    @Test
+    @Test(testName = "Проверка редактирования группы")
     public void testGroupDeletion() {
       app.nav().goToGroupsPage();
       app.group().selectAnyGroup();

@@ -7,8 +7,8 @@ public class NavigationHelper extends HelperBase {
 
   //<editor-fold desc="Locators">
   public By groupsPageLinkLoc = By.cssSelector("#nav a[href='group.php']");
-  public By editContactPageLinkLoc = By.cssSelector("#nav [href='edit.php']");
-  public By homePageLinkLoc = By.cssSelector("#nav [href='./']");
+  public By editContactPageLinkLoc = By.cssSelector("#nav a[href='edit.php']");
+  public By homePageLinkLoc = By.cssSelector("#nav a[href='./']");
   //</editor-fold>
 
   public NavigationHelper(WebDriver driver) {
