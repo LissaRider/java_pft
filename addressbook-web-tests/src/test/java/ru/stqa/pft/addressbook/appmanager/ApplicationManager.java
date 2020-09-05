@@ -27,11 +27,11 @@ public class ApplicationManager {
   }
 
   public void init() {
-    if (browser == BrowserType.FIREFOX) {
+    if (browser.equals(BrowserType.FIREFOX)) {
       driver = new FirefoxDriver();
-    } else if (browser == BrowserType.CHROME) {
+    } else if (browser.equals(BrowserType.CHROME)) {
       driver = new ChromeDriver();
-    } else if (browser == BrowserType.IE) {
+    } else if (browser.equals(BrowserType.IE)) {
       InternetExplorerOptions ieOptions = new InternetExplorerOptions();
       ieOptions.disableNativeEvents();
       driver = new InternetExplorerDriver(ieOptions);
