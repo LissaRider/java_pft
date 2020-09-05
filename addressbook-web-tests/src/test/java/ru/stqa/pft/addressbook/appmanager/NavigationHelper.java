@@ -17,15 +17,15 @@ public class NavigationHelper extends HelperBase {
 
   //<editor-fold desc="Methods">
   public void goToGroupsPage() {
-    getElement(groupsPageLinkLoc).click();
+    click(groupsPageLinkLoc);
   }
 
   public void goToEditContactPage() {
-    getElement(editContactPageLinkLoc).click();
+    click(editContactPageLinkLoc);
   }
 
   public void goToHomePage() {
-    getElement(homePageLinkLoc).click();
+    click(homePageLinkLoc);
   }
   //</editor-fold>
 }

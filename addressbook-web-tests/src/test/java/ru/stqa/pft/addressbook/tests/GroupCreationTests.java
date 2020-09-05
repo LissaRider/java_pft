@@ -18,4 +18,17 @@ public class GroupCreationTests extends TestBase {
     app.group().submitGroupCreation();
     app.group().returnToGroupsPage();
   }
+
+  @Test(testName = "Проверка создание группы (дефолтные значения)")
+  public void testGroupCreationWithDefaultFields() {
+    app.nav().goToGroupsPage();
+    app.group().initGroupCreation();
+    app.group().fillGroupForm(new GroupData(
+            "Colleagues",
+            null,
+            null
+    ));
+    app.group().submitGroupCreation();
+    app.group().returnToGroupsPage();
+  }
 }

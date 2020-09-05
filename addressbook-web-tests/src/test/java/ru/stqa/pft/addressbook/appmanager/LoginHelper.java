@@ -28,7 +28,7 @@ public class LoginHelper extends HelperBase {
   }
 
   public void submitLogin() {
-    getElement(loginBtnLoc).click();
+    click(loginBtnLoc);
   }
   //</editor-fold>
 }

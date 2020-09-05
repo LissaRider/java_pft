@@ -10,7 +10,7 @@ public class TestBase {
   private String browser = BrowserType.FIREFOX;
 //  private String browser = BrowserType.CHROME;
 //  private String browser = BrowserType.IE;
-  
+
   protected final ApplicationManager app = new ApplicationManager(browser);
 
   @BeforeClass(alwaysRun = true)

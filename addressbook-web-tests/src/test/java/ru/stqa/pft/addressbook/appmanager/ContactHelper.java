@@ -77,60 +77,61 @@ public class ContactHelper extends HelperBase {
     selectByValue(anniversaryDayLoc, contactData.getAnniversaryDay());
     selectByValue(anniversaryMonthLoc, contactData.getAnniversaryMonth());
     clearAndType(anniversaryYearLoc, contactData.getAnniversaryYear());
-    if (IsAnyElementPresent(contactsGroupLoc))
+    if (IsAnyElementPresent(contactsGroupLoc)) {
       selectByValue(contactsGroupLoc, "[none]");
 //      selectByText(contactsGroupLoc, "[none]");
 //      selectByIndex(contactsGroupLoc, 0);
+    }
     clearAndType(adAddressLoc, contactData.getAdAddress());
     clearAndType(adPhoneLoc, contactData.getAdPhone());
     clearAndType(notesLoc, contactData.getNotes());
   }
 
   public void submitContactCreation() {
-//    getElement(topCreateContactBtnLoc).click(); /*только верхняя кнопка*/
-//    getElement(bottomCreateContactBtnLoc).click(); /*только нижняя кнопка*/
-//    getFirstElement(createContactBtnLoc).click(); /*первая кнопка из найденных*/
-    getAnyElement(createContactBtnLoc).click(); /*любая кнопка из найденных*/
+//    click(topCreateContactBtnLoc); /*только верхняя кнопка*/
+//    click(bottomCreateContactBtnLoc); /*только нижняя кнопка*/
+//    click(createContactBtnLoc); /*первая кнопка из найденных*/
+    click(createContactBtnLoc); /*любая кнопка из найденных*/
   }
 
   public void returnToEditContactPage() {
-    getElement(returnToEditContactPageLinkLoc).click();
+    click(returnToEditContactPageLinkLoc);
   }
 
   public void returnToHomePage() {
-    getElement(returnToHomePageLinkLoc).click();
+    click(returnToHomePageLinkLoc);
   }
 
   public void selectAnyContact() {
-    getAnyElement(contactCheckboxLoc).click();
+    click(contactCheckboxLoc);
   }
 
   public void initContactDeletionOnHomePage() {
-    getElement(deleteContactBtnHomePageLoc).click();
+    click(deleteContactBtnHomePageLoc);
   }
 
   public void initAnyContactModification() {
-    getAnyElement(editContactBtnLoc).click();
+    click(editContactBtnLoc);
   }
 
   public void viewAnyContact() {
-    getAnyElement(viewContactBtnLoc).click();
+    click(viewContactBtnLoc);
   }
 
   public void submitContactModification() {
-    getElement(updateContactBtnLoc).click();
+    click(updateContactBtnLoc);
   }
 
   public void selectAllContacts() {
-    getElement(selectAllCheckboxLoc).click();
+    click(selectAllCheckboxLoc);
   }
 
   public void initContactDeletionOnEditContactPage() {
-    getElement(deleteContactBtnEditPageLoc).click();
+    click(deleteContactBtnEditPageLoc);
   }
 
   public void initContactModification() {
-    getElement(modifyContactBtnLoc).click();
+    click(modifyContactBtnLoc);
   }
   //</editor-fold>
 }

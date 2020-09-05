@@ -34,10 +34,16 @@ public class HelperBase {
     return getElements(by).stream().findFirst().get();
   }
 
-  public void clearAndType(By by, String value) {
+  public void click(By by) {
     getElement(by).click();
-    getElement(by).clear();
-    getElement(by).sendKeys(value);
+  }
+
+  public void clearAndType(By by, String value) {
+    click(by);
+    if (value != null) {
+      getElement(by).clear();
+      getElement(by).sendKeys(value);
+    }
   }
 
   public void uploadFile(By by, String path) {

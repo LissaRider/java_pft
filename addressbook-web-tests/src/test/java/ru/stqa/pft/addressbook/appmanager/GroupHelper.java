@@ -31,10 +31,10 @@ public class GroupHelper extends HelperBase {
 
   //<editor-fold desc="Methods">
   public void initGroupCreation() {
-//    getElement(topAddGroupBtnLoc).click(); /*только верхняя кнопка*/
-//    getElement(bottomAddGroupBtnLoc).click(); /*только нижняя кнопка*/
-//    getFirstElement(addGroupBtnLoc).click(); /*первая кнопка из найденных*/
-    getAnyElement(addGroupBtnLoc).click(); /*любая кнопка из найденных*/
+//    click(topAddGroupBtnLoc); /*только верхняя кнопка*/
+//    click(bottomAddGroupBtnLoc); /*только нижняя кнопка*/
+//    click(addGroupBtnLoc); /*первая кнопка из найденных*/
+    click(addGroupBtnLoc); /*любая кнопка из найденных*/
   }
 
   public void fillGroupForm(GroupData groupData) {
@@ -44,33 +44,33 @@ public class GroupHelper extends HelperBase {
   }
 
   public void submitGroupCreation() {
-    getElement(createGroupBtnLoc).click();
+    click(createGroupBtnLoc);
   }
 
   public void selectAnyGroup() {
-    getAnyElement(groupCheckboxLoc).click();
+    click(groupCheckboxLoc);
   }
 
   public void submitGroupDeletion() {
-//    getElement(topDeleteGroupBtnLoc).click(); /*только верхняя кнопка*/
-//    getElement(bottomDeleteGroupBtnLoc).click(); /*только нижняя кнопка*/
-//    getFirstElement(deleteGroupBtnLoc).click(); /*первая кнопка из найденных*/
-    getAnyElement(deleteGroupBtnLoc).click();
+//    click(topDeleteGroupBtnLoc); /*только верхняя кнопка*/
+//    click(bottomDeleteGroupBtnLoc); /*только нижняя кнопка*/
+//    click(deleteGroupBtnLoc); /*первая кнопка из найденных*/
+    click(deleteGroupBtnLoc); /*любая кнопка из найденных*/
   }
 
   public void returnToGroupsPage() {
-    getElement(returnToGroupsPageLinkLoc).click();
+    click(returnToGroupsPageLinkLoc);
   }
 
   public void initGroupModification() {
-//    getElement(topEditGroupBtnLoc).click(); /*только верхняя кнопка*/
-//    getElement(bottomEditGroupBtnLoc).click(); /*только нижняя кнопка*/
-//    getFirstElement(editGroupBtnLoc).click(); /*первая кнопка из найденных*/
-    getAnyElement(editGroupBtnLoc).click(); /*любая кнопка из найденных*/
+//    click(topEditGroupBtnLoc); /*только верхняя кнопка*/
+//    click(bottomEditGroupBtnLoc); /*только нижняя кнопка*/
+//    click(editGroupBtnLoc); /*первая кнопка из найденных*/
+    click(editGroupBtnLoc); /*любая кнопка из найденных*/
   }
 
   public void submitGroupModification() {
-    getElement(updateGroupBtnLoc).click();
+    click(updateGroupBtnLoc);
   }
   //</editor-fold>
 }
