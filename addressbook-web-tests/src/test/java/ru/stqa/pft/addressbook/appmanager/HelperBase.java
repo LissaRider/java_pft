@@ -41,8 +41,11 @@ public class HelperBase {
   public void clearAndType(By by, String value) {
     click(by);
     if (value != null) {
-      getElement(by).clear();
-      getElement(by).sendKeys(value);
+      String extValue = getElement(by).getAttribute("value");
+      if (!value.equals(extValue)) {
+        getElement(by).clear();
+        getElement(by).sendKeys(value);
+      }
     }
   }
 
