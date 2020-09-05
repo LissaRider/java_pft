@@ -1,7 +1,11 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.BrowserType;
 import ru.stqa.pft.addressbook.models.LoginData;
 
 import java.util.concurrent.TimeUnit;
@@ -10,23 +14,28 @@ public class ApplicationManager {
 
   WebDriver driver;
 
+
   private LoginHelper loginHelper;
   private ContactHelper contactHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
   private HelperBase helperBase;
+  private String browser;
+
+  public ApplicationManager(String browser) {
+    this.browser = browser;
+  }
 
   public void init() {
-
-    //<editor-fold desc="Drivers">
-    driver = new FirefoxDriver();
-
-//    driver = new ChromeDriver();
-
-/*    InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-    ieOptions.disableNativeEvents();
-    driver = new InternetExplorerDriver(ieOptions);*/
-    //</editor-fold>
+    if (browser == BrowserType.FIREFOX) {
+      driver = new FirefoxDriver();
+    } else if (browser == BrowserType.CHROME) {
+      driver = new ChromeDriver();
+    } else if (browser == BrowserType.IE) {
+      InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+      ieOptions.disableNativeEvents();
+      driver = new InternetExplorerDriver(ieOptions);
+    }
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
