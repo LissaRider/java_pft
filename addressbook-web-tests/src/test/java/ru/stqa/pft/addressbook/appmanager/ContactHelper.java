@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -54,7 +55,7 @@ public class ContactHelper extends HelperBase {
   }
 
   //<editor-fold desc="Methods">
-  public void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
     clearAndType(firstNameLoc, contactData.getFirstName());
     clearAndType(middleNameLoc, contactData.getMiddleName());
     clearAndType(lastNameLoc, contactData.getLastName());
@@ -77,10 +78,12 @@ public class ContactHelper extends HelperBase {
     selectByValue(anniversaryDayLoc, contactData.getAnniversaryDay());
     selectByValue(anniversaryMonthLoc, contactData.getAnniversaryMonth());
     clearAndType(anniversaryYearLoc, contactData.getAnniversaryYear());
-    if (IsAnyElementPresent(contactsGroupLoc)) {
+    if (creation) {
       selectByValue(contactsGroupLoc, "[none]");
 //      selectByText(contactsGroupLoc, "[none]");
-//      selectByIndex(contactsGroupLoc, 0);
+//      selectByIndex(contactsGroupLoc, 0);}
+    } else {
+      Assert.assertFalse(IsAnyElementPresent(contactsGroupLoc));
     }
     clearAndType(adAddressLoc, contactData.getAdAddress());
     clearAndType(adPhoneLoc, contactData.getAdPhone());

@@ -34,7 +34,8 @@ public class ContactModificationTests extends TestBase {
             "2021",
             "England",
             "8(909) 777-77-77",
-            "Rise and rise again until lambs become lions."));
+            "Rise and rise again until lambs become lions."),
+            false);
     app.contact().submitContactModification();
     app.contact().returnToHomePage();
   }
@@ -69,7 +70,8 @@ public class ContactModificationTests extends TestBase {
             "2024",
             "Moscow,  metro station Vystavochnaya",
             "8(909) 888-88-88",
-            "By god... I am on Mars."));
+            "By god... I am on Mars."),
+            false);
     app.contact().submitContactModification();
     app.contact().returnToHomePage();
   }

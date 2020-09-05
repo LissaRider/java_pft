@@ -33,7 +33,8 @@ public class ContactCreationTests extends TestBase {
             "2026",
             "Moscow, Biryulyovo Zapadnoye District",
             "8(909) 999-99-99",
-            "\"Who in the world am I?\" Ah, that is the great puzzle!"));
+            "\"Who in the world am I?\" Ah, that is the great puzzle!"),
+            true);
     app.contact().submitContactCreation();
     app.contact().returnToEditContactPage();
   }
