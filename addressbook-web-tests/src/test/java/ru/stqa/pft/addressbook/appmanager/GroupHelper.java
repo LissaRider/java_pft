@@ -7,7 +7,7 @@ import ru.stqa.pft.addressbook.models.GroupData;
 public class GroupHelper extends HelperBase {
 
   //<editor-fold desc="Locators">
-  public By addGroupBtnLoc = By.name("new");
+  public static By addGroupBtnLoc = By.name("new");
 //  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
 //  public By bottomAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(2)");
   public By groupNameLoc = By.name("group_name");

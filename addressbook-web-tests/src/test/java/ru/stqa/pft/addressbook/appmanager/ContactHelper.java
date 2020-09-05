@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.models.ContactData;
 public class ContactHelper extends HelperBase {
 
   //<editor-fold desc="Locators">
+  public static By contactsTableLoc = By.id("maintable");
   public By firstNameLoc = By.name("firstname");
   public By middleNameLoc = By.name("middlename");
   public By lastNameLoc = By.name("lastname");
@@ -37,7 +38,7 @@ public class ContactHelper extends HelperBase {
   public By notesLoc = By.name("notes");
 //  public By topCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(1)");
 //  public By bottomCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(2)");
-  public By createContactBtnLoc = By.name("submit");
+  public static By createContactBtnLoc = By.name("submit");
   public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
   public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
   public By contactCheckboxLoc = By.cssSelector("#maintable [name='selected[]']");
