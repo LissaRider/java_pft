@@ -28,10 +28,13 @@ public class ApplicationManager {
 
   public void init() {
     if (browser.equals(BrowserType.FIREFOX)) {
+//      https://github.com/mozilla/geckodriver/releases
       driver = new FirefoxDriver();
     } else if (browser.equals(BrowserType.CHROME)) {
       driver = new ChromeDriver();
+//      https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_win32.zip
     } else if (browser.equals(BrowserType.IE)) {
+//      https://selenium-release.storage.googleapis.com/3.150/IEDriverServer_Win32_3.150.1.zip
       InternetExplorerOptions ieOptions = new InternetExplorerOptions();
       ieOptions.disableNativeEvents();
       driver = new InternetExplorerDriver(ieOptions);
