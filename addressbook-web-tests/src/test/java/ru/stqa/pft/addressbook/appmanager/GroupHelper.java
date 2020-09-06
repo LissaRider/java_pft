@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.models.GroupData;
 
 public class GroupHelper extends HelperBase {
@@ -25,12 +24,8 @@ public class GroupHelper extends HelperBase {
   public By updateGroupBtnLoc = By.name("update");
   //</editor-fold>
 
-  public GroupHelper(WebDriver driver) {
-    super(driver);
-  }
-
-  public NavigationHelper nav() {
-    return new NavigationHelper(driver);
+  public GroupHelper(ApplicationManager app) {
+    super(app);
   }
 
   //<editor-fold desc="Methods">
@@ -78,7 +73,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void createGroup(GroupData group) {
-    nav().goToGroupsPage();
+    app.nav().goToGroupsPage();
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
@@ -104,9 +99,8 @@ public class GroupHelper extends HelperBase {
   }
 
   public void verifyGroupPresence(GroupData newGroup) {
-    nav().goToGroupsPage();
+    app.nav().goToGroupsPage();
     if (!isAnyGroupPresent()) createGroup(newGroup);
   }
-
   //</editor-fold>
 }

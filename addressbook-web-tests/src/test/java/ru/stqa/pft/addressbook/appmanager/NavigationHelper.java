@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class NavigationHelper extends HelperBase {
 
@@ -12,16 +11,8 @@ public class NavigationHelper extends HelperBase {
   public By pageTitleLoc = By.tagName("h1");
   //</editor-fold>
 
-  public NavigationHelper(WebDriver driver) {
-    super(driver);
-  }
-
-  public GroupHelper group() {
-    return new GroupHelper(driver);
-  }
-
-  public ContactHelper contact() {
-    return new ContactHelper(driver);
+  public NavigationHelper(ApplicationManager app) {
+    super(app);
   }
 
   //<editor-fold desc="Methods">
@@ -32,7 +23,7 @@ public class NavigationHelper extends HelperBase {
   public void goToGroupsPage() {
     if (isAnyElementPresent(pageTitleLoc)
             && getPageTitle().equals("Groups")
-            && isAnyElementPresent(group().addGroupBtnLoc)) {
+            && isAnyElementPresent(app.group().addGroupBtnLoc)) {
       return;
     }
     click(groupsPageLinkLoc);
@@ -41,14 +32,14 @@ public class NavigationHelper extends HelperBase {
   public void goToEditContactPage() {
     if (isAnyElementPresent(pageTitleLoc)
             && getPageTitle().equals("Edit / add address book entry")
-            && isAnyElementPresent(contact().createContactBtnLoc)) {
+            && isAnyElementPresent(app.contact().createContactBtnLoc)) {
       return;
     }
     click(editContactPageLinkLoc);
   }
 
   public void goToHomePage() {
-    if (isAnyElementPresent(contact().contactsTableLoc)) {
+    if (isAnyElementPresent(app.contact().contactsTableLoc)) {
       return;
     }
     click(homePageLinkLoc);

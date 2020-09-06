@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
 
@@ -50,12 +49,8 @@ public class ContactHelper extends HelperBase {
   public By modifyContactBtnLoc = By.name("modifiy");
   //</editor-fold>
 
-  public ContactHelper(WebDriver driver) {
-    super(driver);
-  }
-
-  public NavigationHelper nav() {
-    return new NavigationHelper(driver);
+  public ContactHelper(ApplicationManager app) {
+    super(app);
   }
 
   //<editor-fold desc="Methods">
@@ -142,7 +137,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContact(ContactData contact) {
-    nav().goToEditContactPage();
+    app.nav().goToEditContactPage();
     fillContactForm(contact, true);
     submitContactCreation();
     returnToHomePage();
@@ -172,13 +167,13 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContacts(ContactData contact, int n) {
-    nav().goToEditContactPage();
+    app.nav().goToEditContactPage();
     for (int i = 1; i <= n; i++) {
       fillContactForm(contact, true);
       submitContactCreation();
       returnToEditContactPage();
     }
-    nav().goToHomePage();
+    app.nav().goToHomePage();
   }
 
   public boolean isAnyContactPresent() {
@@ -186,7 +181,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void verifyContactPresence(ContactData newContact) {
-    nav().goToHomePage();
+    app.nav().goToHomePage();
     if (!isAnyContactPresent()) createContact(newContact);
   }
   //</editor-fold>

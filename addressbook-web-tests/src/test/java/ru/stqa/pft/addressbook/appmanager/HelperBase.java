@@ -9,12 +9,15 @@ import java.util.concurrent.TimeUnit;
 
 public class HelperBase {
 
+  protected ApplicationManager app;
   protected WebDriver driver;
+
   private String state;
   private boolean acceptNextAlert = true;
 
-  public HelperBase(WebDriver driver) {
-    this.driver = driver;
+  public HelperBase(ApplicationManager app) {
+    this.app = app;
+    driver = app.driver;
   }
 
   //<editor-fold desc="Base methods">

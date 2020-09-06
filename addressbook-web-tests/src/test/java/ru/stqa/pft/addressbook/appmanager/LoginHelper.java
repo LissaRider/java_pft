@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.models.LoginData;
 
 public class LoginHelper extends HelperBase {
@@ -12,8 +11,8 @@ public class LoginHelper extends HelperBase {
   public By loginBtnLoc = By.cssSelector("input[type=submit]");
   //</editor-fold>
 
-  public LoginHelper(WebDriver driver) {
-    super(driver);
+  public LoginHelper(ApplicationManager app) {
+    super(app);
   }
 
   //<editor-fold desc="Methods">
