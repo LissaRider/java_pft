@@ -49,24 +49,42 @@ public class HelperBase {
     }
   }
 
-  public void uploadFile(By by, String path) {
-    getElement(by).sendKeys(path);
-  }
-
-  public void selectByText(By by, String text) {
-    new Select(getElement(by)).selectByVisibleText(text);
-  }
-
-  public void selectByValue(By by, String value) {
-    new Select(getElement(by)).selectByValue(value);
-  }
-
-  public void selectByIndex(By by, int index) {
-    new Select(getElement(by)).selectByIndex(index);
+  public void uploadFile(By by, String source) {
+//    здесь фото кладется в базу данных, но в ui никак больше не фигурирует после сохранения
+    if (source != null) {
+      getElement(by).sendKeys(getFilePath(source));
+    }
   }
 
   public String getFilePath(String source) {
     return System.getProperty("user.dir") + "\\src\\test\\resources\\" + source;
+  }
+
+  public void selectByText(By by, String text) {
+    if (text != null) {
+      String extText = new Select(getElement(by)).getFirstSelectedOption().getText();
+      if (!text.equals(extText)) {
+        new Select(getElement(by)).selectByVisibleText(text);
+      }
+    }
+  }
+
+  public void selectByValue(By by, String value) {
+    if (value != null) {
+      String extValue = new Select(getElement(by)).getFirstSelectedOption().getAttribute("value");
+      if (!value.equals(extValue)) {
+        new Select(getElement(by)).selectByValue(value);
+      }
+    }
+  }
+
+  public void selectByIndex(By by, Integer index) {
+    if (index != null) {
+      List<WebElement> list = new Select(getElement(by)).getOptions();
+      if (!list.get(index).isSelected()) {
+        new Select(getElement(by)).selectByIndex(index);
+      }
+    }
   }
 
   public boolean isElementPresent(By by) {
@@ -78,7 +96,7 @@ public class HelperBase {
     }
   }
 
-  public boolean IsAnyElementPresent(By by) {
+  public boolean isAnyElementPresent(By by) {
     try {
       driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
       return getElements(by).size() > 0;

@@ -5,7 +5,7 @@ public class ContactData {
   private final String middleName;
   private final String lastName;
   private final String nickname;
-  private final String source;
+  private final String fileSource;
   private final String jobTitle;
   private final String companyName;
   private final String mainAddress;
@@ -17,7 +17,7 @@ public class ContactData {
   private final String email2;
   private final String email3;
   private final String webSite;
-  private final int birthDay;
+  private final Integer birthDay;
   private final String birthMonth;
   private final String birthYear;
   private final String anniversaryDay;
@@ -28,17 +28,17 @@ public class ContactData {
   private final String notes;
 
   public ContactData(String firstName, String middleName, String lastName, String nickname,
-                     String filePath, String jobTitle, String companyName, String mainAddress,
+                     String fileSource, String jobTitle, String companyName, String mainAddress,
                      String homePhone, String mobilePhone, String workPhone, String faxNumber,
                      String email, String email2, String email3, String webSite,
-                     int birthDay, String birthMonth, String birthYear,
+                     Integer birthDay, String birthMonth, String birthYear,
                      String anniversaryDay, String anniversaryMonth, String anniversaryYear,
                      String adAddress, String adPhone, String notes) {
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
     this.nickname = nickname;
-    this.source = filePath;
+    this.fileSource = fileSource;
     this.jobTitle = jobTitle;
     this.companyName = companyName;
     this.mainAddress = mainAddress;
@@ -77,8 +77,8 @@ public class ContactData {
     return nickname;
   }
 
-  public String getSource() {
-    return source;
+  public String getFileSource() {
+    return fileSource;
   }
 
   public String getJobTitle() {
@@ -125,7 +125,7 @@ public class ContactData {
     return webSite;
   }
 
-  public int getBirthDay() {
+  public Integer getBirthDay() {
     return birthDay;
   }
 

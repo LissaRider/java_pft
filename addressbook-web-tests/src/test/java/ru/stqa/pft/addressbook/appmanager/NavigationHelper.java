@@ -16,32 +16,39 @@ public class NavigationHelper extends HelperBase {
     super(driver);
   }
 
-  //<editor-fold desc="Methods">
-  public void goToGroupsPage() {
-    if (isElementPresent(pageTitleLoc)
-            && getPageTitle().equals("Groups")
-            && isElementPresent(GroupHelper.addGroupBtnLoc)) {
-      return;
-    }
-    click(groupsPageLinkLoc);
-
+  public GroupHelper group() {
+    return new GroupHelper(driver);
   }
 
+  public ContactHelper contact() {
+    return new ContactHelper(driver);
+  }
+
+  //<editor-fold desc="Methods">
   public String getPageTitle() {
     return getElement(pageTitleLoc).getText();
   }
 
+  public void goToGroupsPage() {
+    if (isAnyElementPresent(pageTitleLoc)
+            && getPageTitle().equals("Groups")
+            && isAnyElementPresent(group().addGroupBtnLoc)) {
+      return;
+    }
+    click(groupsPageLinkLoc);
+  }
+
   public void goToEditContactPage() {
-    if (isElementPresent(pageTitleLoc)
+    if (isAnyElementPresent(pageTitleLoc)
             && getPageTitle().equals("Edit / add address book entry")
-            && isElementPresent(ContactHelper.createContactBtnLoc)) {
+            && isAnyElementPresent(contact().createContactBtnLoc)) {
       return;
     }
     click(editContactPageLinkLoc);
   }
 
   public void goToHomePage() {
-    if (isElementPresent(ContactHelper.contactsTableLoc)) {
+    if (isAnyElementPresent(contact().contactsTableLoc)) {
       return;
     }
     click(homePageLinkLoc);

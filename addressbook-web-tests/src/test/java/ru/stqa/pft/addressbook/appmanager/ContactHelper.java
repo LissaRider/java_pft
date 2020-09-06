@@ -8,7 +8,7 @@ import ru.stqa.pft.addressbook.models.ContactData;
 public class ContactHelper extends HelperBase {
 
   //<editor-fold desc="Locators">
-  public static By contactsTableLoc = By.id("maintable");
+  public By contactsTableLoc = By.id("maintable");
   public By firstNameLoc = By.name("firstname");
   public By middleNameLoc = By.name("middlename");
   public By lastNameLoc = By.name("lastname");
@@ -32,13 +32,12 @@ public class ContactHelper extends HelperBase {
   public By anniversaryMonthLoc = By.name("amonth");
   public By anniversaryYearLoc = By.name("ayear");
   public By contactsGroupLoc = By.name("new_group");
-//  public By groupsListLoc = By.cssSelector("select[name=new_group] option");
   public By adAddressLoc = By.name("address2");
   public By adPhoneLoc = By.name("phone2");
   public By notesLoc = By.name("notes");
 //  public By topCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(1)");
 //  public By bottomCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(2)");
-  public static By createContactBtnLoc = By.name("submit");
+  public By createContactBtnLoc = By.name("submit");
   public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
   public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
   public By contactCheckboxLoc = By.cssSelector("#maintable [name='selected[]']");
@@ -55,13 +54,17 @@ public class ContactHelper extends HelperBase {
     super(driver);
   }
 
+  public NavigationHelper nav() {
+    return new NavigationHelper(driver);
+  }
+
   //<editor-fold desc="Methods">
   public void fillContactForm(ContactData contactData, boolean creation) {
     clearAndType(firstNameLoc, contactData.getFirstName());
     clearAndType(middleNameLoc, contactData.getMiddleName());
     clearAndType(lastNameLoc, contactData.getLastName());
     clearAndType(nicknameLoc, contactData.getNickname());
-    uploadFile(inputFileLoc, getFilePath(contactData.getSource()));
+    uploadFile(inputFileLoc, contactData.getFileSource());
     clearAndType(jobTitleLoc, contactData.getJobTitle());
     clearAndType(companyNameLoc, contactData.getCompanyName());
     clearAndType(mainAddressLoc, contactData.getMainAddress());
@@ -84,7 +87,7 @@ public class ContactHelper extends HelperBase {
 //      selectByText(contactsGroupLoc, "[none]");
 //      selectByIndex(contactsGroupLoc, 0);}
     } else {
-      Assert.assertFalse(IsAnyElementPresent(contactsGroupLoc));
+      Assert.assertFalse(isAnyElementPresent(contactsGroupLoc));
     }
     clearAndType(adAddressLoc, contactData.getAdAddress());
     clearAndType(adPhoneLoc, contactData.getAdPhone());
@@ -136,6 +139,55 @@ public class ContactHelper extends HelperBase {
 
   public void initContactModification() {
     click(modifyContactBtnLoc);
+  }
+
+  public void createContact(ContactData contact) {
+    nav().goToEditContactPage();
+    fillContactForm(contact, true);
+    submitContactCreation();
+    returnToHomePage();
+  }
+
+  public void modifyContact(ContactData contact) {
+    fillContactForm(contact, false);
+    submitContactModification();
+    returnToHomePage();
+  }
+
+  public void deleteAnyContactFromList() {
+    selectAnyContact();
+    initContactDeletionOnHomePage();
+    closeAlertAndGetItsText();
+  }
+
+  public void deleteAnyContactOnEditPage() {
+    initAnyContactModification();
+    initContactDeletionOnEditContactPage();
+  }
+
+  public void deleteAllContacts() {
+    selectAllContacts();
+    initContactDeletionOnHomePage();
+    closeAlertAndGetItsText();
+  }
+
+  public void createContacts(ContactData contact, int n) {
+    nav().goToEditContactPage();
+    for (int i = 1; i <= n; i++) {
+      fillContactForm(contact, true);
+      submitContactCreation();
+      returnToEditContactPage();
+    }
+    nav().goToHomePage();
+  }
+
+  public boolean isAnyContactPresent() {
+    return isAnyElementPresent(contactCheckboxLoc);
+  }
+
+  public void verifyContactPresence(ContactData newContact) {
+    nav().goToHomePage();
+    if (!isAnyContactPresent()) createContact(newContact);
   }
   //</editor-fold>
 }

@@ -1,29 +1,54 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.models.ContactData;
 
 public class ContactDeletionTests extends TestBase {
 
-  @Test(testName = "Провека удаления контакта на главной странице", priority=1)
+  public ContactData newContact = new ContactData(
+          "Clone",
+          null,
+          "Attack",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+  );
+
+  @Test(testName = "Провека удаления контакта на главной странице", priority = 1)
   public void testContactDeletionOnHomePage() {
-    app.nav().goToHomePage();
-    app.contact().selectAnyContact();
-    app.contact().initContactDeletionOnHomePage();
-    app.base().closeAlertAndGetItsText();
+    app.contact().verifyContactPresence(newContact);
+    app.contact().deleteAnyContactFromList();
   }
 
-  @Test(testName = "Проверка удаления контакта со страницы редактирования", priority=2)
+  @Test(testName = "Проверка удаления контакта со страницы редактирования", priority = 2)
   public void testContactDeletionOnEditContactPage() {
-    app.nav().goToHomePage();
-    app.contact().initAnyContactModification();
-    app.contact().initContactDeletionOnEditContactPage();
+    app.contact().verifyContactPresence(newContact);
+    app.contact().deleteAnyContactOnEditPage();
   }
 
-  @Test(testName = "Проверка удаления всех контактов", priority=3)
+  @Test(testName = "Проверка удаления всех контактов", priority = 3)
   public void testAllContactsDeletion() {
     app.nav().goToHomePage();
-    app.contact().selectAllContacts();
-    app.contact().initContactDeletionOnHomePage();
-    app.base().closeAlertAndGetItsText();
+    if (!app.contact().isAnyContactPresent()) app.contact().createContacts(newContact, 3);
+    app.contact().deleteAllContacts();
   }
 }

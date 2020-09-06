@@ -14,7 +14,6 @@ public class ApplicationManager {
 
   WebDriver driver;
 
-
   private LoginHelper loginHelper;
   private ContactHelper contactHelper;
   private NavigationHelper navigationHelper;

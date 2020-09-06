@@ -7,7 +7,7 @@ import ru.stqa.pft.addressbook.models.GroupData;
 public class GroupHelper extends HelperBase {
 
   //<editor-fold desc="Locators">
-  public static By addGroupBtnLoc = By.name("new");
+  public By addGroupBtnLoc = By.name("new");
 //  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
 //  public By bottomAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(2)");
   public By groupNameLoc = By.name("group_name");
@@ -27,6 +27,10 @@ public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver driver) {
     super(driver);
+  }
+
+  public NavigationHelper nav() {
+    return new NavigationHelper(driver);
   }
 
   //<editor-fold desc="Methods">
@@ -72,5 +76,37 @@ public class GroupHelper extends HelperBase {
   public void submitGroupModification() {
     click(updateGroupBtnLoc);
   }
+
+  public void createGroup(GroupData group) {
+    nav().goToGroupsPage();
+    initGroupCreation();
+    fillGroupForm(group);
+    submitGroupCreation();
+    returnToGroupsPage();
+  }
+
+  public void modifyGroup(GroupData groupData) {
+    selectAnyGroup();
+    initGroupModification();
+    fillGroupForm(groupData);
+    submitGroupModification();
+    returnToGroupsPage();
+  }
+
+  public void removeGroup() {
+    selectAnyGroup();
+    submitGroupDeletion();
+    returnToGroupsPage();
+  }
+
+  public boolean isAnyGroupPresent() {
+    return isAnyElementPresent(groupCheckboxLoc);
+  }
+
+  public void verifyGroupPresence(GroupData newGroup) {
+    nav().goToGroupsPage();
+    if (!isAnyGroupPresent()) createGroup(newGroup);
+  }
+
   //</editor-fold>
 }

@@ -5,11 +5,39 @@ import ru.stqa.pft.addressbook.models.ContactData;
 
 public class ContactModificationTests extends TestBase {
 
+  public ContactData newContact = new ContactData(
+          "James",
+          null,
+          "Bond",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+  );
+
   @Test(testName = "Проверка редактирования контакта со страницы редактирования")
   public void testContactModificationFromEditContactPage() {
-    app.nav().goToHomePage();
+    app.contact().verifyContactPresence(newContact);
     app.contact().initAnyContactModification();
-    app.contact().fillContactForm(new ContactData(
+    app.contact().modifyContact(new ContactData(
             "Robin",
             "Batkovich",
             "Hood",
@@ -34,18 +62,16 @@ public class ContactModificationTests extends TestBase {
             "2021",
             "England",
             "8(909) 777-77-77",
-            "Rise and rise again until lambs become lions."),
-            false);
-    app.contact().submitContactModification();
-    app.contact().returnToHomePage();
+            "Rise and rise again until lambs become lions."
+    ));
   }
 
   @Test(testName = "Проверка редактирования контакта со страницы просмотра")
   public void testContactModificationFromViewContactPage() {
-    app.nav().goToHomePage();
+    app.contact().verifyContactPresence(newContact);
     app.contact().viewAnyContact();
     app.contact().initContactModification();
-    app.contact().fillContactForm(new ContactData(
+    app.contact().modifyContact(new ContactData(
             "John",
             "Ivanovich",
             "Carter",
@@ -70,9 +96,7 @@ public class ContactModificationTests extends TestBase {
             "2024",
             "Moscow,  metro station Vystavochnaya",
             "8(909) 888-88-88",
-            "By god... I am on Mars."),
-            false);
-    app.contact().submitContactModification();
-    app.contact().returnToHomePage();
+            "By god... I am on Mars."
+    ));
   }
 }
