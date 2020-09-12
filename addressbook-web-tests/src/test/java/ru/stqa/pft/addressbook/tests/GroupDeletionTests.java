@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.GroupData;
 
+import java.util.List;
+
 public class GroupDeletionTests extends TestBase {
 
   public GroupData newGroup = new GroupData(
@@ -15,10 +17,10 @@ public class GroupDeletionTests extends TestBase {
   @Test(testName = "Проверка удаления любой группы")
   public void testAnyGroupDeletion() {
     app.group().verifyGroupPresence(newGroup, 1);
-    int before = app.group().getGroupsCount();
+    List<GroupData> before = app.group().getGroupsList();
     app.group().removeAnyGroup();
-    int after = app.group().getGroupsCount();
-    Assert.assertEquals(after, before - 1);
+    List<GroupData> after = app.group().getGroupsList();
+    Assert.assertEquals(after.size(), before.size() - 1);
   }
 
   @Test(testName = "Проверка удаления первой группы")
@@ -26,10 +28,10 @@ public class GroupDeletionTests extends TestBase {
     app.group().verifyGroupPresence(newGroup, 3);
     if (app.group().getGroupsCount() == 2)
       app.group().createGroups(newGroup, 1);
-    int before = app.group().getGroupsCount();
+    List<GroupData> before = app.group().getGroupsList();
     app.group().removeGroup(0);
-    int after = app.group().getGroupsCount();
-    Assert.assertEquals(after, before - 1);
+    List<GroupData> after = app.group().getGroupsList();
+    Assert.assertEquals(after.size(), before.size() - 1);
   }
 
   @Test(testName = "Проверка удаления последней группы")
@@ -37,9 +39,9 @@ public class GroupDeletionTests extends TestBase {
     app.group().verifyGroupPresence(newGroup, 3);
     if (app.group().getGroupsCount() == 2)
         app.group().createGroups(newGroup, 1);
-    int before = app.group().getGroupsCount();
-    app.group().removeGroup(before - 1);
-    int after = app.group().getGroupsCount();
-    Assert.assertEquals(after, before - 1);
+    List<GroupData> before = app.group().getGroupsList();
+    app.group().removeGroup(before.size() - 1);
+    List<GroupData> after = app.group().getGroupsList();
+    Assert.assertEquals(after.size(), before.size() - 1);
   }
 }

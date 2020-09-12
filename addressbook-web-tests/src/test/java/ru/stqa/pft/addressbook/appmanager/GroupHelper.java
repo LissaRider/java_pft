@@ -1,13 +1,18 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.models.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupHelper extends HelperBase {
 
   //<editor-fold desc="Locators">
   public By addGroupBtnLoc = By.name("new");
-//  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
+  //  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
 //  public By topAddGroupBtnLoc = By.xpath(".//input[@name='new'][1]");
 //  public By bottomAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(2)");
 //  public By bottomAddGroupBtnLoc = By.xpath(".//input[@name='new'][last()]");
@@ -16,7 +21,7 @@ public class GroupHelper extends HelperBase {
   public By groupFooterLoc = By.name("group_footer");
   public By createGroupBtnLoc = By.name("submit");
   public By returnToGroupsPageLinkLoc = By.cssSelector("#content a[href='group.php']");
-//  public By returnToGroupsPageLinkLoc = By.xpath(".//*[@id='content']//a[@href='group.php']");
+  //  public By returnToGroupsPageLinkLoc = By.xpath(".//*[@id='content']//a[@href='group.php']");
 //  public By topDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(1)");
 //  public By topDeleteGroupBtnLoc = By.xpath(".//input[@name='delete'][1]");
 //  public By bottomDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(2)");
@@ -24,11 +29,12 @@ public class GroupHelper extends HelperBase {
   public By groupCheckboxLoc = By.name("selected[]");
   public By deleteGroupBtnLoc = By.name("delete");
   public By editGroupBtnLoc = By.name("edit");
-//  public By topEditGroupBtnLoc = By.cssSelector("input[name=edit]:nth-child(1)");
+  //  public By topEditGroupBtnLoc = By.cssSelector("input[name=edit]:nth-child(1)");
 //  public By topEditGroupBtnLoc = By.xpath(".//input[@name='edit'][1]");
 //  public By bottomEditGroupBtnLoc = By.cssSelector("input[name=edit]:nth-child(2)");
 //  public By bottomEditGroupBtnLoc = By.xpath(".//input[@name='edit'][last()]");
   public By updateGroupBtnLoc = By.name("update");
+  public By groupLoc = By.className("group");
   //</editor-fold>
 
   public GroupHelper(ApplicationManager app) {
@@ -141,6 +147,17 @@ public class GroupHelper extends HelperBase {
 
   public int getGroupsCount() {
     return getElements(groupCheckboxLoc).size();
+  }
+
+  public List<GroupData> getGroupsList() {
+    List<GroupData> groups = new ArrayList<>();
+    List<WebElement> elements = getElements(groupLoc);
+    for (WebElement element : elements) {
+      String name = element.getText();
+      GroupData group = new GroupData(name, null, null);
+      groups.add(group);
+    }
+    return groups;
   }
   //</editor-fold>
 }
