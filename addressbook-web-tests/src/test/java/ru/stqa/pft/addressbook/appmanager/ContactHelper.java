@@ -35,17 +35,27 @@ public class ContactHelper extends HelperBase {
   public By adPhoneLoc = By.name("phone2");
   public By notesLoc = By.name("notes");
 //  public By topCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(1)");
+//  public By topCreateContactBtnLoc = By.xpath(".//input[@name='submit'][1]");
 //  public By bottomCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(2)");
+//  public By bottomCreateContactBtnLoc = By.xpath(".//input[@name='submit'][last()]");
   public By createContactBtnLoc = By.name("submit");
   public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
+//  public By returnToHomePageLinkLoc = By.xpath(".//*[@id='content']//a[@href='index.php']");
   public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
+//  public By returnToEditContactPageLinkLoc = By.xpath(".//*[@id='content']//a[@href='edit.php']");
   public By contactCheckboxLoc = By.cssSelector("#maintable [name='selected[]']");
+//  public By contactCheckboxLoc = By.xpath(".//*[@id='maintable']//*[@name='selected[]']");
   public By deleteContactBtnHomePageLoc = By.cssSelector("input[onclick='DeleteSel()']");
+//  public By deleteContactBtnHomePageLoc = By.xpath(".//input[@onclick='DeleteSel()']");
   public By editContactBtnLoc = By.cssSelector("#maintable a[href^='edit.php']");
+//  public By editContactBtnLoc = By.xpath(".//*[@id='maintable']//a[starts-with(@href,'edit.php')]");
   public By viewContactBtnLoc = By.cssSelector("#maintable a[href^='view.php']");
+//  public By viewContactBtnLoc = By.xpath(".//*[@id='maintable']//a[starts-with(@href,'view.php')]");
   public By updateContactBtnLoc = By.cssSelector("[name=update][value=Update]");
+//  public By updateContactBtnLoc = By.xpath(".//*[@name='update' and @value='Update']");
   public By selectAllCheckboxLoc = By.id("MassCB");
   public By deleteContactBtnEditPageLoc = By.cssSelector("[name=update][value=Delete]");
+//  public By deleteContactBtnEditPageLoc = By.xpath(".//*[@name='update' and @value='Delete']");
   public By modifyContactBtnLoc = By.name("modifiy");
   //</editor-fold>
 
