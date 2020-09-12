@@ -80,7 +80,6 @@ public class GroupHelper extends HelperBase {
   }
 
   public void createGroup(GroupData group) {
-    app.nav().goToGroupsPage();
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
@@ -108,6 +107,10 @@ public class GroupHelper extends HelperBase {
   public void verifyGroupPresence(GroupData newGroup) {
     app.nav().goToGroupsPage();
     if (!isAnyGroupPresent()) createGroup(newGroup);
+  }
+
+  public int getGroupsCount() {
+    return getElements(groupCheckboxLoc).size();
   }
   //</editor-fold>
 }
