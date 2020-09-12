@@ -29,9 +29,13 @@ public class GroupCreationTests extends TestBase {
 //        max = g.getId();
 //    }
 //    group.setId(max);
-    group.setId(after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId());
+//    group.setId(after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId());
     before.add(group);
-    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
+    Comparator<GroupData> byId = Comparator.comparingInt(GroupData::getId);
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
+//    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
   }
 
   @Test(testName = "Проверка создания группы (дефолтные значения)")
@@ -52,8 +56,12 @@ public class GroupCreationTests extends TestBase {
 //        max = g.getId();
 //    }
 //    group.setId(max);
-    group.setId(after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId());
+//    group.setId(after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId());
     before.add(group);
-    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
+    Comparator<GroupData> byId = Comparator.comparingInt(GroupData::getId);
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
+//    Assert.assertEquals(new HashSet<>(before), new HashSet<>(after));
   }
 }
