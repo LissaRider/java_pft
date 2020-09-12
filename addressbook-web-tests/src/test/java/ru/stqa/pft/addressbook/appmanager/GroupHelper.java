@@ -125,16 +125,12 @@ public class GroupHelper extends HelperBase {
     }
   }
 
-  public int getGroupsCount() {
-    return getElements(groupCheckboxLoc).size();
-  }
-
   public List<GroupData> getGroupsList() {
     List<GroupData> groups = new ArrayList<>();
     List<WebElement> elements = getElements(groupLoc);
     for (WebElement element : elements) {
       String name = element.getText();
-      String id = element.findElement(groupInputLoc).getAttribute("value");
+      int id = Integer.parseInt(element.findElement(groupInputLoc).getAttribute("value"));
       GroupData group = new GroupData(id, name, null, null);
       groups.add(group);
     }
