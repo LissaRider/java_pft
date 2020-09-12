@@ -8,7 +8,7 @@ public class LoginHelper extends HelperBase {
   //<editor-fold desc="Locators">
   public By passwordLoc = By.name("pass");
   public By usernameLoc = By.name("user");
-  public By loginBtnLoc = By.cssSelector("input[type=submit]");
+  public By loginBtnLoc = By.xpath(".//input[@type='submit']");
   //</editor-fold>
 
   public LoginHelper(ApplicationManager app) {
