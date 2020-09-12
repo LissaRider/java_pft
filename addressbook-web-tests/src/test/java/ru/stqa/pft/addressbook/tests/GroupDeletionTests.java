@@ -21,6 +21,8 @@ public class GroupDeletionTests extends TestBase {
     app.group().removeAnyGroup();
     List<GroupData> after = app.group().getGroupsList();
     Assert.assertEquals(after.size(), before.size() - 1);
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after, before);
   }
 
   @Test(testName = "Проверка удаления первой группы")
@@ -32,16 +34,20 @@ public class GroupDeletionTests extends TestBase {
     app.group().removeGroup(0);
     List<GroupData> after = app.group().getGroupsList();
     Assert.assertEquals(after.size(), before.size() - 1);
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after, before);
   }
 
   @Test(testName = "Проверка удаления последней группы")
   public void testLastGroupDeletion() {
     app.group().verifyGroupPresence(newGroup, 3);
     if (app.group().getGroupsCount() == 2)
-        app.group().createGroups(newGroup, 1);
+      app.group().createGroups(newGroup, 1);
     List<GroupData> before = app.group().getGroupsList();
     app.group().removeGroup(before.size() - 1);
     List<GroupData> after = app.group().getGroupsList();
     Assert.assertEquals(after.size(), before.size() - 1);
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after, before);
   }
 }
