@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
-  @Test(testName = "Проверка создание группы")
+  @Test(testName = "Проверка создания группы")
   public void testGroupCreation() {
     app.nav().goToGroupsPage();
     List<GroupData> before = app.group().getGroupsList();
@@ -22,7 +22,7 @@ public class GroupCreationTests extends TestBase {
     Assert.assertEquals(after.size(), before.size() + 1);
   }
 
-  @Test(testName = "Проверка создание группы (дефолтные значения)")
+  @Test(testName = "Проверка создания группы (дефолтные значения)")
   public void testGroupCreationWithDefaultFields() {
     app.nav().goToGroupsPage();
     List<GroupData> before = app.group().getGroupsList();

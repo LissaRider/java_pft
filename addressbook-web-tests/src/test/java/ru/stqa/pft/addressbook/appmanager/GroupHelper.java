@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.models.GroupData;
 
@@ -35,6 +34,7 @@ public class GroupHelper extends HelperBase {
 //  public By bottomEditGroupBtnLoc = By.xpath(".//input[@name='edit'][last()]");
   public By updateGroupBtnLoc = By.name("update");
   public By groupLoc = By.className("group");
+  public By groupInputLoc = By.tagName("input");
   //</editor-fold>
 
   public GroupHelper(ApplicationManager app) {
@@ -57,10 +57,6 @@ public class GroupHelper extends HelperBase {
 
   public void submitGroupCreation() {
     click(createGroupBtnLoc);
-  }
-
-  public void selectAnyGroup() {
-    getElements(groupCheckboxLoc).stream().findAny().orElse(null).click();
   }
 
   public void selectGroup(int index) {
@@ -97,28 +93,12 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
-  public void modifyAnyGroup(GroupData groupData) {
-    app.nav().goToGroupsPage();
-    selectAnyGroup();
-    initGroupModification();
-    fillGroupForm(groupData);
-    submitGroupModification();
-    returnToGroupsPage();
-  }
-
   public void modifyGroup(int index, GroupData groupData) {
     app.nav().goToGroupsPage();
     selectGroup(index);
     initGroupModification();
     fillGroupForm(groupData);
     submitGroupModification();
-    returnToGroupsPage();
-  }
-
-  public void removeAnyGroup() {
-    app.nav().goToGroupsPage();
-    selectAnyGroup();
-    submitGroupDeletion();
     returnToGroupsPage();
   }
 
@@ -154,7 +134,8 @@ public class GroupHelper extends HelperBase {
     List<WebElement> elements = getElements(groupLoc);
     for (WebElement element : elements) {
       String name = element.getText();
-      GroupData group = new GroupData(name, null, null);
+      String id = element.findElement(groupInputLoc).getAttribute("value");
+      GroupData group = new GroupData(id, name, null, null);
       groups.add(group);
     }
     return groups;
