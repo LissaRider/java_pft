@@ -17,8 +17,6 @@ public class GroupDeletionTests extends TestBase {
   @Test(testName = "Проверка удаления первой группы")
   public void testFirstGroupDeletion() {
     app.group().verifyGroupPresence(newGroup, 3);
-    if (app.group().getGroupsCount() == 2)
-      app.group().createGroups(newGroup, 1);
     List<GroupData> before = app.group().getGroupsList();
     app.group().removeGroup(0);
     List<GroupData> after = app.group().getGroupsList();
@@ -30,8 +28,6 @@ public class GroupDeletionTests extends TestBase {
   @Test(testName = "Проверка удаления последней группы")
   public void testLastGroupDeletion() {
     app.group().verifyGroupPresence(newGroup, 3);
-    if (app.group().getGroupsCount() == 2)
-      app.group().createGroups(newGroup, 1);
     List<GroupData> before = app.group().getGroupsList();
     app.group().removeGroup(before.size() - 1);
     List<GroupData> after = app.group().getGroupsList();
