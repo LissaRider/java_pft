@@ -13,10 +13,10 @@ public class GroupModificationTests extends TestBase {
   );
 
   @Test(testName = "Проверка редактирования группы")
-  public void testGroupModification() {
-    app.group().verifyGroupPresence(newGroup);;
+  public void testAnyGroupModification() {
+    app.group().verifyGroupPresence(newGroup, 1);
     int before = app.group().getGroupsCount();
-    app.group().modifyGroup(new GroupData(
+    app.group().modifyAnyGroup(new GroupData(
             "Friends",
             "<h1>FRIENDS</h1><p>Created by Lissa Rider</p></p>",
             "<a href=\"index.php\">home</a>"
@@ -27,9 +27,9 @@ public class GroupModificationTests extends TestBase {
 
   @Test(testName = "Проверка редактирования группы (с неизменяющимися значениями)")
   public void testGroupModificationWithSameValues() {
-    app.group().verifyGroupPresence(newGroup);
+    app.group().verifyGroupPresence(newGroup, 1);
     int before = app.group().getGroupsCount();
-    app.group().modifyGroup(new GroupData(
+    app.group().modifyAnyGroup(new GroupData(
             "Relatives",
             "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
             "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +

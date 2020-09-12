@@ -54,7 +54,11 @@ public class GroupHelper extends HelperBase {
   }
 
   public void selectAnyGroup() {
-    click(groupCheckboxLoc);
+    getElements(groupCheckboxLoc).stream().findAny().orElse(null).click();
+  }
+
+  public void selectGroup(int index) {
+    getElements(groupCheckboxLoc).get(index).click();
   }
 
   public void submitGroupDeletion() {
@@ -80,13 +84,15 @@ public class GroupHelper extends HelperBase {
   }
 
   public void createGroup(GroupData group) {
+    app.nav().goToGroupsPage();
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
     returnToGroupsPage();
   }
 
-  public void modifyGroup(GroupData groupData) {
+  public void modifyAnyGroup(GroupData groupData) {
+    app.nav().goToGroupsPage();
     selectAnyGroup();
     initGroupModification();
     fillGroupForm(groupData);
@@ -94,8 +100,25 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
-  public void removeGroup() {
+  public void modifyGroup(int index, GroupData groupData) {
+    app.nav().goToGroupsPage();
+    selectGroup(index);
+    initGroupModification();
+    fillGroupForm(groupData);
+    submitGroupModification();
+    returnToGroupsPage();
+  }
+
+  public void removeAnyGroup() {
+    app.nav().goToGroupsPage();
     selectAnyGroup();
+    submitGroupDeletion();
+    returnToGroupsPage();
+  }
+
+  public void removeGroup(int index) {
+    app.nav().goToGroupsPage();
+    selectGroup(index);
     submitGroupDeletion();
     returnToGroupsPage();
   }
@@ -104,9 +127,16 @@ public class GroupHelper extends HelperBase {
     return isAnyElementPresent(groupCheckboxLoc);
   }
 
-  public void verifyGroupPresence(GroupData newGroup) {
+  public void verifyGroupPresence(GroupData newGroup, int n) {
     app.nav().goToGroupsPage();
-    if (!isAnyGroupPresent()) createGroup(newGroup);
+    if (!isAnyGroupPresent()) createGroups(newGroup, n);
+  }
+
+  public void createGroups(GroupData group, int n) {
+    app.nav().goToGroupsPage();
+    for (int i = 1; i <= n; i++) {
+      createGroup(group);
+    }
   }
 
   public int getGroupsCount() {
