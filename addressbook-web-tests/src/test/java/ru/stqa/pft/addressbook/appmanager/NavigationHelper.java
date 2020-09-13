@@ -6,8 +6,11 @@ public class NavigationHelper extends HelperBase {
 
   //<editor-fold desc="Locators">
   public By groupsPageLinkLoc = By.cssSelector("#nav a[href='group.php']");
+//  public By groupsPageLinkLoc = By.xpath(".//*[@id=nav]//a[href='group.php']");
   public By editContactPageLinkLoc = By.cssSelector("#nav a[href='edit.php']");
+//  public By editContactPageLinkLoc = By.xpath(".//*[@id=nav]//a[href='edit.php']");
   public By homePageLinkLoc = By.cssSelector("#nav a[href='./']");
+//  public By homePageLinkLoc = By.xpath(".//*[@id=nav]//a[href='./']");
   public By pageTitleLoc = By.tagName("h1");
   //</editor-fold>
 

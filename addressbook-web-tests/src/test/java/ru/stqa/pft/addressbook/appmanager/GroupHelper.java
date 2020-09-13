@@ -11,7 +11,7 @@ public class GroupHelper extends HelperBase {
 
   //<editor-fold desc="Locators">
   public By addGroupBtnLoc = By.name("new");
-  //  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
+//  public By topAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(1)");
 //  public By topAddGroupBtnLoc = By.xpath(".//input[@name='new'][1]");
 //  public By bottomAddGroupBtnLoc = By.cssSelector("input[name=new]:nth-child(2)");
 //  public By bottomAddGroupBtnLoc = By.xpath(".//input[@name='new'][last()]");
@@ -20,7 +20,7 @@ public class GroupHelper extends HelperBase {
   public By groupFooterLoc = By.name("group_footer");
   public By createGroupBtnLoc = By.name("submit");
   public By returnToGroupsPageLinkLoc = By.cssSelector("#content a[href='group.php']");
-  //  public By returnToGroupsPageLinkLoc = By.xpath(".//*[@id='content']//a[@href='group.php']");
+//  public By returnToGroupsPageLinkLoc = By.xpath(".//*[@id='content']//a[@href='group.php']");
 //  public By topDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(1)");
 //  public By topDeleteGroupBtnLoc = By.xpath(".//input[@name='delete'][1]");
 //  public By bottomDeleteGroupBtnLoc = By.cssSelector("input[name=delete]:nth-child(2)");
@@ -28,7 +28,7 @@ public class GroupHelper extends HelperBase {
   public By groupCheckboxLoc = By.name("selected[]");
   public By deleteGroupBtnLoc = By.name("delete");
   public By editGroupBtnLoc = By.name("edit");
-  //  public By topEditGroupBtnLoc = By.cssSelector("input[name=edit]:nth-child(1)");
+//  public By topEditGroupBtnLoc = By.cssSelector("input[name=edit]:nth-child(1)");
 //  public By topEditGroupBtnLoc = By.xpath(".//input[@name='edit'][1]");
 //  public By bottomEditGroupBtnLoc = By.cssSelector("input[name=edit]:nth-child(2)");
 //  public By bottomEditGroupBtnLoc = By.xpath(".//input[@name='edit'][last()]");
@@ -53,6 +53,10 @@ public class GroupHelper extends HelperBase {
     clearAndType(groupNameLoc, groupData.getName());
     clearAndType(groupHeaderLoc, groupData.getHeader());
     clearAndType(groupFooterLoc, groupData.getFooter());
+  }
+
+  public void fillGroupFormRequiredFields(GroupData groupData) {
+    clearAndType(groupNameLoc, groupData.getName());
   }
 
   public void submitGroupCreation() {
@@ -90,6 +94,7 @@ public class GroupHelper extends HelperBase {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+    verifyMessage("A new group has been entered into the address book.");
     returnToGroupsPage();
   }
 
@@ -99,6 +104,7 @@ public class GroupHelper extends HelperBase {
     initGroupModification();
     fillGroupForm(groupData);
     submitGroupModification();
+    verifyMessage("Group record has been updated.");
     returnToGroupsPage();
   }
 
@@ -106,6 +112,7 @@ public class GroupHelper extends HelperBase {
     app.nav().goToGroupsPage();
     selectGroup(index);
     submitGroupDeletion();
+    verifyMessage("Group has been removed.");
     returnToGroupsPage();
   }
 
@@ -121,7 +128,11 @@ public class GroupHelper extends HelperBase {
   public void createGroups(GroupData group, int n) {
     app.nav().goToGroupsPage();
     for (int i = 1; i <= n; i++) {
-      createGroup(group);
+      app.nav().goToGroupsPage();
+      initGroupCreation();
+      fillGroupFormRequiredFields(group);
+      submitGroupCreation();
+      returnToGroupsPage();
     }
   }
 

@@ -3,15 +3,19 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class HelperBase {
 
+  //<editor-fold desc="Locators">
+  public By msgBoxLoc = By.cssSelector("#content .msgbox");
+  //</editor-fold>
+
   protected ApplicationManager app;
   protected WebDriver driver;
-
   private String state;
   private boolean acceptNextAlert = true;
 
@@ -21,6 +25,14 @@ public class HelperBase {
   }
 
   //<editor-fold desc="Base methods">
+  public void verifyMessage(String message) {
+    Assert.assertTrue(msgBoxText(msgBoxLoc).contains(message));
+  }
+
+  public String msgBoxText(By msgBoxLoc) {
+    return getElement(msgBoxLoc).getText();
+  }
+
   public WebElement getElement(By by) {
     return driver.findElement(by);
   }
@@ -126,6 +138,7 @@ public class HelperBase {
       } else {
         alert.dismiss();
       }
+//      System.out.println(alertText);
       return alertText;
     } finally {
       acceptNextAlert = true;
@@ -134,7 +147,7 @@ public class HelperBase {
   //</editor-fold>
 
   //<editor-fold desc="Extensions">
-  public void WaitForPageLoad(int timeOutInSeconds) {//
+  public void waitForPageLoad(int timeOutInSeconds) {//
     try {
       WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
       //Checks every 500 ms whether predicate returns true

@@ -39,7 +39,6 @@ public class ApplicationManager {
     }
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     String baseUrl = "http://localhost/addressbook";
     driver.get(baseUrl);

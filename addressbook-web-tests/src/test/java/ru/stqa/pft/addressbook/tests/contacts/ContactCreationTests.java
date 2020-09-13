@@ -1,14 +1,20 @@
 package ru.stqa.pft.addressbook.tests.contacts;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.tests.TestBase;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
   @Test(testName = "Проверка создания контакта")
   public void testContactCreation() {
-   app.contact().createContact(new ContactData(
+    app.nav().goToHomePage();
+    List<ContactData> before = app.contact().getContactsList();
+    ContactData contact = new ContactData(
             "Alice",
             "Batkovna",
             "Fabler",
@@ -34,6 +40,14 @@ public class ContactCreationTests extends TestBase {
             "Moscow, Biryulyovo Zapadnoye District",
             "8(909) 999-99-99",
             "\"Who in the world am I?\" Ah, that is the great puzzle!"
-   ));
+    );
+    app.contact().createContact(contact);
+    List<ContactData> after = app.contact().getContactsList();
+    Assert.assertEquals(after.size(), before.size() + 1);
+    before.add(contact);
+    Comparator<ContactData> byId = Comparator.comparingInt(ContactData::getId);
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
   }
 }

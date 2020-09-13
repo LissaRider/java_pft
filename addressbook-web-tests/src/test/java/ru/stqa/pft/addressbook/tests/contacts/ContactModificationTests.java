@@ -1,44 +1,23 @@
 package ru.stqa.pft.addressbook.tests.contacts;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
+import java.util.Comparator;
+import java.util.List;
+
 public class ContactModificationTests extends TestBase {
 
-  public ContactData newContact = new ContactData(
-          "James",
-          null,
-          "Bond",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-  );
+  public ContactData newContact = new ContactData("James", "Bond");
 
-  @Test(testName = "Проверка редактирования контакта со страницы редактирования")
-  public void testContactModificationFromEditContactPage() {
-    app.contact().verifyContactPresence(newContact);
-    app.contact().initAnyContactModification();
-    app.contact().modifyContact(new ContactData(
+  @Test(testName = "Проверка редактирования первого контакта со страницы редактирования")
+  public void testFirstContactModificationFromEditContactPage() {
+    app.contact().verifyContactPresence(newContact, 3);
+    List<ContactData> before = app.contact().getContactsList();
+    app.contact().initContactModification(0);
+    ContactData contact = new ContactData(before.get(0).getId(),
             "Robin",
             "Batkovich",
             "Hood",
@@ -64,15 +43,25 @@ public class ContactModificationTests extends TestBase {
             "England",
             "8(909) 777-77-77",
             "Rise and rise again until lambs become lions."
-    ));
+    );
+    app.contact().modifyContact(contact);
+    List<ContactData> after = app.contact().getContactsList();
+    Assert.assertEquals(after.size(), before.size());
+    before.remove(0);
+    before.add(contact);
+    Comparator<ContactData> byId = Comparator.comparingInt(ContactData::getId);
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
   }
 
-  @Test(testName = "Проверка редактирования контакта со страницы просмотра")
-  public void testContactModificationFromViewContactPage() {
-    app.contact().verifyContactPresence(newContact);
-    app.contact().viewAnyContact();
-    app.contact().initContactModification();
-    app.contact().modifyContact(new ContactData(
+  @Test(testName = "Проверка редактирования последнего контакта со страницы просмотра")
+  public void testLastContactModificationFromViewContactPage() {
+    app.contact().verifyContactPresence(newContact, 3);
+    List<ContactData> before = app.contact().getContactsList();
+    app.contact().viewContact(before.size() - 1);
+    app.contact().initContactModificationOnViewPage();
+    ContactData contact = new ContactData(before.get(before.size() - 1).getId(),
             "John",
             "Ivanovich",
             "Carter",
@@ -98,6 +87,15 @@ public class ContactModificationTests extends TestBase {
             "Moscow,  metro station Vystavochnaya",
             "8(909) 888-88-88",
             "By god... I am on Mars."
-    ));
+    );
+    app.contact().modifyContact(contact);
+    List<ContactData> after = app.contact().getContactsList();
+    Assert.assertEquals(after.size(), before.size());
+    before.remove(before.size() - 1);
+    before.add(contact);
+    Comparator<ContactData> byId = Comparator.comparingInt(ContactData::getId);
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
   }
 }

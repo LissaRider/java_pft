@@ -1,8 +1,12 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -57,6 +61,10 @@ public class ContactHelper extends HelperBase {
   public By deleteContactBtnEditPageLoc = By.cssSelector("[name=update][value=Delete]");
 //  public By deleteContactBtnEditPageLoc = By.xpath(".//*[@name='update' and @value='Delete']");
   public By modifyContactBtnLoc = By.name("modifiy");
+  public By contactLoc = By.name("entry");
+  public By contactInputLoc = By.tagName("input");
+  public By cellLoc = By.tagName("td");
+
   //</editor-fold>
 
   public ContactHelper(ApplicationManager app) {
@@ -99,6 +107,11 @@ public class ContactHelper extends HelperBase {
     clearAndType(notesLoc, contactData.getNotes());
   }
 
+  public void fillContactFormRequiredFields(ContactData contactData) {
+    clearAndType(firstNameLoc, contactData.getFirstName());
+    clearAndType(lastNameLoc, contactData.getLastName());
+  }
+
   public void submitContactCreation() {
 //    click(topCreateContactBtnLoc); /*только верхняя кнопка*/
 //    click(bottomCreateContactBtnLoc); /*только нижняя кнопка*/
@@ -114,20 +127,20 @@ public class ContactHelper extends HelperBase {
     click(returnToHomePageLinkLoc);
   }
 
-  public void selectAnyContact() {
-    click(contactCheckboxLoc);
+  public void selectContact(int index) {
+    getElements(contactCheckboxLoc).get(index).click();
   }
 
   public void initContactDeletionOnHomePage() {
     click(deleteContactBtnHomePageLoc);
   }
 
-  public void initAnyContactModification() {
-    click(editContactBtnLoc);
+  public void initContactModification(int index) {
+    getElements(editContactBtnLoc).get(index).click();
   }
 
-  public void viewAnyContact() {
-    click(viewContactBtnLoc);
+  public void viewContact(int index) {
+    getElements(viewContactBtnLoc).get(index).click();
   }
 
   public void submitContactModification() {
@@ -142,7 +155,7 @@ public class ContactHelper extends HelperBase {
     click(deleteContactBtnEditPageLoc);
   }
 
-  public void initContactModification() {
+  public void initContactModificationOnViewPage() {
     click(modifyContactBtnLoc);
   }
 
@@ -150,36 +163,43 @@ public class ContactHelper extends HelperBase {
     app.nav().goToEditContactPage();
     fillContactForm(contact, true);
     submitContactCreation();
+    verifyMessage("Information entered into address book.");
     returnToHomePage();
   }
 
   public void modifyContact(ContactData contact) {
     fillContactForm(contact, false);
     submitContactModification();
+    verifyMessage("Address book updated");
     returnToHomePage();
   }
 
-  public void deleteAnyContactFromList() {
-    selectAnyContact();
+  public void deleteContactFromList(int index) {
+    selectContact(index);
     initContactDeletionOnHomePage();
     closeAlertAndGetItsText();
+    verifyMessage("Record successful deleted");
   }
 
-  public void deleteAnyContactOnEditPage() {
-    initAnyContactModification();
+
+  public void deleteContactOnEditPage(int index) {
+    initContactModification(index);
     initContactDeletionOnEditContactPage();
+    verifyMessage("Record successful deleted");
   }
 
   public void deleteAllContacts() {
+
     selectAllContacts();
     initContactDeletionOnHomePage();
     closeAlertAndGetItsText();
+    verifyMessage("Record successful deleted");
   }
 
   public void createContacts(ContactData contact, int n) {
     app.nav().goToEditContactPage();
     for (int i = 1; i <= n; i++) {
-      fillContactForm(contact, true);
+      fillContactFormRequiredFields(contact);
       submitContactCreation();
       returnToEditContactPage();
     }
@@ -190,9 +210,24 @@ public class ContactHelper extends HelperBase {
     return isAnyElementPresent(contactCheckboxLoc);
   }
 
-  public void verifyContactPresence(ContactData newContact) {
+  public void verifyContactPresence(ContactData newContact, int n) {
     app.nav().goToHomePage();
-    if (!isAnyContactPresent()) createContact(newContact);
+    if (!isAnyContactPresent()) createContacts(newContact, n);
+  }
+
+  public List<ContactData> getContactsList() {
+    List<ContactData> contacts = new ArrayList<>();
+    List<WebElement> elements = getElements(contactLoc);
+    for (var element : elements) {
+      List<WebElement> cells = element.findElements(cellLoc);
+      String lastName = cells.get(1).getText();
+      String firstName = cells.get(2).getText();
+      String address = cells.get(3).getText();
+      int id = Integer.parseInt(element.findElement(contactInputLoc).getAttribute("value"));
+      ContactData contact = new ContactData(id, firstName, lastName, address);
+      contacts.add(contact);
+    }
+    return contacts;
   }
   //</editor-fold>
 }

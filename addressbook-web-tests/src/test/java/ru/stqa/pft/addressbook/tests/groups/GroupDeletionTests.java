@@ -9,11 +9,7 @@ import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
 
-  public GroupData newGroup = new GroupData(
-          "Relatives",
-          null,
-          null
-  );
+  public GroupData newGroup = new GroupData("Relatives");
 
   @Test(testName = "Проверка удаления первой группы")
   public void testFirstGroupDeletion() {

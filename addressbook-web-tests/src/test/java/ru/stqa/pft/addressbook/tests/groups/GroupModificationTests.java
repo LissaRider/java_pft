@@ -12,12 +12,13 @@ public class GroupModificationTests extends TestBase {
 
   public GroupData newGroup = new GroupData(
           "Relatives",
-          null,
-          null
+          "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
+          "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
+                  "target=\"_self\">add group</a>"
   );
 
   @Test(testName = "Проверка редактирования первой группы")
-  public void testAnyGroupModification() {
+  public void testFirstGroupModification() {
     app.group().verifyGroupPresence(newGroup, 1);
     List<GroupData> before = app.group().getGroupsList();
     GroupData group = new GroupData(before.get(0).getId(),
@@ -38,7 +39,7 @@ public class GroupModificationTests extends TestBase {
   }
 
   @Test(testName = "Проверка редактирования последней группы (с неизменяющимися значениями)")
-  public void testGroupModificationWithSameValues() {
+  public void testLastGroupModificationWithSameValues() {
     app.group().verifyGroupPresence(newGroup, 1);
     List<GroupData> before = app.group().getGroupsList();
     GroupData group = new GroupData(before.get(before.size() - 1).getId(),
