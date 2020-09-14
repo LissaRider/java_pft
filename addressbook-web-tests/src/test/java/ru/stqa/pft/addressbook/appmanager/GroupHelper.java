@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.models.GroupData;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GroupHelper extends HelperBase {
@@ -138,14 +139,18 @@ public class GroupHelper extends HelperBase {
 
   public List<GroupData> getGroupsList() {
     List<GroupData> groups = new ArrayList<>();
-    List<WebElement> elements = getElements(groupLoc);
-    for (WebElement element : elements) {
-      String name = element.getText();
-      int id = Integer.parseInt(element.findElement(groupInputLoc).getAttribute("value"));
-      GroupData group = new GroupData(id, name, null, null);
-      groups.add(group);
+    if (isAnyGroupPresent()) {
+      List<WebElement> elements = getElements(groupLoc);
+      for (WebElement element : elements) {
+        String name = element.getText();
+        int id = Integer.parseInt(element.findElement(groupInputLoc).getAttribute("value"));
+        GroupData group = new GroupData(id, name, null, null);
+        groups.add(group);
+      }
+      return groups;
+    } else {
+      return Collections.emptyList();
     }
-    return groups;
   }
   //</editor-fold>
 }

@@ -6,6 +6,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -64,7 +65,6 @@ public class ContactHelper extends HelperBase {
   public By contactLoc = By.name("entry");
   public By contactInputLoc = By.tagName("input");
   public By cellLoc = By.tagName("td");
-
   //</editor-fold>
 
   public ContactHelper(ApplicationManager app) {
@@ -218,16 +218,21 @@ public class ContactHelper extends HelperBase {
   public List<ContactData> getContactsList() {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = getElements(contactLoc);
-    for (var element : elements) {
-      List<WebElement> cells = element.findElements(cellLoc);
-      String lastName = cells.get(1).getText();
-      String firstName = cells.get(2).getText();
-      String address = cells.get(3).getText();
-      int id = Integer.parseInt(element.findElement(contactInputLoc).getAttribute("value"));
-      ContactData contact = new ContactData(id, firstName, lastName, address);
-      contacts.add(contact);
+    if (isAnyContactPresent()) {
+      List<WebElement> elements = getElements(contactLoc);
+      for (var element : elements) {
+        List<WebElement> cells = element.findElements(cellLoc);
+        String lastName = cells.get(1).getText();
+        String firstName = cells.get(2).getText();
+        String address = cells.get(3).getText();
+        int id = Integer.parseInt(element.findElement(contactInputLoc).getAttribute("value"));
+        ContactData contact = new ContactData(id, firstName, lastName, address);
+        contacts.add(contact);
+      }
+      return contacts;
+    } else {
+      return Collections.emptyList();
     }
-    return contacts;
   }
   //</editor-fold>
 }
