@@ -25,6 +25,11 @@ public class HelperBase {
   }
 
   //<editor-fold desc="Base methods">
+
+  public void implicitlyWait(int timeout) {
+    driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+  }
+
   public void verifyMessage(String message) {
     Assert.assertTrue(msgBoxText(msgBoxLoc).contains(message));
   }

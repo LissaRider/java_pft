@@ -6,7 +6,6 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -217,7 +216,8 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactsList() {
     List<ContactData> contacts = new ArrayList<>();
-    if (isAnyContactPresent()) {
+    try {
+      implicitlyWait(0);
       List<WebElement> elements = getElements(contactLoc);
       for (var element : elements) {
         List<WebElement> cells = element.findElements(cellLoc);
@@ -229,8 +229,8 @@ public class ContactHelper extends HelperBase {
         contacts.add(contact);
       }
       return contacts;
-    } else {
-      return Collections.emptyList();
+    } finally {
+      implicitlyWait(10);
     }
   }
   //</editor-fold>
