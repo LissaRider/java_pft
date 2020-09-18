@@ -3,10 +3,9 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.models.GroupData;
+import ru.stqa.pft.addressbook.models.Groups;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -91,11 +90,8 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
-  /**
-   * Множество групп
-   */
-  public Set<GroupData> all() {
-    Set<GroupData> groups = new HashSet<>();
+  public Groups all() {
+    Groups groups = new Groups();
     try {
       implicitlyWait(0);
       List<WebElement> elements = getElements(groupLoc);
