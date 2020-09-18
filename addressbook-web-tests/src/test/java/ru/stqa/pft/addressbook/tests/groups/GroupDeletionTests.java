@@ -12,7 +12,7 @@ public class GroupDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    GroupData newGroup = new GroupData("Relatives");
+    GroupData newGroup = new GroupData().withName("Relatives");
     app.group().verifyPresence(newGroup, 2);
   }
 

@@ -13,23 +13,22 @@ public class GroupModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    GroupData newGroup = new GroupData(
-            "Relatives",
-            "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
-            "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
-                    "target=\"_self\">add group</a>"
-    );
+    GroupData newGroup = new GroupData()
+            .withName("Relatives")
+            .withHeader("<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>")
+            .withFooter("<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
+                    "target=\"_self\">add group</a>");
     app.group().verifyPresence(newGroup, 1);
   }
 
   @Test(testName = "Проверка редактирования первой группы")
   public void testFirstGroupModification() {
     List<GroupData> before = app.group().list();
-    GroupData group = new GroupData(before.get(0).getId(),
-            "Friends",
-            "<h1>FRIENDS</h1><p>Created by Lissa Rider</p></p>",
-            "<a href=\"index.php\">home</a>"
-    );
+    GroupData group = new GroupData()
+            .withId(before.get(0).getId())
+            .withName("Friends")
+            .withHeader("<h1>FRIENDS</h1><p>Created by Lissa Rider</p></p>")
+            .withFooter("<a href=\"index.php\">home</a>");
     app.group().modify(0, group);
     List<GroupData> after = app.group().list();
 
@@ -47,12 +46,12 @@ public class GroupModificationTests extends TestBase {
   public void testLastGroupModificationWithSameValues() {
     List<GroupData> before = app.group().list();
     int index = before.size() - 1;
-    GroupData group = new GroupData(before.get(index).getId(),
-            "Relatives",
-            "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
-            "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
-                    "target=\"_self\">add group</a>"
-    );
+    GroupData group = new GroupData()
+            .withId(before.get(index).getId())
+            .withName("Relatives")
+            .withHeader("<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>")
+            .withFooter("<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
+                    "target=\"_self\">add group</a>");
     app.group().modify(index, group);
     List<GroupData> after = app.group().list();
 

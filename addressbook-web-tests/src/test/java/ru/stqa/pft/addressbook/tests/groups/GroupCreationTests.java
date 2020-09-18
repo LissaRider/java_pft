@@ -14,12 +14,12 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
     app.goTo().groupsPage();
     List<GroupData> before = app.group().list();
-    GroupData group = new GroupData(
-            "Relatives",
-            "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
-            "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
-                    "target=\"_self\">add group</a>"
-    );
+    GroupData group = new GroupData()
+            .withName("Relatives")
+            .withHeader("<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>")
+            .withFooter("<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
+            "target=\"_self\">add group</a>");
+
     app.group().create(group);
     List<GroupData> after = app.group().list();
 
@@ -43,7 +43,7 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreationWithDefaultFields() {
     app.goTo().groupsPage();
     List<GroupData> before = app.group().list();
-    GroupData group = new GroupData("Colleagues", null, null);
+    GroupData group = new GroupData().withName("Colleagues");
     app.group().create(group);
     List<GroupData> after = app.group().list();
 
