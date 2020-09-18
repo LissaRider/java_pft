@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests.groups;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.tests.TestBase;
@@ -17,9 +18,13 @@ public class GroupModificationTests extends TestBase {
                   "target=\"_self\">add group</a>"
   );
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.group().verifyGroupPresence(newGroup, 1);
+  }
+
   @Test(testName = "Проверка редактирования первой группы")
   public void testFirstGroupModification() {
-    app.group().verifyGroupPresence(newGroup, 1);
     List<GroupData> before = app.group().getGroupsList();
     GroupData group = new GroupData(before.get(0).getId(),
             "Friends",
@@ -40,18 +45,18 @@ public class GroupModificationTests extends TestBase {
 
   @Test(testName = "Проверка редактирования последней группы (с неизменяющимися значениями)")
   public void testLastGroupModificationWithSameValues() {
-    app.group().verifyGroupPresence(newGroup, 1);
     List<GroupData> before = app.group().getGroupsList();
-    GroupData group = new GroupData(before.get(before.size() - 1).getId(),
+    int index = before.size() - 1;
+    GroupData group = new GroupData(before.get(index).getId(),
             "Relatives",
             "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
             "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
                     "target=\"_self\">add group</a>"
     );
-    app.group().modifyGroup(before.size() - 1, group);
+    app.group().modifyGroup(index, group);
     List<GroupData> after = app.group().getGroupsList();
     Assert.assertEquals(after.size(), before.size());
-    before.remove(before.size() - 1);
+    before.remove(index);
     before.add(group);
     Comparator<GroupData> byId = Comparator.comparingInt(GroupData::getId);
     before.sort(byId);
