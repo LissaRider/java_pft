@@ -12,8 +12,8 @@ public class ContactCreationTests extends TestBase {
 
   @Test(testName = "Проверка создания контакта")
   public void testContactCreation() {
-    app.goTo().goToHomePage();
-    List<ContactData> before = app.contact().getContactsList();
+    app.goTo().homePage();
+    List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData(
             "Alice",
             "Batkovna",
@@ -41,8 +41,9 @@ public class ContactCreationTests extends TestBase {
             "8(909) 999-99-99",
             "\"Who in the world am I?\" Ah, that is the great puzzle!"
     );
-    app.contact().createContact(contact);
-    List<ContactData> after = app.contact().getContactsList();
+    app.contact().create(contact);
+    List<ContactData> after = app.contact().list();
+
     Assert.assertEquals(after.size(), before.size() + 1);
     before.add(contact);
     Comparator<ContactData> byId = Comparator.comparingInt(ContactData::getId);

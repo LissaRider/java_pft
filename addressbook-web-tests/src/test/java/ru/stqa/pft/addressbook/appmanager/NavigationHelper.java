@@ -41,7 +41,7 @@ public class NavigationHelper extends HelperBase {
     click(editContactPageLinkLoc);
   }
 
-  public void goToHomePage() {
+  public void homePage() {
     if (isAnyElementPresent(app.contact().contactsTableLoc)) {
       return;
     }

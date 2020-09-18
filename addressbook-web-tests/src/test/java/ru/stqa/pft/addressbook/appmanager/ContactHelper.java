@@ -134,11 +134,11 @@ public class ContactHelper extends HelperBase {
     click(deleteContactBtnHomePageLoc);
   }
 
-  public void initContactModification(int index) {
+  public void initModification(int index) {
     getElements(editContactBtnLoc).get(index).click();
   }
 
-  public void viewContact(int index) {
+  public void view(int index) {
     getElements(viewContactBtnLoc).get(index).click();
   }
 
@@ -154,11 +154,11 @@ public class ContactHelper extends HelperBase {
     click(deleteContactBtnEditPageLoc);
   }
 
-  public void initContactModificationOnViewPage() {
+  public void initModificationFromViewPage() {
     click(modifyContactBtnLoc);
   }
 
-  public void createContact(ContactData contact) {
+  public void create(ContactData contact) {
     app.goTo().goToEditContactPage();
     fillContactForm(contact, true);
     submitContactCreation();
@@ -166,14 +166,14 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public void modifyContact(ContactData contact) {
+  public void modify(ContactData contact) {
     fillContactForm(contact, false);
     submitContactModification();
     verifyMessage("Address book updated");
     returnToHomePage();
   }
 
-  public void deleteContactFromList(int index) {
+  public void deleteFromList(int index) {
     selectContact(index);
     initContactDeletionOnHomePage();
     closeAlertAndGetItsText();
@@ -181,13 +181,13 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void deleteContactOnEditPage(int index) {
-    initContactModification(index);
+  public void deleteFromEditPage(int index) {
+    initModification(index);
     initContactDeletionOnEditContactPage();
     verifyMessage("Record successful deleted");
   }
 
-  public void deleteAllContacts() {
+  public void deleteAll() {
 
     selectAllContacts();
     initContactDeletionOnHomePage();
@@ -202,19 +202,19 @@ public class ContactHelper extends HelperBase {
       submitContactCreation();
       returnToEditContactPage();
     }
-    app.goTo().goToHomePage();
+    app.goTo().homePage();
   }
 
   public boolean isAnyContactPresent() {
     return isAnyElementPresent(contactCheckboxLoc);
   }
 
-  public void verifyContactPresence(ContactData newContact, int n) {
-    app.goTo().goToHomePage();
+  public void verifyPresence(ContactData newContact, int n) {
+    app.goTo().homePage();
     if (!isAnyContactPresent()) createContacts(newContact, n);
   }
 
-  public List<ContactData> getContactsList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<>();
     try {
       implicitlyWait(0);

@@ -14,13 +14,13 @@ public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     ContactData newContact = new ContactData("James", "Bond");
-    app.contact().verifyContactPresence(newContact, 2);
+    app.contact().verifyPresence(newContact, 2);
   }
 
   @Test(testName = "Проверка редактирования первого контакта со страницы редактирования")
   public void testFirstContactModificationFromEditContactPage() {
-    List<ContactData> before = app.contact().getContactsList();
-    app.contact().initContactModification(0);
+    List<ContactData> before = app.contact().list();
+    app.contact().initModification(0);
     ContactData contact = new ContactData(before.get(0).getId(),
             "Robin",
             "Batkovich",
@@ -48,8 +48,9 @@ public class ContactModificationTests extends TestBase {
             "8(909) 777-77-77",
             "Rise and rise again until lambs become lions."
     );
-    app.contact().modifyContact(contact);
-    List<ContactData> after = app.contact().getContactsList();
+    app.contact().modify(contact);
+    List<ContactData> after = app.contact().list();
+
     Assert.assertEquals(after.size(), before.size());
     before.remove(0);
     before.add(contact);
@@ -61,10 +62,10 @@ public class ContactModificationTests extends TestBase {
 
   @Test(testName = "Проверка редактирования последнего контакта со страницы просмотра")
   public void testLastContactModificationFromViewContactPage() {
-    List<ContactData> before = app.contact().getContactsList();
+    List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    app.contact().viewContact(index);
-    app.contact().initContactModificationOnViewPage();
+    app.contact().view(index);
+    app.contact().initModificationFromViewPage();
     ContactData contact = new ContactData(before.get(index).getId(),
             "John",
             "Ivanovich",
@@ -93,8 +94,9 @@ public class ContactModificationTests extends TestBase {
             "8(909) 888-88-88",
             "By god... I am on Mars."
     );
-    app.contact().modifyContact(contact);
-    List<ContactData> after = app.contact().getContactsList();
+    app.contact().modify(contact);
+    List<ContactData> after = app.contact().list();
+
     Assert.assertEquals(after.size(), before.size());
     before.remove(index);
     before.add(contact);

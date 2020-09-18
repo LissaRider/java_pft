@@ -19,7 +19,7 @@ public class GroupModificationTests extends TestBase {
             "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
                     "target=\"_self\">add group</a>"
     );
-    app.group().verifyGroupPresence(newGroup, 1);
+    app.group().verifyPresence(newGroup, 1);
   }
 
   @Test(testName = "Проверка редактирования первой группы")

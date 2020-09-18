@@ -120,7 +120,7 @@ public class GroupHelper extends HelperBase {
     return isAnyElementPresent(groupCheckboxLoc);
   }
 
-  public void verifyGroupPresence(GroupData newGroup, int n) {
+  public void verifyPresence(GroupData newGroup, int n) {
     app.goTo().groupsPage();
     if (!isAnyGroupPresent()) createGroups(newGroup, n);
   }

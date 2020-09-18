@@ -13,7 +13,7 @@ public class GroupDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     GroupData newGroup = new GroupData("Relatives");
-    app.group().verifyGroupPresence(newGroup, 2);
+    app.group().verifyPresence(newGroup, 2);
   }
 
   @Test(testName = "Проверка удаления первой группы")

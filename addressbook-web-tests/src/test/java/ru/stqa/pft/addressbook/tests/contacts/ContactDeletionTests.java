@@ -13,15 +13,16 @@ public class ContactDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     ContactData newContact = new ContactData("Attack", "Clone");
-    app.contact().verifyContactPresence(newContact, 2);
+    app.contact().verifyPresence(newContact, 2);
   }
 
   @Test(testName = "Провека удаления первого контакта на главной странице")
   public void testFirstContactDeletionOnHomePage() {
-    List<ContactData> before = app.contact().getContactsList();
-    app.contact().deleteContactFromList(0);
-    app.goTo().goToHomePage();
-    List<ContactData> after = app.contact().getContactsList();
+    List<ContactData> before = app.contact().list();
+    app.contact().deleteFromList(0);
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
+
     Assert.assertEquals(after.size(), before.size() - 1);
     before.remove(0);
     Assert.assertEquals(after, before);
@@ -29,21 +30,24 @@ public class ContactDeletionTests extends TestBase {
 
   @Test(testName = "Провека удаления последнего контакта на главной странице")
   public void testLastContactDeletionOnHomePage() {
-    List<ContactData> before = app.contact().getContactsList();
-    app.contact().deleteContactFromList(before.size() - 1);
-    app.goTo().goToHomePage();
-    List<ContactData> after = app.contact().getContactsList();
-    Assert.assertEquals(after.size(), before.size() - 1);
-    before.remove(before.size() - 1);
+    List<ContactData> before = app.contact().list();
+    int index = before.size() - 1;
+    app.contact().deleteFromList(index);
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
+
+    Assert.assertEquals(after.size(), index);
+    before.remove(index);
     Assert.assertEquals(before, after);
   }
 
   @Test(testName = "Проверка удаления контакта со страницы редактирования")
   public void testContactDeletionOnEditContactPage() {
-    List<ContactData> before = app.contact().getContactsList();
-    app.contact().deleteContactOnEditPage(0);
-    app.goTo().goToHomePage();
-    List<ContactData> after = app.contact().getContactsList();
+    List<ContactData> before = app.contact().list();
+    app.contact().deleteFromEditPage(0);
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
+
     Assert.assertEquals(after.size(), before.size() - 1);
     before.remove(0);
     Assert.assertEquals(before, after);
@@ -51,12 +55,13 @@ public class ContactDeletionTests extends TestBase {
 
   @Test(testName = "Проверка удаления всех контактов")
   public void testAllContactsDeletion() {
-    List<ContactData> before = app.contact().getContactsList();
-    app.contact().deleteAllContacts();
-    app.goTo().goToHomePage();
-    List<ContactData> after = app.contact().getContactsList();
+    List<ContactData> before = app.contact().list();
+    app.contact().deleteAll();
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
+
     Assert.assertEquals(after.size(), 0);
-    before.removeAll(before);
+    before.clear();
     Assert.assertEquals(before, after);
   }
 }
