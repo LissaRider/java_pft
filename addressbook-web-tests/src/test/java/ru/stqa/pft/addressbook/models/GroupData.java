@@ -26,6 +26,11 @@ public class GroupData {
     this.footer = footer;
   }
 
+  public GroupData(int id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

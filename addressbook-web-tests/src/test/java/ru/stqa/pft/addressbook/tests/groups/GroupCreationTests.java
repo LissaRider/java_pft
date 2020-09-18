@@ -42,7 +42,7 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreationWithDefaultFields() {
     app.nav().goToGroupsPage();
     List<GroupData> before = app.group().getGroupsList();
-    GroupData group = new GroupData("Colleagues");
+    GroupData group = new GroupData("Colleagues", null, null);
     app.group().createGroup(group);
     List<GroupData> after = app.group().getGroupsList();
     Assert.assertEquals(after.size(), before.size() + 1);
