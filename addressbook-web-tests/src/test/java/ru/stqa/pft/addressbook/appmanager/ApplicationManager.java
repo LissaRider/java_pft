@@ -59,7 +59,7 @@ public class ApplicationManager {
     return groupHelper;
   }
 
-  public NavigationHelper nav() {
+  public NavigationHelper goTo() {
     return navigationHelper;
   }
 

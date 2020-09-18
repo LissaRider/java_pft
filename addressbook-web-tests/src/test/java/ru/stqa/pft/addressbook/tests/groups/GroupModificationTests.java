@@ -25,14 +25,15 @@ public class GroupModificationTests extends TestBase {
 
   @Test(testName = "Проверка редактирования первой группы")
   public void testFirstGroupModification() {
-    List<GroupData> before = app.group().getGroupsList();
+    List<GroupData> before = app.group().list();
     GroupData group = new GroupData(before.get(0).getId(),
             "Friends",
             "<h1>FRIENDS</h1><p>Created by Lissa Rider</p></p>",
             "<a href=\"index.php\">home</a>"
     );
-    app.group().modifyGroup(0, group);
-    List<GroupData> after = app.group().getGroupsList();
+    app.group().modify(0, group);
+    List<GroupData> after = app.group().list();
+
     Assert.assertEquals(after.size(), before.size());
     before.remove(0);
     before.add(group);
@@ -45,7 +46,7 @@ public class GroupModificationTests extends TestBase {
 
   @Test(testName = "Проверка редактирования последней группы (с неизменяющимися значениями)")
   public void testLastGroupModificationWithSameValues() {
-    List<GroupData> before = app.group().getGroupsList();
+    List<GroupData> before = app.group().list();
     int index = before.size() - 1;
     GroupData group = new GroupData(before.get(index).getId(),
             "Relatives",
@@ -53,8 +54,9 @@ public class GroupModificationTests extends TestBase {
             "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
                     "target=\"_self\">add group</a>"
     );
-    app.group().modifyGroup(index, group);
-    List<GroupData> after = app.group().getGroupsList();
+    app.group().modify(index, group);
+    List<GroupData> after = app.group().list();
+    
     Assert.assertEquals(after.size(), before.size());
     before.remove(index);
     before.add(group);

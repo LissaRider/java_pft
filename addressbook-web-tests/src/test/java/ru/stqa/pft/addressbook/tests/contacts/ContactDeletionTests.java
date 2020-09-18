@@ -16,7 +16,7 @@ public class ContactDeletionTests extends TestBase {
     app.contact().verifyContactPresence(newContact, 3);
     List<ContactData> before = app.contact().getContactsList();
     app.contact().deleteContactFromList(0);
-    app.nav().goToHomePage();
+    app.goTo().goToHomePage();
     List<ContactData> after = app.contact().getContactsList();
     Assert.assertEquals(after.size(), before.size() - 1);
     before.remove(0);
@@ -28,7 +28,7 @@ public class ContactDeletionTests extends TestBase {
     app.contact().verifyContactPresence(newContact, 3);
     List<ContactData> before = app.contact().getContactsList();
     app.contact().deleteContactFromList(before.size() - 1);
-    app.nav().goToHomePage();
+    app.goTo().goToHomePage();
     List<ContactData> after = app.contact().getContactsList();
     Assert.assertEquals(after.size(), before.size() - 1);
     before.remove(before.size() - 1);
@@ -40,7 +40,7 @@ public class ContactDeletionTests extends TestBase {
     app.contact().verifyContactPresence(newContact, 1);
     List<ContactData> before = app.contact().getContactsList();
     app.contact().deleteContactOnEditPage(0);
-    app.nav().goToHomePage();
+    app.goTo().goToHomePage();
     List<ContactData> after = app.contact().getContactsList();
     Assert.assertEquals(after.size(), before.size() - 1);
     before.remove(0);
@@ -52,7 +52,7 @@ public class ContactDeletionTests extends TestBase {
     app.contact().verifyContactPresence(newContact, 3);
     List<ContactData> before = app.contact().getContactsList();
     app.contact().deleteAllContacts();
-    app.nav().goToHomePage();
+    app.goTo().goToHomePage();
     List<ContactData> after = app.contact().getContactsList();
     Assert.assertEquals(after.size(), 0);
     before.removeAll(before);

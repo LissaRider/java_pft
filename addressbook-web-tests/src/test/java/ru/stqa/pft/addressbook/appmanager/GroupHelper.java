@@ -89,8 +89,8 @@ public class GroupHelper extends HelperBase {
     click(updateGroupBtnLoc);
   }
 
-  public void createGroup(GroupData group) {
-    app.nav().goToGroupsPage();
+  public void create(GroupData group) {
+    app.goTo().groupsPage();
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
@@ -98,8 +98,8 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
-  public void modifyGroup(int index, GroupData groupData) {
-    app.nav().goToGroupsPage();
+  public void modify(int index, GroupData groupData) {
+    app.goTo().groupsPage();
     selectGroup(index);
     initGroupModification();
     fillGroupForm(groupData);
@@ -108,8 +108,8 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
-  public void removeGroup(int index) {
-    app.nav().goToGroupsPage();
+  public void delete(int index) {
+    app.goTo().groupsPage();
     selectGroup(index);
     submitGroupDeletion();
     verifyMessage("Group has been removed.");
@@ -121,14 +121,14 @@ public class GroupHelper extends HelperBase {
   }
 
   public void verifyGroupPresence(GroupData newGroup, int n) {
-    app.nav().goToGroupsPage();
+    app.goTo().groupsPage();
     if (!isAnyGroupPresent()) createGroups(newGroup, n);
   }
 
   public void createGroups(GroupData group, int n) {
-    app.nav().goToGroupsPage();
+    app.goTo().groupsPage();
     for (int i = 1; i <= n; i++) {
-      app.nav().goToGroupsPage();
+      app.goTo().groupsPage();
       initGroupCreation();
       fillGroupFormRequiredFields(group);
       submitGroupCreation();
@@ -136,7 +136,7 @@ public class GroupHelper extends HelperBase {
     }
   }
 
-  public List<GroupData> getGroupsList() {
+  public List<GroupData> list() {
     List<GroupData> groups = new ArrayList<>();
     try {
       implicitlyWait(0);

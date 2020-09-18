@@ -19,9 +19,10 @@ public class GroupDeletionTests extends TestBase {
 
   @Test(testName = "Проверка удаления первой группы")
   public void testFirstGroupDeletion() {
-    List<GroupData> before = app.group().getGroupsList();
-    app.group().removeGroup(0);
-    List<GroupData> after = app.group().getGroupsList();
+    List<GroupData> before = app.group().list();
+    app.group().delete(0);
+    List<GroupData> after = app.group().list();
+
     Assert.assertEquals(after.size(), before.size() - 1);
     before.remove(0);
     Assert.assertEquals(after, before);
@@ -29,11 +30,13 @@ public class GroupDeletionTests extends TestBase {
 
   @Test(testName = "Проверка удаления последней группы")
   public void testLastGroupDeletion() {
-    List<GroupData> before = app.group().getGroupsList();
-    app.group().removeGroup(before.size() - 1);
-    List<GroupData> after = app.group().getGroupsList();
-    Assert.assertEquals(after.size(), before.size() - 1);
-    before.remove(before.size() - 1);
+    List<GroupData> before = app.group().list();
+    int index = before.size() - 1;
+    app.group().delete(index);
+    List<GroupData> after = app.group().list();
+
+    Assert.assertEquals(after.size(), index);
+    before.remove(index);
     Assert.assertEquals(after, before);
   }
 }

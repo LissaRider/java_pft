@@ -23,7 +23,7 @@ public class NavigationHelper extends HelperBase {
     return getElement(pageTitleLoc).getText();
   }
 
-  public void goToGroupsPage() {
+  public void groupsPage() {
     if (isAnyElementPresent(pageTitleLoc)
             && getPageTitle().equals("Groups")
             && isAnyElementPresent(app.group().addGroupBtnLoc)) {

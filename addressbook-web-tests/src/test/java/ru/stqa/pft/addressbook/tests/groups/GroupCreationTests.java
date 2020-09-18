@@ -12,16 +12,17 @@ public class GroupCreationTests extends TestBase {
 
   @Test(testName = "Проверка создания группы")
   public void testGroupCreation() {
-    app.nav().goToGroupsPage();
-    List<GroupData> before = app.group().getGroupsList();
+    app.goTo().groupsPage();
+    List<GroupData> before = app.group().list();
     GroupData group = new GroupData(
             "Relatives",
             "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
             "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
                     "target=\"_self\">add group</a>"
     );
-    app.group().createGroup(group);
-    List<GroupData> after = app.group().getGroupsList();
+    app.group().create(group);
+    List<GroupData> after = app.group().list();
+
     Assert.assertEquals(after.size(), before.size() + 1);
 //    int max = 0;
 //    for (GroupData g : after) {
@@ -40,11 +41,12 @@ public class GroupCreationTests extends TestBase {
 
   @Test(testName = "Проверка создания группы (дефолтные значения)")
   public void testGroupCreationWithDefaultFields() {
-    app.nav().goToGroupsPage();
-    List<GroupData> before = app.group().getGroupsList();
+    app.goTo().groupsPage();
+    List<GroupData> before = app.group().list();
     GroupData group = new GroupData("Colleagues", null, null);
-    app.group().createGroup(group);
-    List<GroupData> after = app.group().getGroupsList();
+    app.group().create(group);
+    List<GroupData> after = app.group().list();
+
     Assert.assertEquals(after.size(), before.size() + 1);
 //    int max = 0;
 //    for (GroupData g : after) {

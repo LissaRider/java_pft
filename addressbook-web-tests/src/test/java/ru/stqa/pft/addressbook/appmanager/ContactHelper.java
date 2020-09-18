@@ -159,7 +159,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContact(ContactData contact) {
-    app.nav().goToEditContactPage();
+    app.goTo().goToEditContactPage();
     fillContactForm(contact, true);
     submitContactCreation();
     verifyMessage("Information entered into address book.");
@@ -196,13 +196,13 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContacts(ContactData contact, int n) {
-    app.nav().goToEditContactPage();
+    app.goTo().goToEditContactPage();
     for (int i = 1; i <= n; i++) {
       fillContactFormRequiredFields(contact);
       submitContactCreation();
       returnToEditContactPage();
     }
-    app.nav().goToHomePage();
+    app.goTo().goToHomePage();
   }
 
   public boolean isAnyContactPresent() {
@@ -210,7 +210,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void verifyContactPresence(ContactData newContact, int n) {
-    app.nav().goToHomePage();
+    app.goTo().goToHomePage();
     if (!isAnyContactPresent()) createContacts(newContact, n);
   }
 
