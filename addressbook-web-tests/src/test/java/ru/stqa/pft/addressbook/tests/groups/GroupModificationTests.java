@@ -11,15 +11,14 @@ import java.util.List;
 
 public class GroupModificationTests extends TestBase {
 
-  public GroupData newGroup = new GroupData(
-          "Relatives",
-          "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
-          "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
-                  "target=\"_self\">add group</a>"
-  );
-
   @BeforeMethod
   public void ensurePreconditions() {
+    GroupData newGroup = new GroupData(
+            "Relatives",
+            "<h1>RELATIVES</h1><p>Created by Lissa Rider</p></p>",
+            "<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
+                    "target=\"_self\">add group</a>"
+    );
     app.group().verifyGroupPresence(newGroup, 1);
   }
 
@@ -56,7 +55,7 @@ public class GroupModificationTests extends TestBase {
     );
     app.group().modify(index, group);
     List<GroupData> after = app.group().list();
-    
+
     Assert.assertEquals(after.size(), before.size());
     before.remove(index);
     before.add(group);

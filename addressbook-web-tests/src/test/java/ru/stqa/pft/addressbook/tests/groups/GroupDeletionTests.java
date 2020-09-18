@@ -10,11 +10,10 @@ import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
 
-  public GroupData newGroup = new GroupData("Relatives");
-
   @BeforeMethod
   public void ensurePreconditions() {
-    app.group().verifyGroupPresence(newGroup, 3);
+    GroupData newGroup = new GroupData("Relatives");
+    app.group().verifyGroupPresence(newGroup, 2);
   }
 
   @Test(testName = "Проверка удаления первой группы")
