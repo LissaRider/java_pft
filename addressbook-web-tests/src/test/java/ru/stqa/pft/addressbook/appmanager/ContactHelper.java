@@ -192,19 +192,27 @@ public class ContactHelper extends HelperBase {
     initModification(contact.getId());
     String firstname = getElement(firstNameLoc).getAttribute("value");
     String lastname = getElement(lastNameLoc).getAttribute("value");
+    String address = getElement(mainAddressLoc).getAttribute("value");
     String home = getElement(homePhoneLoc).getAttribute("value");
     String mobile = getElement(mobilePhoneLoc).getAttribute("value");
     String work = getElement(workPhoneLoc).getAttribute("value");
     String add = getElement(adPhoneLoc).getAttribute("value");
+    String email1 = getElement(emailLoc).getAttribute("value");
+    String email2 = getElement(email2Loc).getAttribute("value");
+    String email3 = getElement(email3Loc).getAttribute("value");
     driver.navigate().back();
     return new ContactData()
             .withId(contact.getId())
             .withFirstName(firstname)
             .withLastName(lastname)
+            .withMainAddress(address)
             .withHomePhone(home)
             .withMobilePhone(mobile)
             .withWorkPhone(work)
-            .withAdPhone(add);
+            .withAdPhone(add)
+            .withEmail(email1)
+            .withEmail2(email2)
+            .withEmail3(email3);
   }
 
   public Contacts all() {
@@ -220,18 +228,15 @@ public class ContactHelper extends HelperBase {
         String lastName = cells.get(1).getText();
         String firstName = cells.get(2).getText();
         String address = cells.get(3).getText();
+        String allEmails = cells.get(4).getText();
         String allPhones = cells.get(5).getText();
-//        String[] phones = cells.get(5).getText().split("\n");
         ContactData contact = new ContactData()
                 .withId(id)
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withMainAddress(address)
+                .withAllEmails(allEmails)
                 .withAllPhones(allPhones);
-//                .withHomePhone(phones[0])
-//                .withMobilePhone(phones[1])
-//                .withWorkPhone(phones[2])
-//                .withAdPhone(phones[3]);
         contactCache.add(contact);
       }
       return new Contacts(contactCache);
