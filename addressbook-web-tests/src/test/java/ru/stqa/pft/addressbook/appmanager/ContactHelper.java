@@ -141,6 +141,7 @@ public class ContactHelper extends HelperBase {
     app.goTo().editPage();
     fillForm(contact, true);
     submitCreation();
+    contactCache = null;
     verifyMessage("Information entered into address book.");
     returnToHomePage();
   }
@@ -148,6 +149,7 @@ public class ContactHelper extends HelperBase {
   public void modify(ContactData contact) {
     fillForm(contact, false);
     submitModification();
+    contactCache = null;
     verifyMessage("Address book updated");
     returnToHomePage();
   }
@@ -156,12 +158,14 @@ public class ContactHelper extends HelperBase {
     selectById(contact.getId());
     initDeletionFromHomePage();
     closeAlertAndGetItsText();
+    contactCache = null;
     verifyMessage("Record successful deleted");
   }
 
   public void deleteFromEditPage(ContactData contact) {
     initModification(contact.getId());
     submitDeletionFromEditPage();
+    contactCache = null;
     verifyMessage("Record successful deleted");
   }
 
@@ -169,11 +173,16 @@ public class ContactHelper extends HelperBase {
     selectAll();
     initDeletionFromHomePage();
     closeAlertAndGetItsText();
+    contactCache = null;
     verifyMessage("Record successful deleted");
   }
 
+  private Contacts contactCache = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if(contactCache != null)
+      return new Contacts(contactCache);
+    contactCache = new Contacts();
     try {
       implicitlyWait(0);
       List<WebElement> elements = getElements(contactLoc);
@@ -188,9 +197,9 @@ public class ContactHelper extends HelperBase {
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withMainAddress(address);
-        contacts.add(contact);
+        contactCache.add(contact);
       }
-      return contacts;
+      return new Contacts(contactCache);
     } finally {
       implicitlyWait(10);
     }
