@@ -21,7 +21,6 @@ public class GroupHelper extends HelperBase {
   public By updateGroupBtnLoc = By.name("update");
   public By groupLoc = By.className("group");
   public By groupInputLoc = By.tagName("input");
-  private Groups groupCache = null;
   public By groupLoc(int id) {
     return By.cssSelector("input[value='" + id + "']");
   }
@@ -30,6 +29,8 @@ public class GroupHelper extends HelperBase {
   public GroupHelper(ApplicationManager app) {
     super(app);
   }
+
+  private Groups groupCache = null;
 
   //<editor-fold desc="Methods">
   public void initCreation() {
@@ -67,7 +68,12 @@ public class GroupHelper extends HelperBase {
   }
 
   public int count() {
-    return getElements(groupLoc).size();
+    try {
+      implicitlyWait(0);
+      return getElements(groupLoc).size();
+    } finally {
+      implicitlyWait(10);
+    }
   }
 
   public void create(GroupData group) {

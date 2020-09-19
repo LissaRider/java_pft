@@ -36,8 +36,8 @@ public class ContactModificationTests extends TestBase {
             .withLastName("Hood")
             .withNickname("Prince of Thieves")
             .withFileSource("robin_hood.jpg")
-            .withJobTitle("Senior Software Developer")
             .withCompanyName("Sherwood Forest")
+            .withJobTitle("Senior Software Developer")
             .withMainAddress("Nottingham")
             .withHomePhone("8(495) 222-22-22")
             .withMobilePhone("8(999) 222-22-22")
@@ -57,9 +57,8 @@ public class ContactModificationTests extends TestBase {
             .withAdPhone("8(909) 777-77-77")
             .withNotes("Rise and rise again until lambs become lions.");
     app.contact().modify(contact);
+    assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
-
-    assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 
@@ -76,8 +75,8 @@ public class ContactModificationTests extends TestBase {
             .withLastName("Carter")
             .withNickname("Virginia")
             .withFileSource("john_carter.jpg")
-            .withJobTitle("Middle Software Developer")
             .withCompanyName("Moscow City")
+            .withJobTitle("Middle Software Developer")
             .withMainAddress("Moscow, metro station Business Center")
             .withHomePhone("8(495) 111-11-11")
             .withMobilePhone("8(999) 111-11-11")
@@ -97,9 +96,8 @@ public class ContactModificationTests extends TestBase {
             .withAdPhone("8(909) 888-88-88")
             .withNotes("By god... I am on Mars.");
     app.contact().modify(contact);
+    assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
-
-    assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 }

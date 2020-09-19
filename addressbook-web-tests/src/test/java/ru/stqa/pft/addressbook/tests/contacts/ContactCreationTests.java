@@ -20,8 +20,8 @@ public class ContactCreationTests extends TestBase {
             .withLastName("Fabler")
             .withNickname("LisAnieL")
             .withFileSource("dark_alice.jpg")
-            .withJobTitle("Middle QA Automation Engineer")
             .withCompanyName("Bank")
+            .withJobTitle("Middle QA Automation Engineer")
             .withMainAddress("Moscow, Chertanovo Tsentralnoye District")
             .withHomePhone("8(495) 000-00-00")
             .withMobilePhone("8(999) 000-00-00")
@@ -41,13 +41,25 @@ public class ContactCreationTests extends TestBase {
             .withAdPhone("8(909) 999-99-99")
             .withNotes("\"Who in the world am I?\" Ah, that is the great puzzle!");
     app.contact().create(contact);
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-
-    assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.withAdded(contact.withId(after
             .stream()
             .mapToInt(ContactData::getId)
             .max()
             .orElseThrow())))); /*java 11: getAsInt() to orElseThrow()*/
+  }
+
+  @Test(testName = "Проверка создания некорректного контакта")
+  public void testBadContactCreation() {
+    app.goTo().homePage();
+    Contacts before = app.contact().all();
+    ContactData contact = new ContactData()
+            .withFirstName("Alice'")
+            .withLastName("Fabler");
+    app.contact().create(contact);
+    assertThat(app.contact().count(), equalTo(before.size()));
+    Contacts after = app.contact().all();
+    assertThat(after, equalTo(before));
   }
 }

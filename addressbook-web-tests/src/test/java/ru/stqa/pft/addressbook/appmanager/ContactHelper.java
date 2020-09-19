@@ -63,6 +63,8 @@ public class ContactHelper extends HelperBase {
     super(app);
   }
 
+  private Contacts contactCache = null;
+
   //<editor-fold desc="Methods">
   public void fillForm(ContactData contactData, boolean creation) {
     clearAndType(firstNameLoc, contactData.getFirstName());
@@ -137,6 +139,15 @@ public class ContactHelper extends HelperBase {
     click(returnToHomePageLinkLoc);
   }
 
+  public int count() {
+    try {
+      implicitlyWait(0);
+      return getElements(contactLoc).size();
+    } finally {
+      implicitlyWait(10);
+    }
+  }
+
   public void create(ContactData contact) {
     app.goTo().editPage();
     fillForm(contact, true);
@@ -177,10 +188,8 @@ public class ContactHelper extends HelperBase {
     verifyMessage("Record successful deleted");
   }
 
-  private Contacts contactCache = null;
-
   public Contacts all() {
-    if(contactCache != null)
+    if (contactCache != null)
       return new Contacts(contactCache);
     contactCache = new Contacts();
     try {
