@@ -23,7 +23,7 @@ public class GroupModificationTests extends TestBase {
   }
 
   @Test(testName = "Проверка редактирования группы")
-  public void testFirstGroupModification() {
+  public void testGroupModification() {
     Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()

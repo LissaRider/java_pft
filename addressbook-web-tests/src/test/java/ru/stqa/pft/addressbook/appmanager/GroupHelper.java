@@ -21,36 +21,35 @@ public class GroupHelper extends HelperBase {
   public By updateGroupBtnLoc = By.name("update");
   public By groupLoc = By.className("group");
   public By groupInputLoc = By.tagName("input");
+  public By groupLoc(int id) {
+    return By.cssSelector("input[value='" + id + "']");
+  }
   //</editor-fold>
 
   public GroupHelper(ApplicationManager app) {
     super(app);
   }
 
-  public By groupLoc(int id) {
-    return By.cssSelector("input[value='" + id + "']");
-  }
-
   //<editor-fold desc="Methods">
-  public void initGroupCreation() {
+  public void initCreation() {
     click(addGroupBtnLoc);
   }
 
-  public void fillGroupForm(GroupData groupData) {
+  public void fillForm(GroupData groupData) {
     clearAndType(groupNameLoc, groupData.getName());
     clearAndType(groupHeaderLoc, groupData.getHeader());
     clearAndType(groupFooterLoc, groupData.getFooter());
   }
 
-  public void submitGroupCreation() {
+  public void submitCreation() {
     click(createGroupBtnLoc);
   }
 
-  public void selectGroupById(int id) {
+  public void selectById(int id) {
     getElement(groupLoc(id)).click();
   }
 
-  public void submitGroupDeletion() {
+  public void submitDeletion() {
     click(deleteGroupBtnLoc);
   }
 
@@ -58,34 +57,34 @@ public class GroupHelper extends HelperBase {
     click(returnToGroupsPageLinkLoc);
   }
 
-  public void initGroupModification() {
+  public void initModification() {
     click(editGroupBtnLoc);
   }
 
-  public void submitGroupModification() {
+  public void submitModification() {
     click(updateGroupBtnLoc);
   }
 
   public void create(GroupData group) {
-    initGroupCreation();
-    fillGroupForm(group);
-    submitGroupCreation();
+    initCreation();
+    fillForm(group);
+    submitCreation();
     verifyMessage("A new group has been entered into the address book.");
     returnToGroupsPage();
   }
 
   public void modify(GroupData group) {
-    selectGroupById(group.getId());
-    initGroupModification();
-    fillGroupForm(group);
-    submitGroupModification();
+    selectById(group.getId());
+    initModification();
+    fillForm(group);
+    submitModification();
     verifyMessage("Group record has been updated.");
     returnToGroupsPage();
   }
 
   public void delete(GroupData group) {
-    selectGroupById(group.getId());
-    submitGroupDeletion();
+    selectById(group.getId());
+    submitDeletion();
     verifyMessage("Group has been removed.");
     returnToGroupsPage();
   }

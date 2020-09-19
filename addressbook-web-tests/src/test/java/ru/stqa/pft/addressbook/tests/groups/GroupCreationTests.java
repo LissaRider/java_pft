@@ -23,7 +23,10 @@ public class GroupCreationTests extends TestBase {
     Groups after = app.group().all();
 
     assertThat(after.size(), equalTo(before.size() + 1));
-    assertThat(after, equalTo(
-            before.withAdded(group.withId(after.stream().mapToInt(GroupData::getId).max().orElseThrow())))); /*java 11: getAsInt() to orElseThrow()*/
+    assertThat(after, equalTo(before.withAdded(group.withId(after
+            .stream()
+            .mapToInt(GroupData::getId)
+            .max()
+            .orElseThrow())))); /*java 11: getAsInt() to orElseThrow()*/
   }
 }

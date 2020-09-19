@@ -4,105 +4,102 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
+import ru.stqa.pft.addressbook.models.Contacts;
+import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
 import java.util.Comparator;
-import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    ContactData newContact = new ContactData("James", "Bond");
-    app.contact().verifyPresence(newContact, 2);
+    app.goTo().homePage();
+    ContactData newContact = new ContactData()
+            .withFirstName("James")
+            .withLastName("Bond");
+    if (app.contact().all().size() == 0) app.contact().create(newContact);
   }
 
-  @Test(testName = "Проверка редактирования первого контакта со страницы редактирования")
-  public void testFirstContactModificationFromEditContactPage() {
-    List<ContactData> before = app.contact().list();
-    app.contact().initModification(0);
-    ContactData contact = new ContactData(before.get(0).getId(),
-            "Robin",
-            "Batkovich",
-            "Hood",
-            "Prince of Thieves",
-            "robin_hood.jpg",
-            "Senior Software Developer",
-            "Sherwood Forest",
-            "Nottingham",
-            "8(495) 222-22-22",
-            "8(999) 222-22-22",
-            "8(800) 777-77-77",
-            "8(800) 777-77-70",
-            "robinhood@gmail.com",
-            "robin.hood@yandex.ru",
-            "robin.hood@mail.ru",
-            "www.folktales.com",
-            2,
-            "September",
-            "1991",
-            "1",
-            "september",
-            "2021",
-            "England",
-            "8(909) 777-77-77",
-            "Rise and rise again until lambs become lions."
-    );
+  @Test(testName = "Проверка редактирования контакта со страницы редактирования")
+  public void testContactModificationFromEditContactPage() {
+    Contacts before = app.contact().all();
+    ContactData modifiedContact = before.iterator().next();
+    app.contact().initModification(modifiedContact.getId());
+    ContactData contact = new ContactData()
+            .withId(modifiedContact.getId())
+            .withFirstName("Robin")
+            .withMiddleName("Batkovich")
+            .withLastName("Hood")
+            .withNickname("Prince of Thieves")
+            .withFileSource("robin_hood.jpg")
+            .withJobTitle("Senior Software Developer")
+            .withCompanyName("Sherwood Forest")
+            .withMainAddress("Nottingham")
+            .withHomePhone("8(495) 222-22-22")
+            .withMobilePhone("8(999) 222-22-22")
+            .withWorkPhone("8(800) 777-77-77")
+            .withFaxNumber("8(800) 777-77-70")
+            .withEmail("robinhood@gmail.com")
+            .withEmail2("robin.hood@yandex.ru")
+            .withEmail3("robin.hood@mail.ru")
+            .withWebSite("www.folktales.com")
+            .withBirthDay(2)
+            .withBirthMonth("September")
+            .withBirthYear("1991")
+            .withAnniversaryDay("1")
+            .withAnniversaryMonth("september")
+            .withAnniversaryYear("2021")
+            .withAdAddress("England")
+            .withAdPhone("8(909) 777-77-77")
+            .withNotes("Rise and rise again until lambs become lions.");
     app.contact().modify(contact);
-    List<ContactData> after = app.contact().list();
+    Contacts after = app.contact().all();
 
-    Assert.assertEquals(after.size(), before.size());
-    before.remove(0);
-    before.add(contact);
-    Comparator<ContactData> byId = Comparator.comparingInt(ContactData::getId);
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after);
+    assertThat(after.size(), equalTo(before.size()));
+    assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 
   @Test(testName = "Проверка редактирования последнего контакта со страницы просмотра")
-  public void testLastContactModificationFromViewContactPage() {
-    List<ContactData> before = app.contact().list();
-    int index = before.size() - 1;
-    app.contact().view(index);
+  public void testContactModificationFromViewContactPage() {
+    Contacts before = app.contact().all();
+    ContactData modifiedContact = before.iterator().next();
+    app.contact().view(modifiedContact.getId());
     app.contact().initModificationFromViewPage();
-    ContactData contact = new ContactData(before.get(index).getId(),
-            "John",
-            "Ivanovich",
-            "Carter",
-            "Virginia",
-            "john_carter.jpg",
-
-            "Senior Software Developer",
-            "Moscow City",
-            "Moscow, metro station Business Center",
-            "8(495) 111-11-11",
-            "8(999) 111-11-11",
-            "8(800) 999-99-99",
-            "8(800) 999-99-90",
-            "johncarter@gmail.com",
-            "john.carter@yandex.ru",
-            "john.carter@mail.ru",
-            "www.edgarricestories.com",
-            24,
-            "February",
-            "1994",
-            "23",
-            "february",
-            "2024",
-            "Moscow,  metro station Vystavochnaya",
-            "8(909) 888-88-88",
-            "By god... I am on Mars."
-    );
+    ContactData contact = new ContactData()
+            .withId(modifiedContact.getId())
+            .withFirstName("John")
+            .withMiddleName("Ivanovich")
+            .withLastName("Carter")
+            .withNickname("Virginia")
+            .withFileSource("john_carter.jpg")
+            .withJobTitle("Middle Software Developer")
+            .withCompanyName("Moscow City")
+            .withMainAddress("Moscow, metro station Business Center")
+            .withHomePhone("8(495) 111-11-11")
+            .withMobilePhone("8(999) 111-11-11")
+            .withWorkPhone("8(800) 999-99-99")
+            .withFaxNumber("8(800) 999-99-90")
+            .withEmail("johncarter@gmail.com")
+            .withEmail2("john.carter@yandex.ru")
+            .withEmail3("john.carter@mail.ru")
+            .withWebSite("www.edgarricestories.com")
+            .withBirthDay(24)
+            .withBirthMonth("February")
+            .withBirthYear("1994")
+            .withAnniversaryDay("23")
+            .withAnniversaryMonth("february")
+            .withAnniversaryYear("2024")
+            .withAdAddress("Moscow,  metro station Vystavochnaya")
+            .withAdPhone("8(909) 888-88-88")
+            .withNotes("By god... I am on Mars.");
     app.contact().modify(contact);
-    List<ContactData> after = app.contact().list();
+    Contacts after = app.contact().all();
 
-    Assert.assertEquals(after.size(), before.size());
-    before.remove(index);
-    before.add(contact);
-    Comparator<ContactData> byId = Comparator.comparingInt(ContactData::getId);
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after);
+    assertThat(after.size(), equalTo(before.size()));
+    assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 }

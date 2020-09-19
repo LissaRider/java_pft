@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
+import ru.stqa.pft.addressbook.models.Contacts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -38,32 +38,25 @@ public class ContactHelper extends HelperBase {
   public By adAddressLoc = By.name("address2");
   public By adPhoneLoc = By.name("phone2");
   public By notesLoc = By.name("notes");
-//  public By topCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(1)");
-//  public By topCreateContactBtnLoc = By.xpath(".//input[@name='submit'][1]");
-//  public By bottomCreateContactBtnLoc = By.cssSelector("input[name=submit]:nth-child(2)");
-//  public By bottomCreateContactBtnLoc = By.xpath(".//input[@name='submit'][last()]");
   public By createContactBtnLoc = By.name("submit");
   public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
-//  public By returnToHomePageLinkLoc = By.xpath(".//*[@id='content']//a[@href='index.php']");
-  public By returnToEditContactPageLinkLoc = By.cssSelector("#content a[href='edit.php']");
-//  public By returnToEditContactPageLinkLoc = By.xpath(".//*[@id='content']//a[@href='edit.php']");
-  public By contactCheckboxLoc = By.cssSelector("#maintable [name='selected[]']");
-//  public By contactCheckboxLoc = By.xpath(".//*[@id='maintable']//*[@name='selected[]']");
   public By deleteContactBtnHomePageLoc = By.cssSelector("input[onclick='DeleteSel()']");
-//  public By deleteContactBtnHomePageLoc = By.xpath(".//input[@onclick='DeleteSel()']");
-  public By editContactBtnLoc = By.cssSelector("#maintable a[href^='edit.php']");
-//  public By editContactBtnLoc = By.xpath(".//*[@id='maintable']//a[starts-with(@href,'edit.php')]");
-  public By viewContactBtnLoc = By.cssSelector("#maintable a[href^='view.php']");
-//  public By viewContactBtnLoc = By.xpath(".//*[@id='maintable']//a[starts-with(@href,'view.php')]");
   public By updateContactBtnLoc = By.cssSelector("[name=update][value=Update]");
-//  public By updateContactBtnLoc = By.xpath(".//*[@name='update' and @value='Update']");
   public By selectAllCheckboxLoc = By.id("MassCB");
   public By deleteContactBtnEditPageLoc = By.cssSelector("[name=update][value=Delete]");
-//  public By deleteContactBtnEditPageLoc = By.xpath(".//*[@name='update' and @value='Delete']");
   public By modifyContactBtnLoc = By.name("modifiy");
   public By contactLoc = By.name("entry");
   public By contactInputLoc = By.tagName("input");
   public By cellLoc = By.tagName("td");
+  public By contactLoc(int id) {
+    return By.cssSelector("input[value='" + id + "']");
+  }
+  public By editContactBtnLoc(int id) {
+    return By.cssSelector("#maintable a[href='edit.php?id=" + id + "']");
+  }
+  public By viewContactBtnLoc(int id) {
+    return By.cssSelector("#maintable a[href='view.php?id=" + id + "']");
+  }
   //</editor-fold>
 
   public ContactHelper(ApplicationManager app) {
@@ -71,7 +64,7 @@ public class ContactHelper extends HelperBase {
   }
 
   //<editor-fold desc="Methods">
-  public void fillContactForm(ContactData contactData, boolean creation) {
+  public void fillForm(ContactData contactData, boolean creation) {
     clearAndType(firstNameLoc, contactData.getFirstName());
     clearAndType(middleNameLoc, contactData.getMiddleName());
     clearAndType(lastNameLoc, contactData.getLastName());
@@ -96,8 +89,6 @@ public class ContactHelper extends HelperBase {
     clearAndType(anniversaryYearLoc, contactData.getAnniversaryYear());
     if (creation) {
       selectByValue(contactsGroupLoc, "[none]");
-//      selectByText(contactsGroupLoc, "[none]");
-//      selectByIndex(contactsGroupLoc, 0);}
     } else {
       Assert.assertFalse(isAnyElementPresent(contactsGroupLoc));
     }
@@ -106,116 +97,83 @@ public class ContactHelper extends HelperBase {
     clearAndType(notesLoc, contactData.getNotes());
   }
 
-  public void fillContactFormRequiredFields(ContactData contactData) {
-    clearAndType(firstNameLoc, contactData.getFirstName());
-    clearAndType(lastNameLoc, contactData.getLastName());
+  public void submitCreation() {
+    click(createContactBtnLoc);
   }
 
-  public void submitContactCreation() {
-//    click(topCreateContactBtnLoc); /*только верхняя кнопка*/
-//    click(bottomCreateContactBtnLoc); /*только нижняя кнопка*/
-//    click(createContactBtnLoc); /*первая кнопка из найденных*/
-    click(createContactBtnLoc); /*любая кнопка из найденных*/
-  }
-
-  public void returnToEditContactPage() {
-    click(returnToEditContactPageLinkLoc);
-  }
-
-  public void returnToHomePage() {
-    click(returnToHomePageLinkLoc);
-  }
-
-  public void selectContact(int index) {
-    getElements(contactCheckboxLoc).get(index).click();
-  }
-
-  public void initContactDeletionOnHomePage() {
+  public void initDeletionFromHomePage() {
     click(deleteContactBtnHomePageLoc);
   }
 
-  public void initModification(int index) {
-    getElements(editContactBtnLoc).get(index).click();
-  }
-
-  public void view(int index) {
-    getElements(viewContactBtnLoc).get(index).click();
-  }
-
-  public void submitContactModification() {
-    click(updateContactBtnLoc);
-  }
-
-  public void selectAllContacts() {
-    click(selectAllCheckboxLoc);
-  }
-
-  public void initContactDeletionOnEditContactPage() {
+  public void submitDeletionFromEditPage() {
     click(deleteContactBtnEditPageLoc);
+  }
+
+  public void initModification(int id) {
+    getElement(editContactBtnLoc(id)).click();
   }
 
   public void initModificationFromViewPage() {
     click(modifyContactBtnLoc);
   }
 
+  public void submitModification() {
+    click(updateContactBtnLoc);
+  }
+
+  public void view(int id) {
+    getElement(viewContactBtnLoc(id)).click();
+  }
+
+  public void selectById(int id) {
+    getElement(contactLoc(id)).click();
+  }
+
+  public void selectAll() {
+    click(selectAllCheckboxLoc);
+  }
+
+  public void returnToHomePage() {
+    click(returnToHomePageLinkLoc);
+  }
+
   public void create(ContactData contact) {
-    app.goTo().goToEditContactPage();
-    fillContactForm(contact, true);
-    submitContactCreation();
+    app.goTo().editPage();
+    fillForm(contact, true);
+    submitCreation();
     verifyMessage("Information entered into address book.");
     returnToHomePage();
   }
 
   public void modify(ContactData contact) {
-    fillContactForm(contact, false);
-    submitContactModification();
+    fillForm(contact, false);
+    submitModification();
     verifyMessage("Address book updated");
     returnToHomePage();
   }
 
-  public void deleteFromList(int index) {
-    selectContact(index);
-    initContactDeletionOnHomePage();
+  public void deleteFromList(ContactData contact) {
+    selectById(contact.getId());
+    initDeletionFromHomePage();
     closeAlertAndGetItsText();
     verifyMessage("Record successful deleted");
   }
 
-
-  public void deleteFromEditPage(int index) {
-    initModification(index);
-    initContactDeletionOnEditContactPage();
+  public void deleteFromEditPage(ContactData contact) {
+    initModification(contact.getId());
+    submitDeletionFromEditPage();
     verifyMessage("Record successful deleted");
   }
 
   public void deleteAll() {
-
-    selectAllContacts();
-    initContactDeletionOnHomePage();
+    selectAll();
+    initDeletionFromHomePage();
     closeAlertAndGetItsText();
     verifyMessage("Record successful deleted");
   }
 
-  public void createContacts(ContactData contact, int n) {
-    app.goTo().goToEditContactPage();
-    for (int i = 1; i <= n; i++) {
-      fillContactFormRequiredFields(contact);
-      submitContactCreation();
-      returnToEditContactPage();
-    }
-    app.goTo().homePage();
-  }
-
-  public boolean isAnyContactPresent() {
-    return isAnyElementPresent(contactCheckboxLoc);
-  }
-
-  public void verifyPresence(ContactData newContact, int n) {
-    app.goTo().homePage();
-    if (!isAnyContactPresent()) createContacts(newContact, n);
-  }
-
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     try {
       implicitlyWait(0);
       List<WebElement> elements = getElements(contactLoc);
@@ -225,7 +183,11 @@ public class ContactHelper extends HelperBase {
         String firstName = cells.get(2).getText();
         String address = cells.get(3).getText();
         int id = Integer.parseInt(element.findElement(contactInputLoc).getAttribute("value"));
-        ContactData contact = new ContactData(id, firstName, lastName, address);
+        ContactData contact = new ContactData()
+                .withId(id)
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withMainAddress(address);
         contacts.add(contact);
       }
       return contacts;

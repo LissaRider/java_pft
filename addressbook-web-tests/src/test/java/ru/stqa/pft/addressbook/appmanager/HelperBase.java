@@ -46,14 +46,6 @@ public class HelperBase {
     return driver.findElements(by);
   }
 
-  public WebElement getAnyElement(By by) {
-    return getElements(by).stream().findAny().orElse(null);
-  }
-
-  public WebElement getFirstElement(By by) {
-    return getElements(by).stream().findFirst().get();
-  }
-
   public void click(By by) {
     getElement(by).click();
   }

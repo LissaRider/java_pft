@@ -32,7 +32,7 @@ public class NavigationHelper extends HelperBase {
     click(groupsPageLinkLoc);
   }
 
-  public void goToEditContactPage() {
+  public void editPage() {
     if (isAnyElementPresent(pageTitleLoc)
             && getPageTitle().equals("Edit / add address book entry")
             && isAnyElementPresent(app.contact().createContactBtnLoc)) {
