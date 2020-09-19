@@ -20,13 +20,24 @@ public class GroupCreationTests extends TestBase {
             .withFooter("<a href=\"edit.php\">add contact</a>  <a href=\"group.php?new=New+group\" " +
                     "target=\"_self\">add group</a>");
     app.group().create(group);
+    assertThat(app.group().count(), equalTo(before.size() + 1));
     Groups after = app.group().all();
-
-    assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.withAdded(group.withId(after
             .stream()
             .mapToInt(GroupData::getId)
             .max()
             .orElseThrow())))); /*java 11: getAsInt() to orElseThrow()*/
+  }
+
+  @Test(testName = "Проверка создания некорректной группы")
+  public void testBadGroupCreation() {
+    app.goTo().groupsPage();
+    Groups before = app.group().all();
+    GroupData group = new GroupData()
+            .withName("Relatives'");
+    app.group().create(group);
+    assertThat(app.group().count(), equalTo(before.size()));
+    Groups after = app.group().all();
+    assertThat(after, equalTo(before));
   }
 }

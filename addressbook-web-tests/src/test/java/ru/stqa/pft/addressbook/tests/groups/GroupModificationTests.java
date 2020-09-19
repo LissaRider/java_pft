@@ -32,9 +32,8 @@ public class GroupModificationTests extends TestBase {
             .withHeader("<h1>FRIENDS</h1><p>Created by Lissa Rider</p></p>")
             .withFooter("<a href=\"index.php\">home</a>");
     app.group().modify(group);
+    assertThat(app.group().count(), equalTo(before.size()));
     Groups after = app.group().all();
-
-    assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
   }
 }
