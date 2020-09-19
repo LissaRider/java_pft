@@ -220,16 +220,18 @@ public class ContactHelper extends HelperBase {
         String lastName = cells.get(1).getText();
         String firstName = cells.get(2).getText();
         String address = cells.get(3).getText();
-        String[] phones = cells.get(5).getText().split("\n");
+        String allPhones = cells.get(5).getText();
+//        String[] phones = cells.get(5).getText().split("\n");
         ContactData contact = new ContactData()
                 .withId(id)
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withMainAddress(address)
-                .withHomePhone(phones[0])
-                .withMobilePhone(phones[1])
-                .withWorkPhone(phones[2])
-                .withAdPhone(phones[3]);
+                .withAllPhones(allPhones);
+//                .withHomePhone(phones[0])
+//                .withMobilePhone(phones[1])
+//                .withWorkPhone(phones[2])
+//                .withAdPhone(phones[3]);
         contactCache.add(contact);
       }
       return new Contacts(contactCache);
