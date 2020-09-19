@@ -69,6 +69,7 @@ public class GroupHelper extends HelperBase {
     initCreation();
     fillForm(group);
     submitCreation();
+    groupCache = null;
     verifyMessage("A new group has been entered into the address book.");
     returnToGroupsPage();
   }
@@ -78,6 +79,7 @@ public class GroupHelper extends HelperBase {
     initModification();
     fillForm(group);
     submitModification();
+    groupCache = null;
     verifyMessage("Group record has been updated.");
     returnToGroupsPage();
   }
@@ -85,12 +87,17 @@ public class GroupHelper extends HelperBase {
   public void delete(GroupData group) {
     selectById(group.getId());
     submitDeletion();
+    groupCache = null;
     verifyMessage("Group has been removed.");
     returnToGroupsPage();
   }
 
+  private Groups groupCache = null;
+
   public Groups all() {
-    Groups groups = new Groups();
+    if(groupCache != null)
+      return new Groups(groupCache);
+    groupCache = new Groups();
     try {
       implicitlyWait(0);
       List<WebElement> elements = getElements(groupLoc);
@@ -98,9 +105,9 @@ public class GroupHelper extends HelperBase {
         String name = element.getText();
         int id = Integer.parseInt(element.findElement(groupInputLoc).getAttribute("value"));
         GroupData group = new GroupData().withId(id).withName(name);
-        groups.add(group);
+        groupCache.add(group);
       }
-      return groups;
+      return new Groups(groupCache);
     } finally {
       implicitlyWait(10);
     }
