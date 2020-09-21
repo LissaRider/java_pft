@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.tests.contacts;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
-import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
 import java.util.Arrays;
@@ -23,7 +22,7 @@ public class ContactInformationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    if (app.contact().all().size() !=0) app.contact().deleteAll();
+    if (app.contact().all().size() != 0) app.contact().deleteAll();
     ContactData newContact = new ContactData()
             .withFirstName("Kenobi")
             .withLastName("Obi-Wan")
@@ -59,7 +58,7 @@ public class ContactInformationTests extends TestBase {
   private String mergeEmails(ContactData contact) {
     return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
             .stream()
-            .filter((s) -> ! s.equals(""))
+            .filter((s) -> !s.equals(""))
             .collect(Collectors.joining("\n"));
   }
 }

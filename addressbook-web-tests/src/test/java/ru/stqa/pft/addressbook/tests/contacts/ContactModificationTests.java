@@ -1,14 +1,10 @@
 package ru.stqa.pft.addressbook.tests.contacts;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
-import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.tests.TestBase;
-
-import java.util.Comparator;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,8 +32,8 @@ public class ContactModificationTests extends TestBase {
             .withLastName("Hood")
             .withNickname("Prince of Thieves")
             .withFileSource("robin_hood.jpg")
-            .withCompanyName("Sherwood Forest")
             .withJobTitle("Senior Software Developer")
+            .withCompanyName("Sherwood Forest")
             .withMainAddress("Nottingham")
             .withHomePhone("8(495) 222-22-22")
             .withMobilePhone("8(999) 222-22-22")
@@ -75,8 +71,8 @@ public class ContactModificationTests extends TestBase {
             .withLastName("Carter")
             .withNickname("Virginia")
             .withFileSource("john_carter.jpg")
-            .withCompanyName("Moscow City")
             .withJobTitle("Middle Software Developer")
+            .withCompanyName("Moscow City")
             .withMainAddress("Moscow, metro station Business Center")
             .withHomePhone("8(495) 111-11-11")
             .withMobilePhone("8(999) 111-11-11")
