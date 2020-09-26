@@ -11,7 +11,7 @@ repositories.mavenCentral()
 dependencies.implementation group: 'org.testng', name: 'testng', version: '7.1.0'
 dependencies.implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 dependencies.implementation group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
-
+dependencies.implementation group: 'com.beust', name: 'jcommander', version: '1.78'
 
 /**
  * Test Framework
