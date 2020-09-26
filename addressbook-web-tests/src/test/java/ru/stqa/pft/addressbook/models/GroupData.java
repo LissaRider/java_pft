@@ -4,6 +4,15 @@ import java.util.Objects;
 
 public class GroupData {
 
+  @Override
+  public String toString() {
+    return "GroupData{" +
+            "name='" + name + '\'' +
+            ", header='" + header + '\'' +
+            ", footer='" + footer + '\'' +
+            '}';
+  }
+
   private int id = Integer.MAX_VALUE;
   private String name;
   private String header;
@@ -43,14 +52,6 @@ public class GroupData {
   public GroupData withFooter(String footer) {
     this.footer = footer;
     return this;
-  }
-
-  @Override
-  public String toString() {
-    return "GroupData{" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            '}';
   }
 
   @Override
