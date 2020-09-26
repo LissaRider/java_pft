@@ -6,6 +6,8 @@ import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -31,9 +33,9 @@ public class ContactModificationTests extends TestBase {
             .withMiddleName("Batkovich")
             .withLastName("Hood")
             .withNickname("Prince of Thieves")
-            .withFileSource("robin_hood.jpg")
-            .withJobTitle("Senior Software Developer")
+            .withPhoto(new File("src/test/resources/robin_hood.jpg"))
             .withCompanyName("Sherwood Forest")
+            .withJobTitle("Senior Software Developer")
             .withMainAddress("Nottingham")
             .withHomePhone("8(495) 222-22-22")
             .withMobilePhone("8(999) 222-22-22")
@@ -70,9 +72,9 @@ public class ContactModificationTests extends TestBase {
             .withMiddleName("Ivanovich")
             .withLastName("Carter")
             .withNickname("Virginia")
-            .withFileSource("john_carter.jpg")
-            .withJobTitle("Middle Software Developer")
+            .withPhoto(new File("src/test/resources/john_carter.jpg"))
             .withCompanyName("Moscow City")
+            .withJobTitle("Middle Software Developer")
             .withMainAddress("Moscow, metro station Business Center")
             .withHomePhone("8(495) 111-11-11")
             .withMobilePhone("8(999) 111-11-11")

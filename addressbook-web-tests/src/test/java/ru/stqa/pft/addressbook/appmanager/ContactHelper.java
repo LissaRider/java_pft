@@ -71,7 +71,7 @@ public class ContactHelper extends HelperBase {
     clearAndType(middleNameLoc, contactData.getMiddleName());
     clearAndType(lastNameLoc, contactData.getLastName());
     clearAndType(nicknameLoc, contactData.getNickname());
-    uploadFile(inputFileLoc, contactData.getFileSource());
+    uploadFile(inputFileLoc,contactData.getPhoto());
     clearAndType(jobTitleLoc, contactData.getJobTitle());
     clearAndType(companyNameLoc, contactData.getCompanyName());
     clearAndType(mainAddressLoc, contactData.getMainAddress());

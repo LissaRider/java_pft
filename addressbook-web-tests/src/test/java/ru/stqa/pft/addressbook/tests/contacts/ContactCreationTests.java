@@ -5,6 +5,8 @@ import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -19,7 +21,7 @@ public class ContactCreationTests extends TestBase {
             .withMiddleName("Batkovna")
             .withLastName("Fabler")
             .withNickname("LisAnieL")
-            .withFileSource("dark_alice.jpg")
+            .withPhoto(new File("src/test/resources/dark_alice.jpg"))
             .withCompanyName("Bank")
             .withJobTitle("Middle QA Automation Engineer")
             .withMainAddress("Moscow, Chertanovo Tsentralnoye District")
