@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests.groups;
 
+import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.GroupData;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -41,7 +43,22 @@ public class GroupCreationTests extends TestBase {
     return list.iterator();
   }
 
-  @Test(testName = "Проверка создания группы (параметризация)", dataProvider = "groupsFromCsvFile")
+  @DataProvider
+  public Iterator<Object[]> groupsFromXmlFile() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
+    String xml = "";
+    String line = reader.readLine();
+    while (line != null) {
+      xml += line;
+      line = reader.readLine();
+    }
+    XStream xstream = new XStream();
+    xstream.processAnnotations(GroupData.class);
+    List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
+    return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+  }
+
+  @Test(testName = "Проверка создания группы (параметризация)", dataProvider = "groupsFromXmlFile")
   public void parameterizedTestGroupCreation(GroupData group) {
     app.goTo().groupsPage();
     Groups before = app.group().all();
