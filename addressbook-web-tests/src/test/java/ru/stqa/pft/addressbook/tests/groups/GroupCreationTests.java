@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.tests.groups;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -33,7 +35,8 @@ public class GroupCreationTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> groupsFromCsvFile() throws IOException {
     List<Object[]> list = new ArrayList<>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+    BufferedReader reader = new BufferedReader(
+            new FileReader(new File("src/test/resources/groups.csv")));
     String line = reader.readLine();
     while (line != null) {
       String[] split = line.split(";");
@@ -45,20 +48,37 @@ public class GroupCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> groupsFromXmlFile() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
-    String xml = "";
+    BufferedReader reader = new BufferedReader(
+            new FileReader(new File("src/test/resources/groups.xml")));
+    StringBuilder xml = new StringBuilder();
     String line = reader.readLine();
     while (line != null) {
-      xml += line;
+      xml.append(line);
       line = reader.readLine();
     }
     XStream xstream = new XStream();
     xstream.processAnnotations(GroupData.class);
-    List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
+    //noinspection unchecked
+    List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml.toString());
     return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
-  @Test(testName = "Проверка создания группы (параметризация)", dataProvider = "groupsFromXmlFile")
+  @DataProvider
+  public Iterator<Object[]> groupsFromJsonFile() throws IOException {
+    BufferedReader reader = new BufferedReader(
+            new FileReader(new File("src/test/resources/groups.json")));
+    StringBuilder json = new StringBuilder();
+    String line = reader.readLine();
+    while (line != null) {
+      json.append(line);
+      line = reader.readLine();
+    }
+    Gson gson = new Gson();
+    List<GroupData> groups = gson.fromJson(json.toString(), new TypeToken<List<GroupData>>() { }.getType());
+    return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+  }
+
+  @Test(testName = "Проверка создания группы (параметризация)", dataProvider = "groupsFromJsonFile")
   public void parameterizedTestGroupCreation(GroupData group) {
     app.goTo().groupsPage();
     Groups before = app.group().all();
