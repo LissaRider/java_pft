@@ -21,6 +21,7 @@ public class GroupHelper extends HelperBase {
   public By updateGroupBtnLoc = By.name("update");
   public By groupLoc = By.className("group");
   public By groupInputLoc = By.tagName("input");
+  public By groupCheckboxLoc = By.name("selected[]");
   public By groupLoc(int id) {
     return By.cssSelector("input[value='" + id + "']");
   }
@@ -67,6 +68,14 @@ public class GroupHelper extends HelperBase {
     click(updateGroupBtnLoc);
   }
 
+  private void selectAll() {
+    var checkboxes = getElements(groupCheckboxLoc);
+    for(var checkbox : checkboxes){
+      if(!checkbox.isSelected())
+        checkbox.click();
+    }
+  }
+
   public int count() {
     try {
       implicitlyWait(0);
@@ -97,6 +106,14 @@ public class GroupHelper extends HelperBase {
 
   public void delete(GroupData group) {
     selectById(group.getId());
+    submitDeletion();
+    groupCache = null;
+    verifyMessage("Group has been removed.");
+    returnToGroupsPage();
+  }
+
+  public void deleteAll() {
+    selectAll();
     submitDeletion();
     groupCache = null;
     verifyMessage("Group has been removed.");

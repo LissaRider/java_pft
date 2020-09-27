@@ -21,7 +21,7 @@ public class ContactCreationTests extends TestBase {
             .withMiddleName("Batkovna")
             .withLastName("Fabler")
             .withNickname("LisAnieL")
-            .withPhoto(new File("src/test/resources/dark_alice.jpg"))
+            .withPhoto(new File("src/test/resources/photos/dark_alice.jpg"))
             .withCompanyName("Bank")
             .withJobTitle("Middle QA Automation Engineer")
             .withMainAddress("Moscow, Chertanovo Tsentralnoye District")

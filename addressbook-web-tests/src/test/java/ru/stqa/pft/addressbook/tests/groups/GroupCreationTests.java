@@ -1,5 +1,8 @@
 package ru.stqa.pft.addressbook.tests.groups;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
@@ -35,50 +38,65 @@ public class GroupCreationTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> groupsFromCsvFile() throws IOException {
     List<Object[]> list = new ArrayList<>();
-    BufferedReader reader = new BufferedReader(
-            new FileReader(new File("src/test/resources/groups.csv")));
-    String line = reader.readLine();
-    while (line != null) {
-      String[] split = line.split(";");
-      list.add(new Object[]{new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
-      line = reader.readLine();
+    try (var reader = new BufferedReader(new FileReader(
+            new File("src/test/resources/data/groups/groups.csv")))) {
+      var line = reader.readLine();
+      while (line != null) {
+        String[] split = line.split(";");
+        list.add(new Object[]{new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+        line = reader.readLine();
+      }
+      return list.iterator();
     }
-    return list.iterator();
   }
 
   @DataProvider
   public Iterator<Object[]> groupsFromXmlFile() throws IOException {
-    BufferedReader reader = new BufferedReader(
-            new FileReader(new File("src/test/resources/groups.xml")));
-    StringBuilder xml = new StringBuilder();
-    String line = reader.readLine();
-    while (line != null) {
-      xml.append(line);
-      line = reader.readLine();
+    try (var reader = new BufferedReader(new FileReader(
+            new File("src/test/resources/data/groups/groups.xml")))) {
+      StringBuilder xml = new StringBuilder();
+      var line = reader.readLine();
+      while (line != null) {
+        xml.append(line);
+        line = reader.readLine();
+      }
+      var xstream = new XStream();
+      xstream.processAnnotations(GroupData.class);
+      //noinspection unchecked
+      var groups = (List<GroupData>) xstream.fromXML(xml.toString());
+      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
-    XStream xstream = new XStream();
-    xstream.processAnnotations(GroupData.class);
-    //noinspection unchecked
-    List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml.toString());
-    return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
   @DataProvider
   public Iterator<Object[]> groupsFromJsonFile() throws IOException {
-    BufferedReader reader = new BufferedReader(
-            new FileReader(new File("src/test/resources/groups.json")));
-    StringBuilder json = new StringBuilder();
-    String line = reader.readLine();
-    while (line != null) {
-      json.append(line);
-      line = reader.readLine();
+    try (var reader = new BufferedReader(new FileReader(
+            new File("src/test/resources/data/groups/groups.json")))) {
+      var json = new StringBuilder();
+      String line = reader.readLine();
+      while (line != null) {
+        json.append(line);
+        line = reader.readLine();
+      }
+      var gson = new Gson();
+      List<GroupData> groups = gson.fromJson(json.toString(), new TypeToken<List<GroupData>>() { }.getType());
+      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
-    Gson gson = new Gson();
-    List<GroupData> groups = gson.fromJson(json.toString(), new TypeToken<List<GroupData>>() { }.getType());
+  }
+
+  @DataProvider
+  public Iterator<Object[]> groupsFromYamlFile() throws IOException {
+    var mapper = new ObjectMapper(new YAMLFactory()); // AutoCloseable
+    List<GroupData> groups = mapper.readValue(
+            new File("src/test/resources/data/groups/groups.yaml"), new TypeReference<>() { });
     return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
-  @Test(testName = "Проверка создания группы (параметризация)", dataProvider = "groupsFromJsonFile")
+//  @Test(testName = "Проверка создания группы (параметризация)", dataProvider = "validGroups")
+//  @Test(testName = "Проверка создания группы (чтение данных в формате CSV)", dataProvider = "groupsFromCsvFile")
+//  @Test(testName = "Проверка создания группы (чтение данных в формате XML)", dataProvider = "groupsFromXmlFile")
+//  @Test(testName = "Проверка создания группы (чтение данных в формате JSON)", dataProvider = "groupsFromJsonFile")
+  @Test(testName = "Проверка создания группы (чтение данных в формате YAML)", dataProvider = "groupsFromYamlFile")
   public void parameterizedTestGroupCreation(GroupData group) {
     app.goTo().groupsPage();
     Groups before = app.group().all();
