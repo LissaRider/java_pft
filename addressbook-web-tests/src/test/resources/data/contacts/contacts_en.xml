@@ -1,0 +1,137 @@
+<list>
+  <contact>
+    <firstName>Hunter</firstName>
+    <lastName>Stroman</lastName>
+    <middleName>Brody</middleName>
+    <nickname>Hunter_Stroman</nickname>
+    <photo>src\test\resources\photos\female\female_icon.png</photo>
+    <jobTitle>Junior Analyst</jobTitle>
+    <companyName>Quicker Associates</companyName>
+    <mainAddress>85 Fordham Street, Long Beach CA 8414</mainAddress>
+    <homePhone>+1(209) 792 85 06</homePhone>
+    <mobilePhone>1909-980-05-07</mobilePhone>
+    <workPhone>1.707.221.04.07 #3904</workPhone>
+    <faxNumber>+18184033481</faxNumber>
+    <email>hunterstroman@gmail.com</email>
+    <email2>hunter.stroman@yahoo.com</email2>
+    <email3>hunter_stroman@hotmail.com</email3>
+    <webSite>https://www.facebook.com/hunter.stroman</webSite>
+    <birthDay>6</birthDay>
+    <birthMonth>August</birthMonth>
+    <birthYear>1986</birthYear>
+    <anniversaryDay>5</anniversaryDay>
+    <anniversaryMonth>August</anniversaryMonth>
+    <anniversaryYear>2001</anniversaryYear>
+    <adAddress>394 Pacific Avenue, Fountain Valley CA 5961</adAddress>
+    <adPhone>+1 (657) 037-37-09</adPhone>
+    <notes>Marty, don t be such a square. Everybody who s anybody drinks.</notes>
+  </contact>
+  <contact>
+    <firstName>Taylor</firstName>
+    <lastName>Botsford</lastName>
+    <middleName>Oliver</middleName>
+    <nickname>Taylor_Botsford</nickname>
+    <photo>src\test\resources\photos\male\male_sign.bmp</photo>
+    <jobTitle>Senior Developer</jobTitle>
+    <companyName>Quisuc Consulting</companyName>
+    <mainAddress>363 Grove Avenue, San Jose CA 8863</mainAddress>
+    <homePhone>+1(714) 764 24 42</homePhone>
+    <mobilePhone>1916-147-67-75</mobilePhone>
+    <workPhone>1.661.950.19.27 #6008</workPhone>
+    <faxNumber>+13232601748</faxNumber>
+    <email>taylorbotsford@gmail.com</email>
+    <email2>taylor.botsford@yahoo.com</email2>
+    <email3>taylor_botsford@hotmail.com</email3>
+    <webSite>https://www.facebook.com/taylor.botsford</webSite>
+    <birthDay>3</birthDay>
+    <birthMonth>August</birthMonth>
+    <birthYear>1987</birthYear>
+    <anniversaryDay>2</anniversaryDay>
+    <anniversaryMonth>August</anniversaryMonth>
+    <anniversaryYear>2002</anniversaryYear>
+    <adAddress>282 Bradford Road, Long Beach CA 7081</adAddress>
+    <adPhone>+1 (650) 588-21-44</adPhone>
+    <notes>Damn! I m late for school!</notes>
+  </contact>
+  <contact>
+    <firstName>Alyssa</firstName>
+    <lastName>Boyle</lastName>
+    <middleName>Grayson</middleName>
+    <nickname>Alyssa_Boyle</nickname>
+    <photo>src\test\resources\photos\male\male_sign.bmp</photo>
+    <jobTitle>Senior Developer</jobTitle>
+    <companyName>FlyHigh Ltd</companyName>
+    <mainAddress>534 Fordham Street, Fairfield CA 9569</mainAddress>
+    <homePhone>+1(818) 452 18 73</homePhone>
+    <mobilePhone>1925-227-13-75</mobilePhone>
+    <workPhone>1.530.390.88.67 #6220</workPhone>
+    <faxNumber>+15594190364</faxNumber>
+    <email>alyssaboyle@gmail.com</email>
+    <email2>alyssa.boyle@yahoo.com</email2>
+    <email3>alyssa_boyle@hotmail.com</email3>
+    <webSite>https://www.facebook.com/alyssa.boyle</webSite>
+    <birthDay>15</birthDay>
+    <birthMonth>May</birthMonth>
+    <birthYear>1992</birthYear>
+    <anniversaryDay>14</anniversaryDay>
+    <anniversaryMonth>May</anniversaryMonth>
+    <anniversaryYear>2007</anniversaryYear>
+    <adAddress>633 Fordham Street, Sacramento CA 2660</adAddress>
+    <adPhone>+1 (661) 060-83-43</adPhone>
+    <notes>Lorraine. My density has brought me to you.</notes>
+  </contact>
+  <contact>
+    <firstName>Annabelle</firstName>
+    <lastName>Hodkiewicz</lastName>
+    <middleName>Jace</middleName>
+    <nickname>Annabelle_Hodkiewicz</nickname>
+    <photo>src\test\resources\photos\male\male_icon.jpg</photo>
+    <jobTitle>Junior Producer</jobTitle>
+    <companyName>Buapel Associates</companyName>
+    <mainAddress>499 Peg Shop Avenue, Fountain Valley CA 1018</mainAddress>
+    <homePhone>+1(619) 512 49 92</homePhone>
+    <mobilePhone>1657-183-25-30</mobilePhone>
+    <workPhone>1.310.219.83.80 #2970</workPhone>
+    <faxNumber>+14150941712</faxNumber>
+    <email>annabellehodkiewicz@gmail.com</email>
+    <email2>annabelle.hodkiewicz@yahoo.com</email2>
+    <email3>annabelle_hodkiewicz@hotmail.com</email3>
+    <webSite>https://www.facebook.com/annabelle.hodkiewicz</webSite>
+    <birthDay>26</birthDay>
+    <birthMonth>July</birthMonth>
+    <birthYear>1985</birthYear>
+    <anniversaryDay>25</anniversaryDay>
+    <anniversaryMonth>July</anniversaryMonth>
+    <anniversaryYear>2000</anniversaryYear>
+    <adAddress>175 Plumb Branch Avenue, Long Beach CA 8898</adAddress>
+    <adPhone>+1 (442) 280-40-03</adPhone>
+    <notes>If you put your mind to it, you can accomplish anything.</notes>
+  </contact>
+  <contact>
+    <firstName>Ariana</firstName>
+    <lastName>Brekke</lastName>
+    <middleName>Landon</middleName>
+    <nickname>Ariana_Brekke</nickname>
+    <photo>src\test\resources\photos\female\female_sign.bmp</photo>
+    <jobTitle>Junior Coordinator</jobTitle>
+    <companyName>Hostes Ltd</companyName>
+    <mainAddress>301 Plumb Branch Avenue, San Jose CA 5056</mainAddress>
+    <homePhone>+1(858) 264 88 25</homePhone>
+    <mobilePhone>1747-556-21-08</mobilePhone>
+    <workPhone>1.707.676.21.52 #2604</workPhone>
+    <faxNumber>+15104688317</faxNumber>
+    <email>arianabrekke@gmail.com</email>
+    <email2>ariana.brekke@yahoo.com</email2>
+    <email3>ariana_brekke@hotmail.com</email3>
+    <webSite>https://www.facebook.com/ariana.brekke</webSite>
+    <birthDay>21</birthDay>
+    <birthMonth>March</birthMonth>
+    <birthYear>1996</birthYear>
+    <anniversaryDay>20</anniversaryDay>
+    <anniversaryMonth>March</anniversaryMonth>
+    <anniversaryYear>2011</anniversaryYear>
+    <adAddress>95 Elm Drive, Bakersfield CA 9861</adAddress>
+    <adPhone>+1 (747) 430-53-80</adPhone>
+    <notes>It s already mutated into human form! Shoot it!</notes>
+  </contact>
+</list>

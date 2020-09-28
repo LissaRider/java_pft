@@ -1,37 +1,71 @@
 package ru.stqa.pft.addressbook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
 public class ContactData {
 
+  @XStreamOmitField
+  @JsonIgnore
   private int id = Integer.MAX_VALUE;
+  @Expose
   private String firstName;
+  @Expose
   private String lastName;
+  @Expose
   private String middleName;
+  @Expose
   private String nickname;
   private File photo;
+  @Expose
   private String jobTitle;
+  @Expose
   private String companyName;
+  @Expose
   private String mainAddress;
+  @Expose
   private String homePhone;
+  @Expose
   private String mobilePhone;
+  @Expose
   private String workPhone;
+  @Expose
   private String faxNumber;
+  @Expose
   private String email;
+  @Expose
   private String email2;
+  @Expose
   private String email3;
+  @Expose
   private String webSite;
+  @Expose
   private Integer birthDay;
+  @Expose
   private String birthMonth;
+  @Expose
   private String birthYear;
+  @Expose
   private String anniversaryDay;
+  @Expose
   private String anniversaryMonth;
+  @Expose
   private String anniversaryYear;
+  @Expose
   private String adAddress;
+  @Expose
   private String adPhone;
+  @Expose
   private String notes;
+  @JsonIgnore
   private String allPhones;
+  @JsonIgnore
   private String allEmails;
 
   public String getAllEmails() {

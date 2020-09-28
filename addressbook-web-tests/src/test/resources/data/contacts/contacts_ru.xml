@@ -1,0 +1,137 @@
+<list>
+  <contact>
+    <firstName>Василий</firstName>
+    <lastName>Денисов</lastName>
+    <middleName>Денисович</middleName>
+    <nickname>Vasiliy_Denisov</nickname>
+    <photo>src\test\resources\photos\male\male_sign.bmp</photo>
+    <jobTitle>Начальник отделения института</jobTitle>
+    <companyName>ОАО СбытТоргБанк</companyName>
+    <mainAddress>800090, г. Москва, ул. Сосновая, д. 16, корп. 6, кв. 27</mainAddress>
+    <homePhone>+7(962) 410 19 13</homePhone>
+    <mobilePhone>8-956-604-55-93</mobilePhone>
+    <workPhone>7.934.585.73.67 #7132</workPhone>
+    <faxNumber>79639025414</faxNumber>
+    <email>vasiliydenisov@gmail.com</email>
+    <email2>vasiliy.denisov@yandex.ru</email2>
+    <email3>vasiliy_denisov@mail.ru</email3>
+    <webSite>https://www.facebook.com/vasiliy.denisov</webSite>
+    <birthDay>19</birthDay>
+    <birthMonth>June</birthMonth>
+    <birthYear>1984</birthYear>
+    <anniversaryDay>18</anniversaryDay>
+    <anniversaryMonth>June</anniversaryMonth>
+    <anniversaryYear>1999</anniversaryYear>
+    <adAddress>360418, г. Москва, ул. Березовая, д. 83, корп. 7, кв. 743</adAddress>
+    <adPhone>8 (952) 083-30-83</adPhone>
+    <notes>Муля, не нервируй меня!</notes>
+  </contact>
+  <contact>
+    <firstName>Антонида</firstName>
+    <lastName>Лыткина</lastName>
+    <middleName>Анатольевна</middleName>
+    <nickname>Antonida_Lytkina</nickname>
+    <photo>src\test\resources\photos\female\female_sign.png</photo>
+    <jobTitle>Начальник отдела кадров</jobTitle>
+    <companyName>ЗАО ТоргТрейдСтрой</companyName>
+    <mainAddress>723564, г. Москва, ул. Шоссейная, д. 67, корп. 5, кв. 210</mainAddress>
+    <homePhone>+7(988) 806 64 89</homePhone>
+    <mobilePhone>8-939-563-45-42</mobilePhone>
+    <workPhone>7.935.263.82.25 #1854</workPhone>
+    <faxNumber>79229171112</faxNumber>
+    <email>antonidalytkina@gmail.com</email>
+    <email2>antonida.lytkina@yandex.ru</email2>
+    <email3>antonida_lytkina@mail.ru</email3>
+    <webSite>https://www.facebook.com/antonida.lytkina</webSite>
+    <birthDay>23</birthDay>
+    <birthMonth>November</birthMonth>
+    <birthYear>1983</birthYear>
+    <anniversaryDay>22</anniversaryDay>
+    <anniversaryMonth>November</anniversaryMonth>
+    <anniversaryYear>1998</anniversaryYear>
+    <adAddress>758791, г. Москва, ул. Весенняя, д. 22, корп. 9, кв. 793</adAddress>
+    <adPhone>8 (931) 462-80-37</adPhone>
+    <notes>За алкоголь! Причину и решение всех проблем</notes>
+  </contact>
+  <contact>
+    <firstName>Никита</firstName>
+    <lastName>Поляков</lastName>
+    <middleName>Егорович</middleName>
+    <nickname>Nikita_Polyakov</nickname>
+    <photo>src\test\resources\photos\male\male_sign.jpg</photo>
+    <jobTitle>Инженер по подготовке производства</jobTitle>
+    <companyName>ООО ПромСнабКлепаж</companyName>
+    <mainAddress>700397, г. Москва, ул. Заводская, д. 46, корп. 9, кв. 682</mainAddress>
+    <homePhone>+7(980) 868 11 54</homePhone>
+    <mobilePhone>8-954-139-58-17</mobilePhone>
+    <workPhone>7.928.348.64.48 #5565</workPhone>
+    <faxNumber>79723936646</faxNumber>
+    <email>nikitapolyakov@gmail.com</email>
+    <email2>nikita.polyakov@yandex.ru</email2>
+    <email3>nikita_polyakov@mail.ru</email3>
+    <webSite>https://www.facebook.com/nikita.polyakov</webSite>
+    <birthDay>5</birthDay>
+    <birthMonth>January</birthMonth>
+    <birthYear>1983</birthYear>
+    <anniversaryDay>4</anniversaryDay>
+    <anniversaryMonth>January</anniversaryMonth>
+    <anniversaryYear>1998</anniversaryYear>
+    <adAddress>469729, г. Москва, ул. Подгорная, д. 52, корп. 2, кв. 726</adAddress>
+    <adPhone>8 (956) 094-60-24</adPhone>
+    <notes>Вот так всегда: ходишь, ходишь в школу, а потом — бац! — и вторая смена</notes>
+  </contact>
+  <contact>
+    <firstName>Людмила</firstName>
+    <lastName>Прохорова</lastName>
+    <middleName>Романовна</middleName>
+    <nickname>Lyudmila_Prokhorova</nickname>
+    <photo>src\test\resources\photos\female\female_icon.png</photo>
+    <jobTitle>Художник</jobTitle>
+    <companyName>ЗАО ПромБанкТорг</companyName>
+    <mainAddress>938283, г. Москва, ул. Почтовая, д. 8, корп. 6, кв. 233</mainAddress>
+    <homePhone>+7(970) 987 21 50</homePhone>
+    <mobilePhone>8-968-964-46-39</mobilePhone>
+    <workPhone>7.963.914.86.55 #9234</workPhone>
+    <faxNumber>79710912806</faxNumber>
+    <email>lyudmilaprokhorova@gmail.com</email>
+    <email2>lyudmila.prokhorova@yandex.ru</email2>
+    <email3>lyudmila_prokhorova@mail.ru</email3>
+    <webSite>https://www.facebook.com/lyudmila.prokhorova</webSite>
+    <birthDay>25</birthDay>
+    <birthMonth>August</birthMonth>
+    <birthYear>1999</birthYear>
+    <anniversaryDay>24</anniversaryDay>
+    <anniversaryMonth>August</anniversaryMonth>
+    <anniversaryYear>2014</anniversaryYear>
+    <adAddress>331643, г. Москва, ул. Свободы, д. 1, корп. 6, кв. 186</adAddress>
+    <adPhone>8 (936) 941-64-05</adPhone>
+    <notes>Элементарно, Ватсон</notes>
+  </contact>
+  <contact>
+    <firstName>Юрий</firstName>
+    <lastName>Елисеев</lastName>
+    <middleName>Германович</middleName>
+    <nickname>Yuriy_Yeliseyev</nickname>
+    <photo>src\test\resources\photos\male\male_sign.bmp</photo>
+    <jobTitle>Заведующий жилым корпусом гостиницы</jobTitle>
+    <companyName>ООО СбытТрейдСтрой</companyName>
+    <mainAddress>584074, г. Москва, ул. Молодежная, д. 17, корп. 7, кв. 261</mainAddress>
+    <homePhone>+7(932) 553 81 09</homePhone>
+    <mobilePhone>8-908-053-24-70</mobilePhone>
+    <workPhone>7.952.276.22.98 #2257</workPhone>
+    <faxNumber>79570347221</faxNumber>
+    <email>yuriyyeliseyev@gmail.com</email>
+    <email2>yuriy.yeliseyev@yandex.ru</email2>
+    <email3>yuriy_yeliseyev@mail.ru</email3>
+    <webSite>https://www.facebook.com/yuriy.yeliseyev</webSite>
+    <birthDay>15</birthDay>
+    <birthMonth>July</birthMonth>
+    <birthYear>1989</birthYear>
+    <anniversaryDay>14</anniversaryDay>
+    <anniversaryMonth>July</anniversaryMonth>
+    <anniversaryYear>2004</anniversaryYear>
+    <adAddress>075840, г. Москва, ул. Клубная, д. 77, корп. 1, кв. 465</adAddress>
+    <adPhone>8 (980) 884-63-61</adPhone>
+    <notes>Я требую продолжения банкета!</notes>
+  </contact>
+</list>
