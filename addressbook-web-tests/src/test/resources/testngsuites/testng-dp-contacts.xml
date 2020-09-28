@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Contacts Data Provider Tests Suite" verbose="4">
+    <test name="ContactsDP">
+        <classes>
+            <class name="ru.stqa.pft.addressbook.tests.contacts.dataproviders.ContactFakerDataTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.contacts.dataproviders.ContactCSVDataTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.contacts.dataproviders.ContactXMLDataTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.contacts.dataproviders.ContactJSONDataTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.contacts.dataproviders.ContactYAMLDataTests"/>
+        </classes>
+    </test>
+</suite>
