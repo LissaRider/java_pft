@@ -5,16 +5,14 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
+import java.io.IOException;
+
 public class TestBase {
 
-  private static String browser = BrowserType.FIREFOX;
-//  private String browser = BrowserType.CHROME;
-//  private String browser = BrowserType.IE;
-
-  protected static final ApplicationManager app = new ApplicationManager(browser);
+  protected static final ApplicationManager app = new ApplicationManager();
 
   @BeforeSuite(alwaysRun = true)
-  public void setUp() {
+  public void setUp() throws IOException {
     app.init();
   }
 

@@ -140,9 +140,9 @@ public class HelperBase {
   //</editor-fold>
 
   //<editor-fold desc="Extensions">
-  public void waitForPageLoad(int timeOutInSeconds) {//
+  public void waitForPageLoad() {//
     try {
-      WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+      WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(app.properties.getProperty("wait.customPageLoad")));
       //Checks every 500 ms whether predicate returns true
       //if returns exit otherwise keep trying till it returns true
       wait.until(driver -> {

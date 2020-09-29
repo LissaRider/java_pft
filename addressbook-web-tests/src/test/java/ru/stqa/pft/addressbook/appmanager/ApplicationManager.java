@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -8,9 +9,15 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.BrowserType;
 import ru.stqa.pft.addressbook.models.LoginData;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+
+  public final Properties properties;
 
   WebDriver driver;
 
@@ -18,29 +25,39 @@ public class ApplicationManager {
   private ContactHelper contactHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
-  private String browser;
 
-  public ApplicationManager(String browser) {
-    this.browser = browser;
+  public ApplicationManager() {
+    properties = new Properties();
   }
 
-  public void init() {
-    if (browser.equals(BrowserType.FIREFOX)) {
-//      https://github.com/mozilla/geckodriver/releases
-      driver = new FirefoxDriver();
-    } else if (browser.equals(BrowserType.CHROME)) {
-      driver = new ChromeDriver();
-//      https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_win32.zip
-    } else if (browser.equals(BrowserType.IE)) {
-//      https://selenium-release.storage.googleapis.com/3.150/IEDriverServer_Win32_3.150.1.zip
-      InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-      ieOptions.disableNativeEvents();
-      driver = new InternetExplorerDriver(ieOptions);
+  public void init() throws IOException {
+    loadProperties("target", "local");
+    loadProperties("timeout", "timeout");
+    String browser = properties.getProperty("web.browser");
+    if (browser != null && !browser.isEmpty()) {
+      switch (browser) {
+        case BrowserType.FIREFOX:
+          driver = new FirefoxDriver(); // https://github.com/mozilla/geckodriver/releases
+          break;
+        case BrowserType.CHROME:
+          driver = new ChromeDriver(); // https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_win32.zip
+          break;
+        case BrowserType.IE:
+          InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+          ieOptions.disableNativeEvents();
+          driver = new InternetExplorerDriver(ieOptions); // https://selenium-release.storage.googleapis.com/3.150/IEDriverServer_Win32_3.150.1.zip
+          break;
+        default:
+          throw new IOException("Unrecognized browser: " + browser);
+      }
+    } else {
+      throw new WebDriverException("Property 'web.browser' is null or not set (" + configFile("target", "local") + ")");
     }
 
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(
+            Long.parseLong(properties.getProperty("wait.implicitly")), TimeUnit.SECONDS);
 
-    String baseUrl = "http://localhost/addressbook";
+    String baseUrl = properties.getProperty("web.baseUrl");
     driver.get(baseUrl);
 
     groupHelper = new GroupHelper(this);
@@ -48,7 +65,18 @@ public class ApplicationManager {
     contactHelper = new ContactHelper(this);
     loginHelper = new LoginHelper(this);
 
-    loginHelper.login(new LoginData("admin", "secret"));
+    loginHelper.login(new LoginData(
+            properties.getProperty("web.adminLogin"),
+            properties.getProperty("web.adminPassword")));
+  }
+
+  public void loadProperties(String key, String def) throws IOException {
+    properties.load(new FileReader(new File(configFile(key, def))));
+  }
+
+  public String configFile(String key, String def) {
+    return String.format("src/test/resources/config/%s.properties",
+            System.getProperty(key, def));
   }
 
   public void stop() {

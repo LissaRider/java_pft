@@ -101,6 +101,7 @@ public class ContactHelper extends HelperBase {
 
   public void submitCreation() {
     click(createContactBtnLoc);
+    waitForPageLoad(); // IE
   }
 
   public void initDeletionFromHomePage() {
@@ -109,6 +110,7 @@ public class ContactHelper extends HelperBase {
 
   public void submitDeletionFromEditPage() {
     click(deleteContactBtnEditPageLoc);
+    waitForPageLoad(); // IE
   }
 
   public void initModification(int id) {
@@ -121,6 +123,7 @@ public class ContactHelper extends HelperBase {
 
   public void submitModification() {
     click(updateContactBtnLoc);
+    waitForPageLoad(); // IE
   }
 
   public void view(int id) {
@@ -137,6 +140,7 @@ public class ContactHelper extends HelperBase {
 
   public void returnToHomePage() {
     click(returnToHomePageLinkLoc);
+    waitForPageLoad(); // IE
   }
 
   public int count() {

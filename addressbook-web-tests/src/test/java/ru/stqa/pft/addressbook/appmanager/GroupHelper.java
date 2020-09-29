@@ -46,6 +46,7 @@ public class GroupHelper extends HelperBase {
 
   public void submitCreation() {
     click(createGroupBtnLoc);
+    waitForPageLoad(); // IE
   }
 
   public void selectById(int id) {
@@ -54,10 +55,12 @@ public class GroupHelper extends HelperBase {
 
   public void submitDeletion() {
     click(deleteGroupBtnLoc);
+    waitForPageLoad(); // IE
   }
 
   public void returnToGroupsPage() {
     click(returnToGroupsPageLinkLoc);
+    waitForPageLoad(); // IE
   }
 
   public void initModification() {
@@ -66,6 +69,7 @@ public class GroupHelper extends HelperBase {
 
   public void submitModification() {
     click(updateGroupBtnLoc);
+    waitForPageLoad(); // IE
   }
 
   private void selectAll() {
