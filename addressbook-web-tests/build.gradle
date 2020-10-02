@@ -19,6 +19,7 @@ dependencies.implementation group: 'com.github.javafaker', name: 'javafaker', ve
 dependencies.implementation group: 'com.ibm.icu', name: 'icu4j', version: '67.1'
 dependencies.implementation group: 'commons-lang', name: 'commons-lang', version: '2.6'
 dependencies.implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+dependencies.implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 
 /**
  * Test Framework
