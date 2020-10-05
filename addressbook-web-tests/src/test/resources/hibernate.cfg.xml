@@ -25,9 +25,8 @@
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
-        <!-- Disable the second-level cache -->
+        <!-- Disable the second-level cache  -->
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
-        <!-- <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property> -->
 
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
@@ -37,6 +36,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="ru.stqa.pft.addressbook.models.GroupData"/>
+        <mapping class="ru.stqa.pft.addressbook.models.ContactData"/>
 
     </session-factory>
 

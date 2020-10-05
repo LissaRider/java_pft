@@ -4,68 +4,145 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
 
   @XStreamOmitField
   @JsonIgnore
+  @Id
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
   private String firstName;
+
   @Expose
+  @Column(name = "lastname")
   private String lastName;
+
   @Expose
+  @Column(name = "middlename")
   private String middleName;
+
   @Expose
+  @Column(name = "nickname")
   private String nickname;
-  private File photo;
+
   @Expose
+  @Column(name = "title")
   private String jobTitle;
+
   @Expose
+  @Column(name = "company")
   private String companyName;
+
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String mainAddress;
+
   @Expose
+  @Column(name = "home")
+  @Type(type = "text")
   private String homePhone;
+
   @Expose
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobilePhone;
+
   @Expose
+  @Column(name = "work")
+  @Type(type = "text")
   private String workPhone;
+
   @Expose
+  @Column(name = "fax")
+  @Type(type = "text")
   private String faxNumber;
+
   @Expose
+  @Column(name = "email")
+  @Type(type = "text")
   private String email;
+
   @Expose
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
+
   @Expose
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
+
   @Expose
+  @Column(name = "homepage")
+  @Type(type = "text")
   private String webSite;
+
   @Expose
+  @Transient
   private Integer birthDay;
+
   @Expose
+  @Transient
   private String birthMonth;
+
   @Expose
+  @Transient
   private String birthYear;
+
   @Expose
+  @Transient
   private String anniversaryDay;
+
   @Expose
+  @Transient
   private String anniversaryMonth;
+
   @Expose
+  @Transient
   private String anniversaryYear;
+
   @Expose
+  @Column(name = "address2")
+  @Type(type = "text")
   private String adAddress;
+
   @Expose
+  @Column(name = "phone2")
+  @Type(type = "text")
   private String adPhone;
+
   @Expose
+  @Column(name = "notes")
+  @Type(type = "text")
   private String notes;
+
+  @Transient
   @JsonIgnore
+  private String group;
+
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
+
+  @JsonIgnore
+  @Transient
   private String allPhones;
+
   @JsonIgnore
+  @Transient
   private String allEmails;
 
   public String getAllEmails() {
@@ -107,7 +184,10 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    return photo;
+    if (photo != null) {
+      return new File(photo);
+    }
+    return null;
   }
 
   public String getJobTitle() {
@@ -190,6 +270,14 @@ public class ContactData {
     return notes;
   }
 
+  public String getGroup() {
+    return group;
+  }
+
+  public void setGroup(String group) {
+    this.group = group;
+  }
+
   public ContactData withId(int id) {
     this.id = id;
     return this;
@@ -216,7 +304,7 @@ public class ContactData {
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
