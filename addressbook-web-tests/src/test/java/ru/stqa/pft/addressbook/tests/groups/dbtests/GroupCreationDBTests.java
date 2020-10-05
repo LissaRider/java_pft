@@ -10,8 +10,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationDBTests extends TestBase {
 
-  @Test(testName = "Проверка создания группы")
-  public void testGroupCreation() {
+  @Test(testName = "Проверка создания группы (БД)")
+  public void dBTestGroupCreation() {
     app.goTo().groupsPage();
     Groups before = app.db().groups();
     GroupData group = new GroupData()
@@ -27,10 +27,11 @@ public class GroupCreationDBTests extends TestBase {
             .mapToInt(GroupData::getId)
             .max()
             .orElseThrow())))); /*java 11: getAsInt() to orElseThrow()*/
+    verifyGroupListInUI();
   }
 
-  @Test(testName = "Проверка создания некорректной группы")
-  public void testBadGroupCreation() {
+  @Test(testName = "Проверка создания некорректной группы (БД)")
+  public void dBTestBadGroupCreation() {
     app.goTo().groupsPage();
     Groups before = app.db().groups();
     GroupData group = new GroupData()
@@ -39,5 +40,6 @@ public class GroupCreationDBTests extends TestBase {
     assertThat(app.db().groups().size(), equalTo(before.size()));
     Groups after = app.db().groups();
     assertThat(after, equalTo(before));
+    verifyGroupListInUI();
   }
 }

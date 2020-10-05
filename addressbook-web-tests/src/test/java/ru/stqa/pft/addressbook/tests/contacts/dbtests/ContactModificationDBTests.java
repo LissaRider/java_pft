@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactModificationDBTests extends TestBase {
 
   @BeforeMethod
-  public void ensurePreconditions() {
+  public void ensureDBPreconditions() {
     app.goTo().homePage();
     ContactData newContact = new ContactData()
             .withFirstName("James")
@@ -22,8 +22,8 @@ public class ContactModificationDBTests extends TestBase {
     if (app.db().contacts().size() == 0) app.contact().create(newContact);
   }
 
-  @Test(testName = "Проверка редактирования контакта со страницы редактирования")
-  public void testContactModificationFromEditContactPage() {
+  @Test(testName = "Проверка редактирования контакта со страницы редактирования (БД)")
+  public void dBTestContactModificationFromEditContactPage() {
     Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     app.contact().initModification(modifiedContact.getId());
@@ -58,10 +58,11 @@ public class ContactModificationDBTests extends TestBase {
     assertThat(app.db().contacts().size(), equalTo(before.size()));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+    verifyContactListInUI();
   }
 
-  @Test(testName = "Проверка редактирования последнего контакта со страницы просмотра")
-  public void testContactModificationFromViewContactPage() {
+  @Test(testName = "Проверка редактирования последнего контакта со страницы просмотра (БД)")
+  public void dBTestContactModificationFromViewContactPage() {
     Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     app.contact().view(modifiedContact.getId());
@@ -97,5 +98,6 @@ public class ContactModificationDBTests extends TestBase {
     assertThat(app.db().contacts().size(), equalTo(before.size()));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+    verifyContactListInUI();
   }
 }

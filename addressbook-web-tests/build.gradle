@@ -78,6 +78,36 @@ task testDPContacts(type: Test) {
     }
 }
 
+task testDBGroups(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngsuites/testng-db-groups.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+
+task testDBContacts(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngsuites/testng-db-contacts.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+
 /**
  * 1st approach: Setting encoding during compilation in Java and Test classes
  */

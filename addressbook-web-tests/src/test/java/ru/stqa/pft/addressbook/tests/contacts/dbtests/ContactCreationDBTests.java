@@ -12,8 +12,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationDBTests extends TestBase {
 
-  @Test(testName = "Проверка создания контакта")
-  public void testContactCreation() {
+  @Test(testName = "Проверка создания контакта (БД)")
+  public void dBTestContactCreation() {
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     ContactData contact = new ContactData()
@@ -50,10 +50,11 @@ public class ContactCreationDBTests extends TestBase {
             .mapToInt(ContactData::getId)
             .max()
             .orElseThrow())))); /*java 11: getAsInt() to orElseThrow()*/
+    verifyContactListInUI();
   }
 
-  @Test(testName = "Проверка создания некорректного контакта")
-  public void testBadContactCreation() {
+  @Test(testName = "Проверка создания некорректного контакта (БД)")
+  public void dBTestBadContactCreation() {
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     ContactData contact = new ContactData()
@@ -63,5 +64,6 @@ public class ContactCreationDBTests extends TestBase {
     assertThat(app.db().contacts().size(), equalTo(before.size()));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before));
+    verifyContactListInUI();
   }
 }

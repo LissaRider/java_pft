@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GroupModificationDBTests extends TestBase {
 
   @BeforeMethod
-  public void ensurePreconditions() {
+  public void ensureDBPreconditions() {
     app.goTo().groupsPage();
     GroupData newGroup = new GroupData()
             .withName("Relatives")
@@ -22,8 +22,8 @@ public class GroupModificationDBTests extends TestBase {
     if (app.db().groups().size() == 0) app.group().create(newGroup);
   }
 
-  @Test
-  public void testGroupModification() {
+  @Test(testName = "Проверка редактирования группы (БД)")
+  public void dbTestGroupModification() {
     Groups before = app.db().groups();
     GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
@@ -35,5 +35,6 @@ public class GroupModificationDBTests extends TestBase {
     assertThat(app.db().groups().size(), equalTo(before.size()));
     Groups after = app.db().groups();
     assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+    verifyGroupListInUI();
   }
 }
