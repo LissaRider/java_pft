@@ -25,6 +25,7 @@ public class ApplicationManager {
   private ContactHelper contactHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
+  private DbHelper dbHelper;
 
   public ApplicationManager() {
     properties = new Properties();
@@ -64,6 +65,7 @@ public class ApplicationManager {
     navigationHelper = new NavigationHelper(this);
     contactHelper = new ContactHelper(this);
     loginHelper = new LoginHelper(this);
+    dbHelper = new DbHelper();
 
     loginHelper.login(new LoginData(
             properties.getProperty("web.adminLogin"),
@@ -81,6 +83,10 @@ public class ApplicationManager {
 
   public void stop() {
     driver.quit();
+  }
+
+  public DbHelper db() {
+    return dbHelper;
   }
 
   public GroupHelper group() {
