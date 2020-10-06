@@ -2,9 +2,12 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
+import ru.stqa.pft.addressbook.models.GroupData;
+import ru.stqa.pft.addressbook.models.Groups;
 
 import java.util.List;
 
@@ -66,37 +69,44 @@ public class ContactHelper extends HelperBase {
   private Contacts contactCache = null;
 
   //<editor-fold desc="Methods">
-  public void fillForm(ContactData contactData, boolean creation) {
-    clearAndType(firstNameLoc, contactData.getFirstName());
-    clearAndType(middleNameLoc, contactData.getMiddleName());
-    clearAndType(lastNameLoc, contactData.getLastName());
-    clearAndType(nicknameLoc, contactData.getNickname());
-    uploadFile(inputFileLoc,contactData.getPhoto());
-    clearAndType(jobTitleLoc, contactData.getJobTitle());
-    clearAndType(companyNameLoc, contactData.getCompanyName());
-    clearAndType(mainAddressLoc, contactData.getMainAddress());
-    clearAndType(homePhoneLoc, contactData.getHomePhone());
-    clearAndType(mobilePhoneLoc, contactData.getMobilePhone());
-    clearAndType(workPhoneLoc, contactData.getWorkPhone());
-    clearAndType(faxNumberLoc, contactData.getFaxNumber());
-    clearAndType(emailLoc, contactData.getEmail());
-    clearAndType(email2Loc, contactData.getEmail2());
-    clearAndType(email3Loc, contactData.getEmail3());
-    clearAndType(webSiteLoc, contactData.getWebSite());
-    selectByIndex(birthDayLoc, contactData.getBirthDay());
-    selectByText(birthMonthLoc, contactData.getBirthMonth());
-    clearAndType(birthYearLoc, contactData.getBirthYear());
-    selectByValue(anniversaryDayLoc, contactData.getAnniversaryDay());
-    selectByValue(anniversaryMonthLoc, contactData.getAnniversaryMonth());
-    clearAndType(anniversaryYearLoc, contactData.getAnniversaryYear());
-    if (creation) {
-      selectByValue(contactsGroupLoc, "[none]");
+  public void fillForm(ContactData contact, boolean creation) {
+    clearAndType(firstNameLoc, contact.getFirstName());
+    clearAndType(middleNameLoc, contact.getMiddleName());
+    clearAndType(lastNameLoc, contact.getLastName());
+    clearAndType(nicknameLoc, contact.getNickname());
+    uploadFile(inputFileLoc,contact.getPhoto());
+    clearAndType(jobTitleLoc, contact.getJobTitle());
+    clearAndType(companyNameLoc, contact.getCompanyName());
+    clearAndType(mainAddressLoc, contact.getMainAddress());
+    clearAndType(homePhoneLoc, contact.getHomePhone());
+    clearAndType(mobilePhoneLoc, contact.getMobilePhone());
+    clearAndType(workPhoneLoc, contact.getWorkPhone());
+    clearAndType(faxNumberLoc, contact.getFaxNumber());
+    clearAndType(emailLoc, contact.getEmail());
+    clearAndType(email2Loc, contact.getEmail2());
+    clearAndType(email3Loc, contact.getEmail3());
+    clearAndType(webSiteLoc, contact.getWebSite());
+    selectByIndex(birthDayLoc, contact.getBirthDay());
+    selectByText(birthMonthLoc, contact.getBirthMonth());
+    clearAndType(birthYearLoc, contact.getBirthYear());
+    selectByValue(anniversaryDayLoc, contact.getAnniversaryDay());
+    selectByValue(anniversaryMonthLoc, contact.getAnniversaryMonth());
+    clearAndType(anniversaryYearLoc, contact.getAnniversaryYear());
+    Groups groups = contact.getGroups();
+    if (creation && groups.size() > 0) {
+      Assert.assertTrue(groups.size() == 1);
+      getGroup(contact);
     } else {
       Assert.assertFalse(isAnyElementPresent(contactsGroupLoc));
     }
-    clearAndType(adAddressLoc, contactData.getAdAddress());
-    clearAndType(adPhoneLoc, contactData.getAdPhone());
-    clearAndType(notesLoc, contactData.getNotes());
+    clearAndType(adAddressLoc, contact.getAdAddress());
+    clearAndType(adPhoneLoc, contact.getAdPhone());
+    clearAndType(notesLoc, contact.getNotes());
+  }
+
+  public void getGroup(ContactData contact) {
+    var group = contact.getGroups().iterator().next();
+    selectByText(contactsGroupLoc, group.getName());
   }
 
   public void submitCreation() {

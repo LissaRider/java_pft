@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests.contacts.dbtests;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
+import ru.stqa.pft.addressbook.models.Groups;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
 import java.io.File;
@@ -16,6 +17,7 @@ public class ContactCreationDBTests extends TestBase {
   public void dBTestContactCreation() {
     app.goTo().homePage();
     Contacts before = app.db().contacts();
+    Groups groups = app.db().groups();
     ContactData contact = new ContactData()
             .withFirstName("Alice")
             .withMiddleName("Batkovna")
@@ -41,7 +43,8 @@ public class ContactCreationDBTests extends TestBase {
             .withAnniversaryYear("2026")
             .withAdAddress("Moscow, Biryulyovo Zapadnoye District")
             .withAdPhone("8(909) 999-99-99")
-            .withNotes("\"Who in the world am I?\" Ah, that is the great puzzle!");
+            .withNotes("\"Who in the world am I?\" Ah, that is the great puzzle!")
+            .inGroup(groups.iterator().next());
     app.contact().create(contact);
     assertThat(app.db().contacts().size(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();

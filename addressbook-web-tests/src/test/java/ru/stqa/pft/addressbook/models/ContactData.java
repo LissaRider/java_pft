@@ -4,17 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
 @Table(name = "addressbook")
 public class ContactData {
 
+  //<editor-fold desc="Parameters">
   @XStreamOmitField
   @JsonIgnore
   @Id
@@ -37,13 +41,17 @@ public class ContactData {
   @Column(name = "nickname")
   private String nickname;
 
-  @Expose
-  @Column(name = "title")
-  private String jobTitle;
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
 
   @Expose
   @Column(name = "company")
   private String companyName;
+
+  @Expose
+  @Column(name = "title")
+  private String jobTitle;
 
   @Expose
   @Column(name = "address")
@@ -129,13 +137,11 @@ public class ContactData {
   @Type(type = "text")
   private String notes;
 
-  @Transient
   @JsonIgnore
-  private String group;
-
-  @Column(name = "photo")
-  @Type(type = "text")
-  private String photo;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<>();
 
   @JsonIgnore
   @Transient
@@ -144,25 +150,9 @@ public class ContactData {
   @JsonIgnore
   @Transient
   private String allEmails;
+  //</editor-fold>
 
-  public String getAllEmails() {
-    return allEmails;
-  }
-
-  public ContactData withAllEmails(String allEmails) {
-    this.allEmails = allEmails;
-    return this;
-  }
-
-  public String getAllPhones() {
-    return allPhones;
-  }
-
-  public ContactData withAllPhones(String allPhones) {
-    this.allPhones = allPhones;
-    return this;
-  }
-
+  //<editor-fold desc="Getters">
   public int getId() {
     return id;
   }
@@ -270,14 +260,20 @@ public class ContactData {
     return notes;
   }
 
-  public String getGroup() {
-    return group;
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
-  public void setGroup(String group) {
-    this.group = group;
+  public String getAllPhones() {
+    return allPhones;
   }
 
+  public String getAllEmails() {
+    return allEmails;
+  }
+  //</editor-fold>
+
+  //<editor-fold desc="Setters">
   public ContactData withId(int id) {
     this.id = id;
     return this;
@@ -407,6 +403,22 @@ public class ContactData {
     this.notes = notes;
     return this;
   }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
+  //</editor-fold>
 
   @Override
   public String toString() {
