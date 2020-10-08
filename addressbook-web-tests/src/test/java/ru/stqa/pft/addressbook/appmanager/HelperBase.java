@@ -104,6 +104,10 @@ public class HelperBase {
     }
   }
 
+  public void refreshPage() {
+    driver.navigate().refresh();
+  }
+
   public boolean isAnyElementPresent(By by) {
     try {
       driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);

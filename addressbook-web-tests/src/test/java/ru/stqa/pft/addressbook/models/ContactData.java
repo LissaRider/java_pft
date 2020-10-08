@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -27,121 +26,143 @@ public class ContactData {
 
   @Expose
   @Column(name = "firstname")
-  private String firstName;
+  private String firstName = "";
 
   @Expose
   @Column(name = "lastname")
-  private String lastName;
+  private String lastName = "";
 
   @Expose
   @Column(name = "middlename")
-  private String middleName;
+  private String middleName = "";
 
   @Expose
   @Column(name = "nickname")
-  private String nickname;
+  private String nickname = "";
 
   @Column(name = "photo")
   @Type(type = "text")
-  private String photo;
+  private String photo = "";
 
   @Expose
   @Column(name = "company")
-  private String companyName;
+  private String companyName = "";
 
   @Expose
   @Column(name = "title")
-  private String jobTitle;
+  private String jobTitle = "";
 
   @Expose
   @Column(name = "address")
   @Type(type = "text")
-  private String mainAddress;
+  private String mainAddress = "";
 
   @Expose
   @Column(name = "home")
   @Type(type = "text")
-  private String homePhone;
+  private String homePhone = "";
 
   @Expose
   @Column(name = "mobile")
   @Type(type = "text")
-  private String mobilePhone;
+  private String mobilePhone = "";
 
   @Expose
   @Column(name = "work")
   @Type(type = "text")
-  private String workPhone;
+  private String workPhone = "";
 
   @Expose
   @Column(name = "fax")
   @Type(type = "text")
-  private String faxNumber;
+  private String faxNumber = "";
 
   @Expose
   @Column(name = "email")
   @Type(type = "text")
-  private String email;
+  private String email = "";
 
   @Expose
   @Column(name = "email2")
   @Type(type = "text")
-  private String email2;
+  private String email2 = "";
 
   @Expose
   @Column(name = "email3")
   @Type(type = "text")
-  private String email3;
+  private String email3 = "";
 
   @Expose
   @Column(name = "homepage")
   @Type(type = "text")
-  private String webSite;
+  private String webSite = "";
 
   @Expose
-  @Transient
-  private Integer birthDay;
+  @Column(name = "bday", columnDefinition = "tinyint")
+  private Integer birthDay = 0;
 
   @Expose
-  @Transient
-  private String birthMonth;
+  @Column(name = "bmonth", columnDefinition = "varchar")
+  private String birthMonth = "-";
 
   @Expose
-  @Transient
-  private String birthYear;
+  @Column(name = "byear", columnDefinition = "varchar")
+  @Type(type = "text")
+  private String birthYear = "";
 
   @Expose
-  @Transient
-  private String anniversaryDay;
+  @Column(name = "aday", columnDefinition = "tinyint")
+  private String anniversaryDay = "0";
 
   @Expose
-  @Transient
-  private String anniversaryMonth;
+  @Column(name = "amonth", columnDefinition = "varchar")
+  private String anniversaryMonth = "-";
 
   @Expose
-  @Transient
-  private String anniversaryYear;
+  @Column(name = "ayear", columnDefinition = "varchar")
+  @Type(type = "text")
+  private String anniversaryYear = "";
 
   @Expose
   @Column(name = "address2")
   @Type(type = "text")
-  private String adAddress;
+  private String adAddress = "";
 
   @Expose
   @Column(name = "phone2")
   @Type(type = "text")
-  private String adPhone;
+  private String adPhone = "";
 
   @Expose
   @Column(name = "notes")
   @Type(type = "text")
-  private String notes;
+  private String notes = "";
 
   @JsonIgnore
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups",
-          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
-  private Set<GroupData> groups = new HashSet<>();
+          joinColumns = @JoinColumn(name = "id"),
+          inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private final Set<GroupData> groups = new HashSet<>();
+
+  @JsonIgnore
+  @Column(name = "im")
+  @Type(type = "text")
+  private final String im = "";
+
+  @JsonIgnore
+  @Column(name = "im2")
+  @Type(type = "text")
+  private final String im2 = "";
+
+  @JsonIgnore
+  @Column(name = "im3")
+  @Type(type = "text")
+  private final String im3 = "";
+
+  @JsonIgnore
+  @Column(name = "deprecated", columnDefinition = "datetime")
+  private final String deprecated = "0000-00-00 00:00:00";
 
   @JsonIgnore
   @Transient
@@ -174,10 +195,7 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    if (photo != null) {
-      return new File(photo);
-    }
-    return null;
+    return photo != null ? new File(photo) : null;
   }
 
   public String getJobTitle() {
@@ -416,6 +434,11 @@ public class ContactData {
 
   public ContactData inGroup(GroupData group) {
     groups.add(group);
+    return this;
+  }
+
+  public ContactData outOfGroup(GroupData group) {
+    groups.remove(group);
     return this;
   }
   //</editor-fold>

@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
@@ -10,6 +9,8 @@ import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.models.Groups;
 
 import java.util.List;
+
+import static org.testng.Assert.*;
 
 public class ContactHelper extends HelperBase {
 
@@ -37,12 +38,13 @@ public class ContactHelper extends HelperBase {
   public By anniversaryDayLoc = By.name("aday");
   public By anniversaryMonthLoc = By.name("amonth");
   public By anniversaryYearLoc = By.name("ayear");
-  public By contactsGroupLoc = By.name("new_group");
+  public By contactGroupLoc = By.name("new_group");
   public By adAddressLoc = By.name("address2");
   public By adPhoneLoc = By.name("phone2");
   public By notesLoc = By.name("notes");
   public By createContactBtnLoc = By.name("submit");
   public By returnToHomePageLinkLoc = By.cssSelector("#content a[href='index.php']");
+  public By returnToGroupPageLinkLoc = By.cssSelector("#content a[href^='./?group=']");
   public By deleteContactBtnHomePageLoc = By.cssSelector("input[onclick='DeleteSel()']");
   public By updateContactBtnLoc = By.cssSelector("[name=update][value=Update]");
   public By selectAllCheckboxLoc = By.id("MassCB");
@@ -51,8 +53,12 @@ public class ContactHelper extends HelperBase {
   public By contactLoc = By.name("entry");
   public By contactInputLoc = By.tagName("input");
   public By cellLoc = By.tagName("td");
+  public By toGroupLoc = By.name("to_group");
+  public By addToGroupBtnLoc = By.name("add");
+  public By groupLoc = By.name("group");
+  public By removeFromGroupBtnLoc = By.name("remove");
   public By contactLoc(int id) {
-    return By.cssSelector("input[value='" + id + "']");
+    return By.cssSelector("input[id='" + id + "']");
   }
   public By editContactBtnLoc(int id) {
     return By.cssSelector("#maintable a[href='edit.php?id=" + id + "']");
@@ -60,13 +66,16 @@ public class ContactHelper extends HelperBase {
   public By viewContactBtnLoc(int id) {
     return By.cssSelector("#maintable a[href='view.php?id=" + id + "']");
   }
+  public By groupLoc(String group) {
+    return By.xpath(".//select[@name='to_group']/option[text()='" + group + "']");
+  }
   //</editor-fold>
+
+  private Contacts contactCache = null;
 
   public ContactHelper(ApplicationManager app) {
     super(app);
   }
-
-  private Contacts contactCache = null;
 
   //<editor-fold desc="Methods">
   public void fillForm(ContactData contact, boolean creation) {
@@ -74,7 +83,7 @@ public class ContactHelper extends HelperBase {
     clearAndType(middleNameLoc, contact.getMiddleName());
     clearAndType(lastNameLoc, contact.getLastName());
     clearAndType(nicknameLoc, contact.getNickname());
-    uploadFile(inputFileLoc,contact.getPhoto());
+    uploadFile(inputFileLoc, contact.getPhoto());
     clearAndType(jobTitleLoc, contact.getJobTitle());
     clearAndType(companyNameLoc, contact.getCompanyName());
     clearAndType(mainAddressLoc, contact.getMainAddress());
@@ -92,21 +101,18 @@ public class ContactHelper extends HelperBase {
     selectByValue(anniversaryDayLoc, contact.getAnniversaryDay());
     selectByValue(anniversaryMonthLoc, contact.getAnniversaryMonth());
     clearAndType(anniversaryYearLoc, contact.getAnniversaryYear());
-    Groups groups = contact.getGroups();
-    if (creation && groups.size() > 0) {
-      Assert.assertTrue(groups.size() == 1);
-      getGroup(contact);
+    if (creation) {
+      if (contact.getGroups().size() > 0) {
+        assertEquals(contact.getGroups().size(), 1);
+        GroupData group = contact.getGroups().iterator().next();
+        selectByText(contactGroupLoc, group.getName());
+      }
     } else {
-      Assert.assertFalse(isAnyElementPresent(contactsGroupLoc));
+      assertFalse(isAnyElementPresent(contactGroupLoc));
     }
     clearAndType(adAddressLoc, contact.getAdAddress());
     clearAndType(adPhoneLoc, contact.getAdPhone());
     clearAndType(notesLoc, contact.getNotes());
-  }
-
-  public void getGroup(ContactData contact) {
-    var group = contact.getGroups().iterator().next();
-    selectByText(contactsGroupLoc, group.getName());
   }
 
   public void submitCreation() {
@@ -180,6 +186,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void deleteFromList(ContactData contact) {
+    app.goTo().homePage();
     selectById(contact.getId());
     initDeletionFromHomePage();
     closeAlertAndGetItsText();
@@ -188,6 +195,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void deleteFromEditPage(ContactData contact) {
+    app.goTo().homePage();
     initModification(contact.getId());
     submitDeletionFromEditPage();
     contactCache = null;
@@ -195,6 +203,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void deleteAll() {
+    app.goTo().homePage();
     selectAll();
     initDeletionFromHomePage();
     closeAlertAndGetItsText();
@@ -202,7 +211,40 @@ public class ContactHelper extends HelperBase {
     verifyMessage("Record successful deleted");
   }
 
+  public void addToGroup(ContactData contact, GroupData group) {
+    app.goTo().homePage();
+    selectById(contact.getId());
+    selectByText(toGroupLoc, group.getName());
+    click(addToGroupBtnLoc);
+    contactCache = null;
+    verifyMessage("Users added.");
+    returnToGroupPage();
+    clearGroupsFilter();
+  }
+
+  public void removeFromGroup(ContactData contact, GroupData group) {
+    app.goTo().homePage();
+    selectByText(groupLoc, group.getName());
+    waitForPageLoad();  // IE
+    selectById(contact.getId());
+    click(removeFromGroupBtnLoc);
+    contactCache = null;
+    verifyMessage("Users removed.");
+    returnToGroupPage();
+    clearGroupsFilter();
+  }
+
+  public void clearGroupsFilter() {
+    selectByText(groupLoc, "[all]");
+  }
+
+  public void returnToGroupPage() {
+    click(returnToGroupPageLinkLoc);
+    waitForPageLoad(); // IE
+  }
+
   public ContactData infoFromEditForm(ContactData contact) {
+    app.goTo().homePage();
     initModification(contact.getId());
     String firstname = getElement(firstNameLoc).getAttribute("value");
     String lastname = getElement(lastNameLoc).getAttribute("value");
@@ -233,6 +275,7 @@ public class ContactHelper extends HelperBase {
     if (contactCache != null)
       return new Contacts(contactCache);
     contactCache = new Contacts();
+    app.goTo().homePage();
     try {
       implicitlyWait(0);
       List<WebElement> elements = getElements(contactLoc);

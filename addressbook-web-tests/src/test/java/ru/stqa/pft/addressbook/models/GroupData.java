@@ -1,15 +1,15 @@
 package ru.stqa.pft.addressbook.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.javafaker.DateAndTime;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @XStreamAlias("group")
 @Entity
@@ -25,21 +25,25 @@ public class GroupData {
 
   @Expose
   @Column(name = "group_name")
-  private String name;
+  private String name = "";
 
   @Expose
   @Column(name = "group_header")
   @Type(type = "text")
-  private String header;
+  private String header = "";
 
   @Expose
   @Column(name = "group_footer")
   @Type(type = "text")
-  private String footer;
+  private String footer = "";
 
   @JsonIgnore
   @ManyToMany(mappedBy = "groups")
-  private Set<ContactData> contacts = new HashSet<>();
+  private final Set<ContactData> contacts = new HashSet<>();
+
+  @JsonIgnore
+  @Column(name = "deprecated", columnDefinition = "datetime")
+  private final String deprecated = "0000-00-00 00:00:00";
   //</editor-fold>
 
   //<editor-fold desc="Getters">
