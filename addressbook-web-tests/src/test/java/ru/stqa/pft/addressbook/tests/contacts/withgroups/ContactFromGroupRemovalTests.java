@@ -26,7 +26,7 @@ public class ContactFromGroupRemovalTests extends TestBase {
     // создаем новый контакт через базу (с проверкой)
     int contactId = new Faker().number().numberBetween(1, 10);
     // TODO создаем новый контакт через базу c привязкой к созданной группе в базе данных
-    //  var contact = new ContactData().withId(id).withFirstName("Bunny").withLastName("Bugs").inGroup(group);
+    //  var contact = new ContactData().withId(contactId).withFirstName("Bunny").withLastName("Bugs").inGroup(group);
     var contact = new ContactData().withId(contactId).withFirstName("Bunny").withLastName("Bugs");
     app.db().addContact(contact);
 

@@ -1,137 +1,142 @@
 <list>
   <contact>
-    <firstName>Василий</firstName>
-    <lastName>Денисов</lastName>
-    <middleName>Денисович</middleName>
-    <nickname>Vasiliy_Denisov</nickname>
-    <photo>src\test\resources\photos\male\male_sign.bmp</photo>
-    <jobTitle>Начальник отделения института</jobTitle>
-    <companyName>ОАО СбытТоргБанк</companyName>
-    <mainAddress>800090, г. Москва, ул. Сосновая, д. 16, корп. 6, кв. 27</mainAddress>
-    <homePhone>+7(962) 410 19 13</homePhone>
-    <mobilePhone>8-956-604-55-93</mobilePhone>
-    <workPhone>7.934.585.73.67 #7132</workPhone>
-    <faxNumber>79639025414</faxNumber>
-    <email>vasiliydenisov@gmail.com</email>
-    <email2>vasiliy.denisov@yandex.ru</email2>
-    <email3>vasiliy_denisov@mail.ru</email3>
-    <webSite>https://www.facebook.com/vasiliy.denisov</webSite>
-    <birthDay>19</birthDay>
-    <birthMonth>June</birthMonth>
-    <birthYear>1984</birthYear>
-    <anniversaryDay>18</anniversaryDay>
-    <anniversaryMonth>June</anniversaryMonth>
-    <anniversaryYear>1999</anniversaryYear>
-    <adAddress>360418, г. Москва, ул. Березовая, д. 83, корп. 7, кв. 743</adAddress>
-    <adPhone>8 (952) 083-30-83</adPhone>
-    <notes>Муля, не нервируй меня!</notes>
-  </contact>
-  <contact>
-    <firstName>Антонида</firstName>
-    <lastName>Лыткина</lastName>
+    <firstName>Мария</firstName>
+    <lastName>Куликова</lastName>
     <middleName>Анатольевна</middleName>
-    <nickname>Antonida_Lytkina</nickname>
-    <photo>src\test\resources\photos\female\female_sign.png</photo>
-    <jobTitle>Начальник отдела кадров</jobTitle>
-    <companyName>ЗАО ТоргТрейдСтрой</companyName>
-    <mainAddress>723564, г. Москва, ул. Шоссейная, д. 67, корп. 5, кв. 210</mainAddress>
-    <homePhone>+7(988) 806 64 89</homePhone>
-    <mobilePhone>8-939-563-45-42</mobilePhone>
-    <workPhone>7.935.263.82.25 #1854</workPhone>
-    <faxNumber>79229171112</faxNumber>
-    <email>antonidalytkina@gmail.com</email>
-    <email2>antonida.lytkina@yandex.ru</email2>
-    <email3>antonida_lytkina@mail.ru</email3>
-    <webSite>https://www.facebook.com/antonida.lytkina</webSite>
-    <birthDay>23</birthDay>
-    <birthMonth>November</birthMonth>
-    <birthYear>1983</birthYear>
-    <anniversaryDay>22</anniversaryDay>
-    <anniversaryMonth>November</anniversaryMonth>
-    <anniversaryYear>1998</anniversaryYear>
-    <adAddress>758791, г. Москва, ул. Весенняя, д. 22, корп. 9, кв. 793</adAddress>
-    <adPhone>8 (931) 462-80-37</adPhone>
-    <notes>За алкоголь! Причину и решение всех проблем</notes>
-  </contact>
-  <contact>
-    <firstName>Никита</firstName>
-    <lastName>Поляков</lastName>
-    <middleName>Егорович</middleName>
-    <nickname>Nikita_Polyakov</nickname>
-    <photo>src\test\resources\photos\male\male_sign.jpg</photo>
-    <jobTitle>Инженер по подготовке производства</jobTitle>
-    <companyName>ООО ПромСнабКлепаж</companyName>
-    <mainAddress>700397, г. Москва, ул. Заводская, д. 46, корп. 9, кв. 682</mainAddress>
-    <homePhone>+7(980) 868 11 54</homePhone>
-    <mobilePhone>8-954-139-58-17</mobilePhone>
-    <workPhone>7.928.348.64.48 #5565</workPhone>
-    <faxNumber>79723936646</faxNumber>
-    <email>nikitapolyakov@gmail.com</email>
-    <email2>nikita.polyakov@yandex.ru</email2>
-    <email3>nikita_polyakov@mail.ru</email3>
-    <webSite>https://www.facebook.com/nikita.polyakov</webSite>
-    <birthDay>5</birthDay>
-    <birthMonth>January</birthMonth>
-    <birthYear>1983</birthYear>
-    <anniversaryDay>4</anniversaryDay>
-    <anniversaryMonth>January</anniversaryMonth>
-    <anniversaryYear>1998</anniversaryYear>
-    <adAddress>469729, г. Москва, ул. Подгорная, д. 52, корп. 2, кв. 726</adAddress>
-    <adPhone>8 (956) 094-60-24</adPhone>
-    <notes>Вот так всегда: ходишь, ходишь в школу, а потом — бац! — и вторая смена</notes>
-  </contact>
-  <contact>
-    <firstName>Людмила</firstName>
-    <lastName>Прохорова</lastName>
-    <middleName>Романовна</middleName>
-    <nickname>Lyudmila_Prokhorova</nickname>
-    <photo>src\test\resources\photos\female\female_icon.png</photo>
-    <jobTitle>Художник</jobTitle>
-    <companyName>ЗАО ПромБанкТорг</companyName>
-    <mainAddress>938283, г. Москва, ул. Почтовая, д. 8, корп. 6, кв. 233</mainAddress>
-    <homePhone>+7(970) 987 21 50</homePhone>
-    <mobilePhone>8-968-964-46-39</mobilePhone>
-    <workPhone>7.963.914.86.55 #9234</workPhone>
-    <faxNumber>79710912806</faxNumber>
-    <email>lyudmilaprokhorova@gmail.com</email>
-    <email2>lyudmila.prokhorova@yandex.ru</email2>
-    <email3>lyudmila_prokhorova@mail.ru</email3>
-    <webSite>https://www.facebook.com/lyudmila.prokhorova</webSite>
-    <birthDay>25</birthDay>
+    <nickname>mariya_kulikova</nickname>
+    <photo>src\test\resources\photos\female\female_icon.bmp</photo>
+    <companyName>ЗАО СнабСбытПром</companyName>
+    <jobTitle>Директор учреждения</jobTitle>
+    <mainAddress>154836, г. Москва, ул. Победы, д. 98, корп. 5, кв. 104</mainAddress>
+    <homePhone>+7(906) 252 44 34</homePhone>
+    <mobilePhone>8-980-436-03-58</mobilePhone>
+    <workPhone>7.903.764.27.40 #6142</workPhone>
+    <faxNumber>79350909063</faxNumber>
+    <email>mariyakulikova@gmail.com</email>
+    <email2>mariya.kulikova@yandex.ru</email2>
+    <email3>mariya_kulikova@mail.ru</email3>
+    <webSite>https://www.facebook.com/mariya.kulikova</webSite>
+    <birthDay>28</birthDay>
     <birthMonth>August</birthMonth>
-    <birthYear>1999</birthYear>
-    <anniversaryDay>24</anniversaryDay>
+    <birthYear>1992</birthYear>
+    <anniversaryDay>27</anniversaryDay>
     <anniversaryMonth>August</anniversaryMonth>
-    <anniversaryYear>2014</anniversaryYear>
-    <adAddress>331643, г. Москва, ул. Свободы, д. 1, корп. 6, кв. 186</adAddress>
-    <adPhone>8 (936) 941-64-05</adPhone>
-    <notes>Элементарно, Ватсон</notes>
+    <anniversaryYear>2007</anniversaryYear>
+    <adAddress>134048, г. Москва, ул. Советская, д. 46, корп. 8, кв. 699</adAddress>
+    <adPhone>8 (923) 134-78-90</adPhone>
+    <notes>Ури, Ури! Где у него кнопка?</notes>
+    <groups/>
   </contact>
   <contact>
-    <firstName>Юрий</firstName>
-    <lastName>Елисеев</lastName>
-    <middleName>Германович</middleName>
-    <nickname>Yuriy_Yeliseyev</nickname>
-    <photo>src\test\resources\photos\male\male_sign.bmp</photo>
-    <jobTitle>Заведующий жилым корпусом гостиницы</jobTitle>
-    <companyName>ООО СбытТрейдСтрой</companyName>
-    <mainAddress>584074, г. Москва, ул. Молодежная, д. 17, корп. 7, кв. 261</mainAddress>
-    <homePhone>+7(932) 553 81 09</homePhone>
-    <mobilePhone>8-908-053-24-70</mobilePhone>
-    <workPhone>7.952.276.22.98 #2257</workPhone>
-    <faxNumber>79570347221</faxNumber>
-    <email>yuriyyeliseyev@gmail.com</email>
-    <email2>yuriy.yeliseyev@yandex.ru</email2>
-    <email3>yuriy_yeliseyev@mail.ru</email3>
-    <webSite>https://www.facebook.com/yuriy.yeliseyev</webSite>
-    <birthDay>15</birthDay>
-    <birthMonth>July</birthMonth>
-    <birthYear>1989</birthYear>
-    <anniversaryDay>14</anniversaryDay>
-    <anniversaryMonth>July</anniversaryMonth>
-    <anniversaryYear>2004</anniversaryYear>
-    <adAddress>075840, г. Москва, ул. Клубная, д. 77, корп. 1, кв. 465</adAddress>
-    <adPhone>8 (980) 884-63-61</adPhone>
-    <notes>Я требую продолжения банкета!</notes>
+    <firstName>Надежда</firstName>
+    <lastName>Корнилова</lastName>
+    <middleName>Владиславовна</middleName>
+    <nickname>nadezhda_kornilova</nickname>
+    <photo>src\test\resources\photos\female\female_sign.bmp</photo>
+    <companyName>ОАО СнабСнабСбыт</companyName>
+    <jobTitle>Администратор</jobTitle>
+    <mainAddress>626124, г. Москва, ул. Нагорная, д. 67, корп. 6, кв. 921</mainAddress>
+    <homePhone>+7(933) 615 64 18</homePhone>
+    <mobilePhone>8-984-280-90-32</mobilePhone>
+    <workPhone>7.918.900.40.91 #3255</workPhone>
+    <faxNumber>79510775989</faxNumber>
+    <email>nadezhdakornilova@gmail.com</email>
+    <email2>nadezhda.kornilova@yandex.ru</email2>
+    <email3>nadezhda_kornilova@mail.ru</email3>
+    <webSite>https://www.facebook.com/nadezhda.kornilova</webSite>
+    <birthDay>14</birthDay>
+    <birthMonth>April</birthMonth>
+    <birthYear>1995</birthYear>
+    <anniversaryDay>13</anniversaryDay>
+    <anniversaryMonth>April</anniversaryMonth>
+    <anniversaryYear>2010</anniversaryYear>
+    <adAddress>652765, г. Москва, ул. Кирова, д. 93, корп. 2, кв. 986</adAddress>
+    <adPhone>8 (902) 825-73-07</adPhone>
+    <notes>Я не жадный, я домовитый!</notes>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>Любовь</firstName>
+    <lastName>Дементьева</lastName>
+    <middleName>Степановна</middleName>
+    <nickname>lyubov_dementyeva</nickname>
+    <photo>src\test\resources\photos\female\female_sign.bmp</photo>
+    <companyName>ОАО БанкБанкПром</companyName>
+    <jobTitle>Начальник лаборатории технико-экономических исследований</jobTitle>
+    <mainAddress>607553, г. Москва, ул. Маяковского, д. 35, корп. 5, кв. 573</mainAddress>
+    <homePhone>+7(946) 079 39 50</homePhone>
+    <mobilePhone>8-985-153-82-54</mobilePhone>
+    <workPhone>7.967.223.65.85 #9345</workPhone>
+    <faxNumber>79068743198</faxNumber>
+    <email>lyubovdementyeva@gmail.com</email>
+    <email2>lyubov.dementyeva@yandex.ru</email2>
+    <email3>lyubov_dementyeva@mail.ru</email3>
+    <webSite>https://www.facebook.com/lyubov.dementyeva</webSite>
+    <birthDay>11</birthDay>
+    <birthMonth>January</birthMonth>
+    <birthYear>1991</birthYear>
+    <anniversaryDay>10</anniversaryDay>
+    <anniversaryMonth>January</anniversaryMonth>
+    <anniversaryYear>2006</anniversaryYear>
+    <adAddress>264751, г. Москва, ул. Школьный , д. 29, корп. 9, кв. 294</adAddress>
+    <adPhone>8 (998) 687-08-04</adPhone>
+    <notes>Ребята, давайте жить дружно!</notes>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>Арсений</firstName>
+    <lastName>Шилов</lastName>
+    <middleName>Юрьевич</middleName>
+    <nickname>arseniy_shilov</nickname>
+    <photo>src\test\resources\photos\male\male_sign.png</photo>
+    <companyName>ЗАО БанкСтройТрейд</companyName>
+    <jobTitle>Начальник лаборатории социологии труда</jobTitle>
+    <mainAddress>329520, г. Москва, ул. Энергетиков, д. 69, корп. 2, кв. 265</mainAddress>
+    <homePhone>+7(998) 436 29 78</homePhone>
+    <mobilePhone>8-910-670-63-68</mobilePhone>
+    <workPhone>7.938.953.57.87 #2993</workPhone>
+    <faxNumber>79021479144</faxNumber>
+    <email>arseniyshilov@gmail.com</email>
+    <email2>arseniy.shilov@yandex.ru</email2>
+    <email3>arseniy_shilov@mail.ru</email3>
+    <webSite>https://www.facebook.com/arseniy.shilov</webSite>
+    <birthDay>3</birthDay>
+    <birthMonth>September</birthMonth>
+    <birthYear>1993</birthYear>
+    <anniversaryDay>2</anniversaryDay>
+    <anniversaryMonth>September</anniversaryMonth>
+    <anniversaryYear>2008</anniversaryYear>
+    <adAddress>710760, г. Москва, ул. Трактовая, д. 55, корп. 9, кв. 865</adAddress>
+    <adPhone>8 (967) 518-72-82</adPhone>
+    <notes>Где карта, Билли? Нам нужна карта!</notes>
+    <groups/>
+  </contact>
+  <contact>
+    <firstName>Лука</firstName>
+    <lastName>Кириллов</lastName>
+    <middleName>Георгиевич</middleName>
+    <nickname>luka_kirillov</nickname>
+    <photo>src\test\resources\photos\male\male_icon.png</photo>
+    <companyName>ООО КлепажТоргСбыт</companyName>
+    <jobTitle>Производитель работ</jobTitle>
+    <mainAddress>118206, г. Москва, ул. Калинина, д. 59, корп. 2, кв. 900</mainAddress>
+    <homePhone>+7(982) 644 63 15</homePhone>
+    <mobilePhone>8-902-665-60-12</mobilePhone>
+    <workPhone>7.967.598.29.14 #4480</workPhone>
+    <faxNumber>79656373637</faxNumber>
+    <email>lukakirillov@gmail.com</email>
+    <email2>luka.kirillov@yandex.ru</email2>
+    <email3>luka_kirillov@mail.ru</email3>
+    <webSite>https://www.facebook.com/luka.kirillov</webSite>
+    <birthDay>13</birthDay>
+    <birthMonth>December</birthMonth>
+    <birthYear>1993</birthYear>
+    <anniversaryDay>12</anniversaryDay>
+    <anniversaryMonth>December</anniversaryMonth>
+    <anniversaryYear>2008</anniversaryYear>
+    <adAddress>417689, г. Москва, ул. Березовая, д. 62, корп. 6, кв. 847</adAddress>
+    <adPhone>8 (963) 612-91-53</adPhone>
+    <notes>Вот иду я красивая по улице, а мужики вокруг так и падают, так и падают… И сами в штабеля укладываются!</notes>
+    <groups/>
   </contact>
 </list>

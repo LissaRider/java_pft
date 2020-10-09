@@ -40,9 +40,10 @@ public class ContactData {
   @Column(name = "nickname")
   private String nickname = "";
 
+  @Expose
   @Column(name = "photo")
   @Type(type = "text")
-  private String photo = "";
+  private String photo;
 
   @Expose
   @Column(name = "company")
@@ -145,21 +146,25 @@ public class ContactData {
           inverseJoinColumns = @JoinColumn(name = "group_id"))
   private final Set<GroupData> groups = new HashSet<>();
 
+  @XStreamOmitField
   @JsonIgnore
   @Column(name = "im")
   @Type(type = "text")
   private final String im = "";
 
+  @XStreamOmitField
   @JsonIgnore
   @Column(name = "im2")
   @Type(type = "text")
   private final String im2 = "";
 
+  @XStreamOmitField
   @JsonIgnore
   @Column(name = "im3")
   @Type(type = "text")
   private final String im3 = "";
 
+  @XStreamOmitField
   @JsonIgnore
   @Column(name = "deprecated", columnDefinition = "datetime")
   private final String deprecated = "0000-00-00 00:00:00";

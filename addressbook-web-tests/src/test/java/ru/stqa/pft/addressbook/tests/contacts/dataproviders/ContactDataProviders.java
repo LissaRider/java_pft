@@ -14,10 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ContactDataProviders {
@@ -83,9 +80,11 @@ public class ContactDataProviders {
   private ContactData getFakeContact(String lang) {
     Faker fake = new Faker(new Locale(lang));
     return new ContactData()
-            .withFirstName(fake.name().firstName())
-            .withLastName(fake.name().lastName())
-            .withMainAddress(fake.address().fullAddress())
+            .withFirstName(fake.name().firstName().replaceAll("['ʹ]", ""))
+            .withLastName(fake.name().lastName().replaceAll("['ʹ]", ""))
+            .withMainAddress(fake.address().fullAddress()
+                    .replaceAll("['ʹ]", "")
+                    .replace("######", String.format("%06d", new Random().nextInt(999999))))
             .withHomePhone(fake.phoneNumber().phoneNumber())
             .withMobilePhone(fake.phoneNumber().phoneNumber())
             .withWorkPhone(fake.phoneNumber().phoneNumber())

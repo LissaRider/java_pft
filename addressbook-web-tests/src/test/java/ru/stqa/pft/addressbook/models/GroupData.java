@@ -41,6 +41,7 @@ public class GroupData {
   @ManyToMany(mappedBy = "groups")
   private final Set<ContactData> contacts = new HashSet<>();
 
+  @XStreamOmitField
   @JsonIgnore
   @Column(name = "deprecated", columnDefinition = "datetime")
   private final String deprecated = "0000-00-00 00:00:00";

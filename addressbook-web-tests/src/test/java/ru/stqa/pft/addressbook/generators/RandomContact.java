@@ -77,7 +77,7 @@ public class RandomContact {
         firstName = getRandomItem(getFirstNamesEN());
         middleName = getRandomItem(maleFirstNamesEN);
         lastName = getRandomItem(lastNamesEN);
-        nickname = firstName + "_" + lastName;
+        nickname = firstName.toLowerCase() + "_" + lastName.toLowerCase();
         jobTitle = getRandomItem(jobSeniorityEN) + " " + getRandomItem(jobPositionEN);
         company = getRandomItem(companyNamesEN) + " " + getRandomItem(companySuffixesEN);
         mainAddress = getRandomRangeList(1, 1000) + " " + getRandomItem(streetTitlesEN) + ", " +
@@ -98,14 +98,14 @@ public class RandomContact {
                 getRandomItem(citiesTitlesEN) + " CA " + getFormat("%04d", 9999);
         addPhone = "+1 (" + getRandomItem(zipCodesEN) + ") " + getFormat("%03d", 999) + "-" +
                 getFormat("%02d", 99) + "-" + getFormat("%02d", 99);
-        notes = getRandomItem(quotesEN).replace("'", " ");
+        notes = getRandomItem(quotesEN).replaceAll("['ʹ]", "");
         break;
       case "ru":
         firstName = getRandomItem(getGenderDependentList(gender, maleFirstNamesRU, femaleFirstNamesRU));
         middleName = getRandomItem(getGenderDependentList(gender, maleMiddleNamesRU, femaleMiddleNamesRU));
         lastName = getRandomItem(getGenderDependentList(gender, maleLastNamesRU, femaleLastNamesRU));
-        nickname = toLatinTrans.transliterate(firstName).replace("'", "") + "_" +
-                toLatinTrans.transliterate(lastName).replace("'", "");
+        nickname = toLatinTrans.transliterate(firstName).replaceAll("['ʹ]", "").toLowerCase() + "_" +
+                toLatinTrans.transliterate(lastName).replaceAll("['ʹ]", "").toLowerCase();
         jobTitle = getRandomItem(jobTitlesRU);
         company = getRandomItem(companyPrefixesRU) + " " + getRandomItem(companySuffixesRU) +
                 getRandomItem(companySuffixesRU) + getRandomItem(companySuffixesRU);

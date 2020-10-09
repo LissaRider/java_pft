@@ -1,7 +1,8 @@
-<configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
     <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>test-${bySecond}.log</file>
+        <file>out/logs/test-${bySecond}.log</file>
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
