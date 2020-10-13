@@ -2,7 +2,8 @@ package ru.stqa.pft.mantis.tests;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import ru.stqa.pft.appmanager.ApplicationManager;
+import ru.stqa.pft.mantis.appmanager.ApplicationManager;
+
 
 import java.io.IOException;
 
