@@ -1,9 +1,11 @@
-package ru.stqa.pft.appmanager;
+package ru.stqa.pft.mantis.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.BrowserType;
@@ -31,13 +33,17 @@ public class ApplicationManager {
     if (browser != null && !browser.isEmpty()) {
       switch (browser) {
         case BrowserType.FIREFOX:
-          driver = new FirefoxDriver(); // https://github.com/mozilla/geckodriver/releases
+          var firefoxOptions = new FirefoxOptions();
+          firefoxOptions.setHeadless(true);
+          driver = new FirefoxDriver(firefoxOptions); // https://github.com/mozilla/geckodriver/releases
           break;
         case BrowserType.CHROME:
-          driver = new ChromeDriver(); // https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_win32.zip
+          var chromeOptions = new ChromeOptions();
+          chromeOptions.setHeadless(true);
+          driver = new ChromeDriver(chromeOptions); // https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_win32.zip
           break;
         case BrowserType.IE:
-          InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+          var ieOptions = new InternetExplorerOptions();
           ieOptions.disableNativeEvents();
           driver = new InternetExplorerDriver(ieOptions); // https://selenium-release.storage.googleapis.com/3.150/IEDriverServer_Win32_3.150.1.zip
           break;
@@ -66,5 +72,13 @@ public class ApplicationManager {
 
   public void stop() {
     driver.quit();
+  }
+
+  public HttpSession newSession() {
+    return new HttpSession(this);
+  }
+
+  public String getProperty(String key) {
+    return properties.getProperty(key);
   }
 }
