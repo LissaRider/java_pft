@@ -78,6 +78,18 @@ public class ContactHelper extends HelperBase {
   }
 
   //<editor-fold desc="Methods">
+  public int id() {
+    var contacts = app.db().contacts();
+    int id;
+    if (!contacts.isEmpty())
+      id = contacts.stream()
+              .mapToInt(ContactData::getId)
+              .max()
+              .orElseThrow() + 1;
+    else id = 1;
+    return id;
+  }
+
   public void fillForm(ContactData contact, boolean creation) {
     clearAndType(firstNameLoc, contact.getFirstName());
     clearAndType(middleNameLoc, contact.getMiddleName());

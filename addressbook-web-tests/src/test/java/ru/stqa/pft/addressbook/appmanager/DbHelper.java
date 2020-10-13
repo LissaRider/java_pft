@@ -10,6 +10,7 @@ import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.models.Groups;
 
+import java.util.Collection;
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -42,22 +43,6 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return new Contacts(result);
-  }
-
-  public void clearData() {
-    Session session = sessionFactory.openSession();
-    session.beginTransaction();
-    List<ContactData> contacts = session.createQuery("from ContactData").list();
-    for (var contact : contacts)
-      session.delete(contact);
-    List<GroupData> groups = session.createQuery("from GroupData").list();
-    for (var group : groups)
-      session.delete(group);
-    session.getTransaction().commit();
-    session.close();
-    var newContacts = contacts();
-    var newGroups = groups();
-    assertTrue(newContacts.isEmpty() && newGroups.isEmpty());
   }
 
   public void addContact(ContactData contact) {

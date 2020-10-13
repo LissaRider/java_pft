@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
+import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
@@ -13,41 +14,61 @@ import static org.testng.Assert.assertFalse;
 
 public class ContactFromGroupRemovalTests extends TestBase {
 
+  private ContactData contact;
+  private GroupData group;
+
   @BeforeMethod
   public void ensurePreconditions() {
-    // удаляем группы и контакты через базу (с проверкой)
-    app.db().clearData();
 
-    // создаем новую группу через базу (с проверкой)
-    int groupId = new Faker().number().numberBetween(1, 10);
-    var group = new GroupData().withId(groupId).withName("Looney Tunes");
-    app.db().addGroup(group);
+    var groupData = new GroupData()
+            .withId(app.group().id())
+            .withName("Looney Tunes");
 
-    // создаем новый контакт через базу (с проверкой)
-    int contactId = new Faker().number().numberBetween(1, 10);
-    // TODO создаем новый контакт через базу c привязкой к созданной группе в базе данных
-    //  var contact = new ContactData().withId(contactId).withFirstName("Bunny").withLastName("Bugs").inGroup(group);
-    var contact = new ContactData().withId(contactId).withFirstName("Bunny").withLastName("Bugs");
-    app.db().addContact(contact);
+    var contactData = new ContactData()
+            .withId(app.contact().id())
+            .withFirstName("Bunny")
+            .withLastName("Bugs");
 
-    // переходим на страницу с контактами
+    var contacts = app.db().contacts();
+    var groups = app.db().groups();
+
+    // Проверяем наличие контактов (что в приложении есть хотя бы один контакт)
+    // Если нет, то создаем через бд (с проверкой) и возвращаем
+    if (contacts.isEmpty()) {
+      app.db().addContact(contactData);
+      contact = app.db().contacts().iterator().next();
+    }
+    // Проверяем наличие групп (что в приложении есть хотя бы одна группа)
+    // Если нет, то создаем через бд (с проверкой) и возвращаем
+    if (groups.isEmpty()) {
+      app.db().addGroup(groupData);
+      group = app.db().groups().iterator().next();
+    }
+    // Проверяем, что существуют контакты, которые можно удалить из группы
+    // Если есть, то возвращаем такой контакт и любую группу, в которую он добавлен
+    if (!(contacts.isEmpty() && groups.isEmpty())) {
+      for (var c : contacts) {
+        if (!c.getGroups().isEmpty()) {
+          contact = c;
+          group = c.getGroups().iterator().next();
+          return;
+        }
+      }
+    }
+    // Если все контакты удалены из всех групп, то берем любой контакт и добавляем в любую группу через интерфейс
+    contact = app.db().contacts().iterator().next();
+    group = app.db().groups().iterator().next();
     app.goTo().homePage();
-
-    // обновляем страницу, чтоб визуально получить актуальный список контактов
-    app.goTo().refreshPage();
-
-    // через интерефейс добавляем созданный контакт в созданную группу (с проверкой через базу)
     app.contact().addToGroup(contact, group);
-    assertFalse(app.db().contacts().iterator().next().getGroups().isEmpty());
   }
 
   @Test
-  public void testContactGroupAddition() {
+  public void testContactGroupDeletion() {
     var before = app.db().contacts();
-    var contact = before.iterator().next();
-    var group = app.db().groups().iterator().next();
     var contactWithoutGroup = contact.outOfGroup(group);
     app.goTo().homePage();
+    // обновляем страницу, чтоб визуально получить актуальный список контактов
+    app.goTo().refreshPage();
     app.contact().removeFromGroup(contact, group);
     var after = app.db().contacts();
     assertThat(after, equalTo(before.without(contact).withAdded(contactWithoutGroup)));

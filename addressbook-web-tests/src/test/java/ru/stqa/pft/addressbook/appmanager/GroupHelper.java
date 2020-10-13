@@ -34,6 +34,18 @@ public class GroupHelper extends HelperBase {
   private Groups groupCache = null;
 
   //<editor-fold desc="Methods">
+  public int id() {
+    var groups = app.db().groups();
+    int id;
+    if (!groups.isEmpty())
+      id = groups.stream()
+              .mapToInt(GroupData::getId)
+              .max()
+              .orElseThrow() + 1;
+    else id = 1;
+    return id;
+  }
+
   public void initCreation() {
     click(addGroupBtnLoc);
   }
