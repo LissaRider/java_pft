@@ -25,7 +25,7 @@ public class HttpSession {
   }
 
   public boolean login(String username, String password) throws IOException {
-    var post = new HttpPost(app.getProperty("web.baseUrl") + "login.php");
+    var post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
     List<NameValuePair> params = new ArrayList<>();
     params.add(new BasicNameValuePair("username", username));
     params.add(new BasicNameValuePair("password", password));
@@ -34,6 +34,7 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params));
     var response = httpclient.execute(post);
     var body = geTextFrom(response);
+    System.out.println(body);
     return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
   }
 
