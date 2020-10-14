@@ -13,6 +13,9 @@ dependencies.implementation group: 'org.seleniumhq.selenium', name: 'selenium-ja
 dependencies.implementation group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
 dependencies.implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.12'
 dependencies.implementation group: 'commons-net', name: 'commons-net', version: '3.7.1'
+dependencies.implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+dependencies.implementation group: 'org.subethamail', name: 'subethasmtp', version: '3.1.7'
+dependencies.implementation group: 'ru.lanwen.verbalregex', name: 'java-verbal-expressions', version: '1.6'
 
 /**
  * Test Framework

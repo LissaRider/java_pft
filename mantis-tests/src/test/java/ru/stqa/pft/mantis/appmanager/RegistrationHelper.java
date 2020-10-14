@@ -22,5 +22,12 @@ public class RegistrationHelper extends HelperBase {
     clearAndType(emailLoc, email);
     click(signupBtnLoc);
   }
+
+  public void finish(String confirmationLink, String password) {
+    open(confirmationLink);
+    clearAndType(By.id("password"), password);
+    clearAndType(By.id("password-confirm"), password);
+    click(By.cssSelector("[class=submit-button] > button"));
+  }
   //</editor-fold>
 }

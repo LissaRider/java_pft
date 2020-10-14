@@ -34,7 +34,6 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params));
     var response = httpclient.execute(post);
     var body = geTextFrom(response);
-    System.out.println(body);
     return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
   }
 
