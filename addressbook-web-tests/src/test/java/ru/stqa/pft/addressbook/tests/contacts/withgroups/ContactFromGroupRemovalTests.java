@@ -1,16 +1,15 @@
 package ru.stqa.pft.addressbook.tests.contacts.withgroups;
 
-import com.github.javafaker.Faker;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
-import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.tests.TestBase;
 
+import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertFalse;
 
 public class ContactFromGroupRemovalTests extends TestBase {
 
@@ -33,16 +32,14 @@ public class ContactFromGroupRemovalTests extends TestBase {
     var groups = app.db().groups();
 
     // Проверяем наличие контактов (что в приложении есть хотя бы один контакт)
-    // Если нет, то создаем через бд (с проверкой) и возвращаем
+    // Если нет, то создаем через бд (с проверкой)
     if (contacts.isEmpty()) {
       app.db().addContact(contactData);
-      contact = app.db().contacts().iterator().next();
     }
     // Проверяем наличие групп (что в приложении есть хотя бы одна группа)
-    // Если нет, то создаем через бд (с проверкой) и возвращаем
+    // Если нет, то создаем через бд (с проверкой)
     if (groups.isEmpty()) {
       app.db().addGroup(groupData);
-      group = app.db().groups().iterator().next();
     }
     // Проверяем, что существуют контакты, которые можно удалить из группы
     // Если есть, то возвращаем такой контакт и любую группу, в которую он добавлен
@@ -64,13 +61,33 @@ public class ContactFromGroupRemovalTests extends TestBase {
 
   @Test
   public void testContactGroupDeletion() {
+    // Hibernate кеширует результаты, поэтому получаем список контактов из бд и обновляем данные по нашему контакту
     var before = app.db().contacts();
-    var contactWithoutGroup = contact.outOfGroup(group);
+    contact = before.stream().filter(c -> (c.getId() == contact.getId())).collect(Collectors.toSet()).iterator().next();
+
+    // Получаем список групп контакта
+    var groupsBefore = contact.getGroups();
+
+    // Переходим на страницу с контактами
     app.goTo().homePage();
-    // обновляем страницу, чтоб визуально получить актуальный список контактов
+
+    // Обновляем страницу, чтоб визуально получить актуальный список контактов
     app.goTo().refreshPage();
+
+    // Удаляем контакт из группы
     app.contact().removeFromGroup(contact, group);
+
+    // Hibernate кеширует результаты, поэтому снова получаем список контактов из бд и обновляем данные по нашему контакту
     var after = app.db().contacts();
-    assertThat(after, equalTo(before.without(contact).withAdded(contactWithoutGroup)));
+    contact = after.stream().filter(c -> (c.getId() == contact.getId())).collect(Collectors.toSet()).iterator().next();
+
+    // Сравниваем размер списков групп контакта до и после удаления
+    assertThat(contact.getGroups().size(), equalTo(groupsBefore.size() - 1));
+
+    // Получаем список групп контакта
+    var groupsAfter = contact.getGroups();
+
+    // Сравниваем изменившиеся списки групп контакта
+    assertThat(groupsAfter, equalTo(groupsBefore.without(group)));
   }
 }

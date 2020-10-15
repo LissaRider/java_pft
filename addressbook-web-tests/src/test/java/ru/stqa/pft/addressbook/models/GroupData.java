@@ -38,7 +38,7 @@ public class GroupData {
   private String footer = "";
 
   @JsonIgnore
-  @ManyToMany(mappedBy = "groups")
+  @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
   private final Set<ContactData> contacts = new HashSet<>();
 
   @XStreamOmitField
