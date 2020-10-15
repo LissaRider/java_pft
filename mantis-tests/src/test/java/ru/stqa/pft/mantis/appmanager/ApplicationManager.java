@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.BrowserType;
 
 import java.io.File;
@@ -21,6 +19,7 @@ public class ApplicationManager {
 
   private WebDriver driver;
 
+  private HttpSession http;
   private RegistrationHelper reg;
   private FtpHelper ftp;
   private MailHelper mail;
@@ -38,23 +37,27 @@ public class ApplicationManager {
     var baseUrl = getProperty("web.baseUrl");
     var browser = getProperty("web.browser");
     var timeout = getProperty("wait.implicitly");
+    var geckoDriverPath = getProperty("web.geckoDriverPath");
+    var chromeDriverPath = getProperty("web.chromeDriverPath");
+    var ieDriverPath = getProperty("web.ieDriverPath");
+
     if (driver == null) {
       if (browser != null && !browser.isEmpty()) {
         switch (browser) {
           case BrowserType.FIREFOX:
             // https://github.com/mozilla/geckodriver/releases
             // driver: geckodriver-v0.27.0-win32
-            System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/geckodriver.exe");
+            setDriverPath("gecko", geckoDriverPath);
             driver = new FirefoxDriver();
             break;
           case BrowserType.CHROME:
             // https://chromedriver.chromium.org/downloads
             // driver:  chromedriver-v86.0.4240.22-win32
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+            setDriverPath("chrome", chromeDriverPath);
             driver = new ChromeDriver();
             break;
           case BrowserType.IE:
-            System.setProperty("webdriver.ie.driver", "src/test/resources/drivers/IEDriverServer.exe");
+            setDriverPath("ie", ieDriverPath);
             // https://selenium-release.storage.googleapis.com/index.html
             // driver: iedriverserver-v3.9.0-win32
             driver = new InternetExplorerDriver();
@@ -85,13 +88,20 @@ public class ApplicationManager {
     return driver;
   }
 
+  private void setDriverPath(String driver, String path) {
+    System.setProperty(String.format("webdriver.%s.driver", driver), path);
+  }
+
+  public String getProperty(String key) {
+    return properties.getProperty(key);
+  }
+
   public void loadProperties(String key, String def) throws IOException {
     properties.load(new FileReader(new File(configFile(key, def))));
   }
 
   public String configFile(String key, String def) {
-    return String.format("src/test/resources/config/%s.properties",
-            System.getProperty(key, def));
+    return String.format("src/test/resources/config/%s.properties", System.getProperty(key, def));
   }
 
   public void stop() {
@@ -123,10 +133,8 @@ public class ApplicationManager {
   }
 
   public HttpSession newSession() {
-    return new HttpSession(this);
-  }
-
-  public String getProperty(String key) {
-    return properties.getProperty(key);
+    if (http == null)
+      http = new HttpSession(this);
+    return http;
   }
 }
