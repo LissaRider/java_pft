@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.BrowserType;
 import ru.stqa.pft.addressbook.models.LoginData;
 
@@ -34,19 +33,34 @@ public class ApplicationManager {
   public void init() throws IOException {
     loadProperties("target", "local");
     loadProperties("timeout", "timeout");
-    String browser = properties.getProperty("web.browser");
+    var baseUrl = getProperty("web.baseUrl");
+    var browser = getProperty("web.browser");
+    var timeout = getProperty("wait.implicitly");
+    var adminLogin = getProperty("web.adminLogin");
+    var adminPassword = getProperty("web.adminPassword");
+    var geckoDriverPath = getProperty("web.geckoDriverPath");
+    var chromeDriverPath = getProperty("web.chromeDriverPath");
+    var ieDriverPath = getProperty("web.ieDriverPath");
+
     if (browser != null && !browser.isEmpty()) {
       switch (browser) {
         case BrowserType.FIREFOX:
-          driver = new FirefoxDriver(); // https://github.com/mozilla/geckodriver/releases
+          // https://github.com/mozilla/geckodriver/releases
+          // driver: geckodriver-v0.27.0-win32
+          setDriverPath("gecko", geckoDriverPath);
+          driver = new FirefoxDriver();
           break;
         case BrowserType.CHROME:
-          driver = new ChromeDriver(); // https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_win32.zip
+          // https://chromedriver.chromium.org/downloads
+          // driver:  chromedriver-v86.0.4240.22-win32
+          setDriverPath("chrome", chromeDriverPath);
+          driver = new ChromeDriver();
           break;
         case BrowserType.IE:
-          InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-          ieOptions.disableNativeEvents();
-          driver = new InternetExplorerDriver(ieOptions); // https://selenium-release.storage.googleapis.com/3.150/IEDriverServer_Win32_3.150.1.zip
+          setDriverPath("ie", ieDriverPath);
+          // https://selenium-release.storage.googleapis.com/index.html
+          // driver: iedriverserver-v3.9.0-win32
+          driver = new InternetExplorerDriver();
           break;
         default:
           throw new IOException("Unrecognized browser: " + browser);
@@ -55,11 +69,16 @@ public class ApplicationManager {
       throw new WebDriverException("Property 'web.browser' is null or not set (" + configFile("target", "local") + ")");
     }
 
-    driver.manage().timeouts().implicitlyWait(
-            Long.parseLong(properties.getProperty("wait.implicitly")), TimeUnit.SECONDS);
+    if (timeout != null && !timeout.isEmpty()) {
+      driver.manage().timeouts().implicitlyWait(Long.parseLong(timeout), TimeUnit.SECONDS);
+    }
 
-    String baseUrl = properties.getProperty("web.baseUrl");
-    driver.get(baseUrl);
+    if (baseUrl != null && !baseUrl.isEmpty()) {
+      driver.get(baseUrl);
+    } else {
+      throw new WebDriverException(
+              "Property 'web.baseUrl' is null or not set (" + configFile("target", "local") + ")");
+    }
 
     groupHelper = new GroupHelper(this);
     navigationHelper = new NavigationHelper(this);
@@ -67,9 +86,15 @@ public class ApplicationManager {
     loginHelper = new LoginHelper(this);
     dbHelper = new DbHelper();
 
-    loginHelper.login(new LoginData(
-            properties.getProperty("web.adminLogin"),
-            properties.getProperty("web.adminPassword")));
+    loginHelper.login(new LoginData(adminLogin, adminPassword));
+  }
+
+  private void setDriverPath(String driver, String path) {
+    System.setProperty(String.format("webdriver.%s.driver", driver), path);
+  }
+
+  private String getProperty(String key) {
+    return properties.getProperty(key);
   }
 
   public void loadProperties(String key, String def) throws IOException {
@@ -77,8 +102,7 @@ public class ApplicationManager {
   }
 
   public String configFile(String key, String def) {
-    return String.format("src/test/resources/config/%s.properties",
-            System.getProperty(key, def));
+    return String.format("src/test/resources/config/%s.properties", System.getProperty(key, def));
   }
 
   public void stop() {
