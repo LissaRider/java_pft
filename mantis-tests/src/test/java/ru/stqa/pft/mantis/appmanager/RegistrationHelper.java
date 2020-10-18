@@ -13,11 +13,14 @@ public class RegistrationHelper extends HelperBase {
   private final By emailLoc = By.id("email-field");
   // для кнопки Signup value не используется, так как может меняться в зависимости от локализации
   private final By signupBtnLoc = By.cssSelector("input[type=submit][class*=btn-success]");
+  private final By passwordLoc = By.id("password");
+  private final By passwordConfirmLoc = By.id("password-confirm");
+  private final By submitBtnLoc = By.cssSelector("[class=submit-button] > button");
   //</editor-fold>
 
   //<editor-fold desc="Methods">
   public void start(String username, String email) {
-    open(app.getProperty("web.baseUrl") + "/signup_page.php");
+    app.goTo().signupPage();
     clearAndType(usernameLoc, username);
     clearAndType(emailLoc, email);
     click(signupBtnLoc);
@@ -25,9 +28,9 @@ public class RegistrationHelper extends HelperBase {
 
   public void finish(String confirmationLink, String password) {
     open(confirmationLink);
-    clearAndType(By.id("password"), password);
-    clearAndType(By.id("password-confirm"), password);
-    click(By.cssSelector("[class=submit-button] > button"));
+    clearAndType(passwordLoc, password);
+    clearAndType(passwordConfirmLoc, password);
+    click(submitBtnLoc);
   }
   //</editor-fold>
 }

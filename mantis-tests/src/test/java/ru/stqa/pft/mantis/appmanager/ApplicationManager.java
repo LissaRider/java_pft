@@ -23,6 +23,11 @@ public class ApplicationManager {
   private RegistrationHelper reg;
   private FtpHelper ftp;
   private MailHelper mail;
+  private JamesHelper james;
+  private UserHelper user;
+  private DbHelper db;
+  private LoginHelper login;
+  private NavigationHelper nav;
 
   public ApplicationManager() {
     properties = new Properties();
@@ -136,5 +141,40 @@ public class ApplicationManager {
     if (http == null)
       http = new HttpSession(this);
     return http;
+  }
+
+  public JamesHelper james() {
+    if (james == null) {
+      james = new JamesHelper(this);
+    }
+    return james;
+  }
+
+  public UserHelper user() {
+    if (user == null) {
+      user = new UserHelper(this);
+    }
+    return user;
+  }
+
+  public DbHelper db() {
+    if (db == null) {
+      db = new DbHelper(this);
+    }
+    return db;
+  }
+
+  public LoginHelper login() {
+    if (login == null) {
+      login = new LoginHelper(this);
+    }
+    return login;
+  }
+
+  public NavigationHelper goTo() {
+    if (nav == null) {
+      nav = new NavigationHelper(this);
+    }
+    return nav;
   }
 }

@@ -1,15 +1,15 @@
 package ru.stqa.pft.addressbook.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.javafaker.DateAndTime;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("group")
 @Entity

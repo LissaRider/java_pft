@@ -1,8 +1,9 @@
-package ru.stqa.pft.mantis.tests;
+package ru.stqa.pft.mantis.tests.mailservice.subethamail;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.mantis.tests.TestBase;
 
 import java.io.IOException;
 
@@ -17,10 +18,10 @@ public class RegistrationTests extends TestBase {
 
   @Test
   public void testRegistration() throws IOException {
-    long now = System.currentTimeMillis();
+    var now = System.currentTimeMillis();
     var user = String.format("user%s", now);
     var password = "password";
-    var email = String.format("user%s@localhost.localdomain", now);
+    var email = String.format("user%s@localhost", now);
     app.registration().start(user, email);
     var mailMessages = app.mail().waitForMail(2, 10000);
     var confirmationLink = app.mail().findConfirmationLink(mailMessages, email);

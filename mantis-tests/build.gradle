@@ -16,6 +16,8 @@ dependencies.implementation group: 'commons-net', name: 'commons-net', version: 
 dependencies.implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 dependencies.implementation group: 'org.subethamail', name: 'subethasmtp', version: '3.1.7'
 dependencies.implementation group: 'ru.lanwen.verbalregex', name: 'java-verbal-expressions', version: '1.6'
+dependencies.implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
+dependencies.implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.22.Final'
 
 /**
  * Test Framework
