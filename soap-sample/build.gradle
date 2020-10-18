@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'no.nils.wsdl2java'
+
+/**
+ * Repositories
+ */
+repositories.mavenCentral()
+
+/**
+ * Dependencies
+ */
+dependencies.implementation group: 'org.testng', name: 'testng', version: '7.1.0'
+dependencies.implementation group: 'com.sun.xml.ws', name: 'rt', version: '2.3.3'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'no.nils:wsdl2java:0.10'
+    }
+}
+
+/**
+ * Test Framework
+ */
+test.useTestNG()
+
+/**
+ * wsdl2java settings
+ */
+wsdl2java.generatedWsdlDir = file("src/main/java")
+wsdl2java.wsdlDir = file("$projectDir/src/main/resources")
+wsdl2java.wsdlsToGenerate = [['-p', 'com.lavasoft', '-autoNameResolution',
+                              "$projectDir/src/main/resources/geoipservice.wsdl"]]
