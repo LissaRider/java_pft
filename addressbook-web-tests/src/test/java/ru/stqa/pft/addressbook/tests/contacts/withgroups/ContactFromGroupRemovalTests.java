@@ -56,6 +56,8 @@ public class ContactFromGroupRemovalTests extends TestBase {
     contact = app.db().contacts().iterator().next();
     group = app.db().groups().iterator().next();
     app.goTo().homePage();
+    // Обновляем страницу, чтоб визуально получить актуальный список контактов
+    app.goTo().refreshPage();
     app.contact().addToGroup(contact, group);
   }
 
