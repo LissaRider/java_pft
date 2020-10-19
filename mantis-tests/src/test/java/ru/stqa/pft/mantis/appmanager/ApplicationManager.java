@@ -28,6 +28,7 @@ public class ApplicationManager {
   private DbHelper db;
   private LoginHelper login;
   private NavigationHelper nav;
+  private SoapHelper soap;
 
   public ApplicationManager() {
     properties = new Properties();
@@ -176,5 +177,12 @@ public class ApplicationManager {
       nav = new NavigationHelper(this);
     }
     return nav;
+  }
+
+  public SoapHelper soap() {
+    if (soap == null) {
+      soap = new SoapHelper(this);
+    }
+    return soap;
   }
 }

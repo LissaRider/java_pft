@@ -18,6 +18,7 @@ dependencies.implementation group: 'org.subethamail', name: 'subethasmtp', versi
 dependencies.implementation group: 'ru.lanwen.verbalregex', name: 'java-verbal-expressions', version: '1.6'
 dependencies.implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 dependencies.implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.22.Final'
+dependencies.implementation group: 'biz.futureware.mantis', name: 'mantis-axis-soap-client', version: '1.2.19'
 
 /**
  * Test Framework
