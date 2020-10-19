@@ -13,11 +13,17 @@ import static org.testng.Assert.assertEquals;
 public class SoapTests extends TestBase {
 
   @Test
-  public void testGetProjects() throws MalformedURLException, ServiceException, RemoteException {
+  public void testGetProjects() throws RemoteException, ServiceException, MalformedURLException {
+    skipIfNotFixed(3);
     var projects = app.soap().getProjects();
-    System.out.println(projects.size());
-    for (var project : projects) {
-      System.out.println(project.getName());
+    System.out.println("==================================== TEST DATA =======================================");
+    System.out.println("Projects number: " + projects.size());
+    if(!projects.isEmpty())
+    {
+      System.out.println("Projects:");
+      for (var project : projects) {
+        System.out.println("  - " + project);
+      }
     }
   }
 

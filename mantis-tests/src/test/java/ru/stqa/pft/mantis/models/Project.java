@@ -22,4 +22,12 @@ public class Project {
     this.name = name;
     return this;
   }
+
+  @Override
+  public String toString() {
+    return "Project{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            '}';
+  }
 }
