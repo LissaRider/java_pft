@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests.groups.dataproviders;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.models.Groups;
@@ -9,6 +10,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCSVDataTests extends TestBase {
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().groupsPage();
+    if (app.group().all().size() == 0) app.group().deleteAll();;
+  }
 
   @Test(testName = "Проверка создания группы (CSV)",
           dataProvider = "groupsFromCsvFile", dataProviderClass = GroupDataProviders.class)

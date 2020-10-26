@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests.contacts.dataproviders;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.ContactData;
 import ru.stqa.pft.addressbook.models.Contacts;
@@ -9,6 +10,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactXMLDataTests extends TestBase {
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().homePage();
+    if (app.contact().all().size() == 0) app.contact().deleteAll();;
+  }
 
   @Test(testName = "RU Проверка создания контакта (XML)",
           dataProvider = "contactsRUFromXmlFile", dataProviderClass = ContactDataProviders.class)
