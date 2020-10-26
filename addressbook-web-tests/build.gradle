@@ -45,7 +45,7 @@ task testGroups(type: Test) {
     }
 }
 
-/*task testContacts(type: Test) {
+task testContacts(type: Test) {
     useTestNG {
         suites 'src/test/resources/testngsuites/testng-contacts.xml'
     }
@@ -58,9 +58,9 @@ task testGroups(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-}*/
+}
 
-/*task testDPGroups(type: Test) {
+task testDPGroups(type: Test) {
     useTestNG {
         suites 'src/test/resources/testngsuites/testng-dp-groups.xml'
     }
@@ -73,9 +73,9 @@ task testGroups(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-}*/
+}
 
-/*task testDPContacts(type: Test) {
+task testDPContacts(type: Test) {
     useTestNG {
         suites 'src/test/resources/testngsuites/testng-dp-contacts.xml'
     }
@@ -88,9 +88,9 @@ task testGroups(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-}*/
+}
 
-/*task testDBGroups(type: Test) {
+task testDBGroups(type: Test) {
     useTestNG {
         suites 'src/test/resources/testngsuites/testng-db-groups.xml'
     }
@@ -106,9 +106,9 @@ task testGroups(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
-}*/
+}
 
-/*task testDBContacts(type: Test) {
+task testDBContacts(type: Test) {
     useTestNG {
         suites 'src/test/resources/testngsuites/testng-db-contacts.xml'
     }
@@ -124,7 +124,7 @@ task testGroups(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
-}*/
+}
 
 /**
  * 1st approach: Setting encoding during compilation in Java and Test classes
