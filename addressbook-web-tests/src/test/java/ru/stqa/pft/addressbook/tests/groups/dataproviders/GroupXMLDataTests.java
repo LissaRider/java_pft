@@ -14,7 +14,7 @@ public class GroupXMLDataTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupsPage();
-    if (app.group().all().size() == 0) app.group().deleteAll();;
+    if (app.group().all().size() > 10) app.group().deleteAll();;
   }
 
   @Test(testName = "Проверка создания группы (XML)",

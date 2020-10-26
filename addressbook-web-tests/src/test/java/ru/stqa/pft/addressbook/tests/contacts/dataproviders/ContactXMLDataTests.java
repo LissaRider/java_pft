@@ -14,7 +14,7 @@ public class ContactXMLDataTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    if (app.contact().all().size() == 0) app.contact().deleteAll();;
+    if (app.contact().all().size() > 10) app.contact().deleteAll();;
   }
 
   @Test(testName = "RU Проверка создания контакта (XML)",
