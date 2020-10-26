@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -31,7 +30,8 @@ public class ApplicationManager {
   private DbHelper dbHelper;
   private String browser;
 
-  public ApplicationManager() {
+  public ApplicationManager(String browser) {
+    this.browser = browser;
     properties = new Properties();
   }
 
@@ -46,7 +46,7 @@ public class ApplicationManager {
     var chromeDriverPath = getProperty("web.chromeDriverPath");
     var ieDriverPath = getProperty("web.ieDriverPath");
     var hubUrl = getProperty("selenium.server");
-    
+
     if (hubUrl == null || hubUrl.isEmpty()) {
       browser = getProperty("web.browser");
       if (browser != null && !browser.isEmpty()) {
