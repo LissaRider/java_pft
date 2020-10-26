@@ -16,14 +16,14 @@ public class ContactCreationTests extends TestBase {
 
   @Test(testName = "Проверка создания контакта")
   public void testContactCreation() {
-    app.goTo().homePage();
-    Contacts before = app.contact().all();
-    Groups groups = app.db().groups();
     GroupData group = new GroupData().withName("Relatives");
-    if (groups.size() == 0) {
+    if (app.db().groups().size() == 0) {
       app.goTo().groupsPage();
       app.group().create(group);
     }
+    app.goTo().homePage();
+    Contacts before = app.contact().all();
+    Groups groups = app.db().groups();
     ContactData contact = new ContactData()
             .withFirstName("Alice")
             .withMiddleName("Batkovna")

@@ -16,11 +16,13 @@ public class ContactCreationDBTests extends TestBase {
 
   @Test(testName = "Проверка создания контакта (БД)")
   public void dBTestContactCreation() {
+    GroupData group = new GroupData()
+            .withId(app.group().id())
+            .withName("Relatives");
+    if (app.db().groups().isEmpty()) app.db().addGroup(group);
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     Groups groups = app.db().groups();
-    GroupData group = new GroupData().withName("Relatives");
-    if (groups.isEmpty()) app.db().addGroup(group);
     ContactData contact = new ContactData()
             .withFirstName("Alice")
             .withMiddleName("Batkovna")
