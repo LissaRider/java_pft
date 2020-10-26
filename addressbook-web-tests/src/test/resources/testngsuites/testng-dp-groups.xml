@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Groups Data Provider Tests Suite" verbose="2">
+<suite name="Groups Data Provider Tests Suite" verbose="3">
     <test name="GroupsDP">
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.groups.dataproviders.GroupValidDataTests"/>

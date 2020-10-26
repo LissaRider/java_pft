@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Base Contacts Tests Suite" verbose="3">
+<suite name="Base Contacts Tests Suite" verbose="2">
     <test name="Contacts">
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.contacts.ContactCreationTests"/>

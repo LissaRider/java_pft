@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Contacts Data Provider Tests Suite" verbose="4">
-    <test name="ContactsDP">
+<suite name="Contacts Data Base Tests Suite" verbose="6">
+    <test name="ContactsDB">
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.contacts.dbtests.ContactCreationDBTests"/>
             <class name="ru.stqa.pft.addressbook.tests.contacts.dbtests.ContactModificationDBTests"/>

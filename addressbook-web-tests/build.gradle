@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.Test
+
 apply plugin: 'java'
 
 /**
@@ -123,6 +125,21 @@ task testDBContacts(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+
+task testContactsWithGroups(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testngsuites/testng-contacts-with-groups.xml'
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
     }
 }
 

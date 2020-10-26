@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Contacts With Groups Tests Suite" verbose="7">
+    <test name="ContactsWithGroups">
+        <classes>
+            <class name="ru.stqa.pft.addressbook.tests.contacts.withgroups.ContactToGroupAddingTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.contacts.withgroups.ContactFromGroupRemovalTests"/>
+        </classes>
+    </test>
+</suite>
