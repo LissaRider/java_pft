@@ -1,16 +1,20 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import ru.stqa.pft.addressbook.models.LoginData;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -41,32 +45,39 @@ public class ApplicationManager {
     var geckoDriverPath = getProperty("web.geckoDriverPath");
     var chromeDriverPath = getProperty("web.chromeDriverPath");
     var ieDriverPath = getProperty("web.ieDriverPath");
+    var hubUrl = getProperty("selenium.server");
 
-    if (browser != null && !browser.isEmpty()) {
-      switch (browser) {
-        case BrowserType.FIREFOX:
-          // https://github.com/mozilla/geckodriver/releases
-          // driver: geckodriver-v0.27.0-win32
-          setDriverPath("gecko", geckoDriverPath);
-          driver = new FirefoxDriver();
-          break;
-        case BrowserType.CHROME:
-          // https://chromedriver.chromium.org/downloads
-          // driver:  chromedriver-v86.0.4240.22-win32
-          setDriverPath("chrome", chromeDriverPath);
-          driver = new ChromeDriver();
-          break;
-        case BrowserType.IE:
-          setDriverPath("ie", ieDriverPath);
-          // https://selenium-release.storage.googleapis.com/index.html
-          // driver: iedriverserver-v3.9.0-win32
-          driver = new InternetExplorerDriver();
-          break;
-        default:
-          throw new IOException("Unrecognized browser: " + browser);
+    if (hubUrl == null || hubUrl.isEmpty()) {
+      if (browser != null && !browser.isEmpty()) {
+        switch (browser) {
+          case BrowserType.FIREFOX:
+            // https://github.com/mozilla/geckodriver/releases
+            // driver: geckodriver-v0.27.0-win32
+            setDriverPath("gecko", geckoDriverPath);
+            driver = new FirefoxDriver();
+            break;
+          case BrowserType.CHROME:
+            // https://chromedriver.chromium.org/downloads
+            // driver:  chromedriver-v86.0.4240.22-win32
+            setDriverPath("chrome", chromeDriverPath);
+            driver = new ChromeDriver();
+            break;
+          case BrowserType.IE:
+            setDriverPath("ie", ieDriverPath);
+            // https://selenium-release.storage.googleapis.com/index.html
+            // driver: iedriverserver-v3.9.0-win32
+            driver = new InternetExplorerDriver();
+            break;
+          default:
+            throw new IOException("Unrecognized browser: " + browser);
+        }
+      } else {
+        throw new WebDriverException("Property 'web.browser' is null or not set (" + configFile("target", "local") + ")");
       }
     } else {
-      throw new WebDriverException("Property 'web.browser' is null or not set (" + configFile("target", "local") + ")");
+      var capabilities = new DesiredCapabilities();
+      capabilities.setBrowserName(browser);
+      driver = new RemoteWebDriver(new URL(hubUrl), capabilities);
     }
 
     if (timeout != null && !timeout.isEmpty()) {
