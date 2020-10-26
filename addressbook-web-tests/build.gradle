@@ -41,72 +41,72 @@ task testGroups(type: Test) {
         systemProperty 'target', "${target}"
     }
 }
-
-task testContacts(type: Test) {
-    useTestNG {
-        suites 'src/test/resources/testngsuites/testng-contacts.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-}
-
-task testDPGroups(type: Test) {
-    useTestNG {
-        suites 'src/test/resources/testngsuites/testng-dp-groups.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-}
-
-task testDPContacts(type: Test) {
-    useTestNG {
-        suites 'src/test/resources/testngsuites/testng-dp-contacts.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-}
-
-task testDBGroups(type: Test) {
-    useTestNG {
-        suites 'src/test/resources/testngsuites/testng-db-groups.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-    if (project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUI}"
-    }
-}
-
-task testDBContacts(type: Test) {
-    useTestNG {
-        suites 'src/test/resources/testngsuites/testng-db-contacts.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-    if (project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUI}"
-    }
-}
+//
+//task testContacts(type: Test) {
+//    useTestNG {
+//        suites 'src/test/resources/testngsuites/testng-contacts.xml'
+//    }
+//    if (project.hasProperty('browser')) {
+//        systemProperty 'browser', "${browser}"
+//    }
+//    if (project.hasProperty('target')) {
+//        systemProperty 'target', "${target}"
+//    }
+//}
+//
+//task testDPGroups(type: Test) {
+//    useTestNG {
+//        suites 'src/test/resources/testngsuites/testng-dp-groups.xml'
+//    }
+//    if (project.hasProperty('browser')) {
+//        systemProperty 'browser', "${browser}"
+//    }
+//    if (project.hasProperty('target')) {
+//        systemProperty 'target', "${target}"
+//    }
+//}
+//
+//task testDPContacts(type: Test) {
+//    useTestNG {
+//        suites 'src/test/resources/testngsuites/testng-dp-contacts.xml'
+//    }
+//    if (project.hasProperty('browser')) {
+//        systemProperty 'browser', "${browser}"
+//    }
+//    if (project.hasProperty('target')) {
+//        systemProperty 'target', "${target}"
+//    }
+//}
+//
+//task testDBGroups(type: Test) {
+//    useTestNG {
+//        suites 'src/test/resources/testngsuites/testng-db-groups.xml'
+//    }
+//    if (project.hasProperty('browser')) {
+//        systemProperty 'browser', "${browser}"
+//    }
+//    if (project.hasProperty('target')) {
+//        systemProperty 'target', "${target}"
+//    }
+//    if (project.hasProperty('verifyUI')) {
+//        systemProperty 'verifyUI', "${verifyUI}"
+//    }
+//}
+//
+//task testDBContacts(type: Test) {
+//    useTestNG {
+//        suites 'src/test/resources/testngsuites/testng-db-contacts.xml'
+//    }
+//    if (project.hasProperty('browser')) {
+//        systemProperty 'browser', "${browser}"
+//    }
+//    if (project.hasProperty('target')) {
+//        systemProperty 'target', "${target}"
+//    }
+//    if (project.hasProperty('verifyUI')) {
+//        systemProperty 'verifyUI', "${verifyUI}"
+//    }
+//}
 
 /**
  * 1st approach: Setting encoding during compilation in Java and Test classes
