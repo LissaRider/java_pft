@@ -29,6 +29,7 @@ public class ApplicationManager {
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
   private DbHelper dbHelper;
+  private String browser;
 
   public ApplicationManager() {
     properties = new Properties();
@@ -45,8 +46,7 @@ public class ApplicationManager {
     var chromeDriverPath = getProperty("web.chromeDriverPath");
     var ieDriverPath = getProperty("web.ieDriverPath");
     var hubUrl = getProperty("selenium.server");
-
-    String browser = "";
+    
     if (hubUrl == null || hubUrl.isEmpty()) {
       browser = getProperty("web.browser");
       if (browser != null && !browser.isEmpty()) {
