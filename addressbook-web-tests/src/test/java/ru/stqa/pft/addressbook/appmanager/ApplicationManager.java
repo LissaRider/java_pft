@@ -79,7 +79,7 @@ public class ApplicationManager {
     } else {
       var capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
+      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "WINDOWS")));
       driver = new RemoteWebDriver(new URL(hubUrl), capabilities);
     }
 
