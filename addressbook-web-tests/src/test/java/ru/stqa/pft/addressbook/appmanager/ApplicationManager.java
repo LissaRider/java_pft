@@ -38,7 +38,6 @@ public class ApplicationManager {
     loadProperties("target", "local");
     loadProperties("timeout", "timeout");
     var baseUrl = getProperty("web.baseUrl");
-    var browser = getProperty("web.browser");
     var timeout = getProperty("wait.implicitly");
     var adminLogin = getProperty("web.adminLogin");
     var adminPassword = getProperty("web.adminPassword");
@@ -47,7 +46,9 @@ public class ApplicationManager {
     var ieDriverPath = getProperty("web.ieDriverPath");
     var hubUrl = getProperty("selenium.server");
 
+    String browser = "";
     if (hubUrl == null || hubUrl.isEmpty()) {
+      browser = getProperty("web.browser");
       if (browser != null && !browser.isEmpty()) {
         switch (browser) {
           case BrowserType.FIREFOX:
