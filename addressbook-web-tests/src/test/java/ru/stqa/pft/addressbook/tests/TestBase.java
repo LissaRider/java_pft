@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-//@Listeners(MyTestListener.class)
+@Listeners(MyTestListener.class)
 public class TestBase {
 
   protected static final ApplicationManager app =
@@ -26,16 +26,16 @@ public class TestBase {
 
   Logger logger = LoggerFactory.getLogger(TestBase.class);
 
-/*  @BeforeSuite
+  @BeforeSuite
   public void setUp(ITestContext context) throws Exception {
     app.init();
     context.setAttribute("app", app);
-  }*/
+  }
 
-  @BeforeSuite(alwaysRun = true)
+/*  @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {
     app.init();
-  }
+  }*/
 
   @AfterSuite(alwaysRun = true)
   public void tearDown() {
