@@ -1,8 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -117,6 +115,10 @@ public class ApplicationManager {
 
   public String configFile(String key, String def) {
     return String.format("src/test/resources/config/%s.properties", System.getProperty(key, def));
+  }
+
+  public byte[] takeScreenshot() {
+    return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
   }
 
   public void stop() {

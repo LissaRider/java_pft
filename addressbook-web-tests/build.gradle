@@ -152,3 +152,24 @@ compileTestJava.options.encoding = "UTF-8"*/
  */
 tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
 tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
+
+/**
+ * Allure settings
+ */
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.8.1"
+    }
+}
+
+apply plugin: 'io.qameta.allure'
+
+allure {
+    version = '2.7.0'
+    autoconfigure = true
+    aspectjweaver = true
+    allureJavaVersion = '2.13.6'
+}
