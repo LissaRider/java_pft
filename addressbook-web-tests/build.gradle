@@ -22,6 +22,8 @@ dependencies.implementation group: 'ch.qos.logback', name: 'logback-classic', ve
 dependencies.implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 dependencies.implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.22.Final'
 dependencies.implementation group: 'org.robotframework', name: 'robotframework', version: '3.2.2'
+dependencies.implementation group: 'io.cucumber', name: 'cucumber-java', version: '6.4.0'
+dependencies.implementation group: 'io.cucumber', name: 'cucumber-testng', version: '6.4.0'
 
 /**
  * Test Framework
