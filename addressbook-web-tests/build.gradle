@@ -145,9 +145,8 @@ task testContactsWithGroups(type: Test) {
 /**
  * Setting encoding during compilation in Java and Test classes
  */
-compileJava.options.encoding("UTF-8")
-compileTestJava.options.encoding("UTF-8")
-test.systemProperty("file.encoding", "UTF-8")
+tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
+tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
 
 /**
  * Allure settings
