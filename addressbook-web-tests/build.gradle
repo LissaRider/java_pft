@@ -21,6 +21,7 @@ dependencies.implementation group: 'commons-lang', name: 'commons-lang', version
 dependencies.implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 dependencies.implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 dependencies.implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.22.Final'
+dependencies.implementation group: 'org.robotframework', name: 'robotframework', version: '3.2.2'
 
 /**
  * Test Framework
@@ -142,16 +143,11 @@ task testContactsWithGroups(type: Test) {
 }
 
 /**
- * 1st approach: Setting encoding during compilation in Java and Test classes
+ * Setting encoding during compilation in Java and Test classes
  */
-/*compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"*/
-
-/**
- * 2nd approach: Setting encoding during compilation in Java and Test classes
- */
-tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
-tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
+compileJava.options.encoding("UTF-8")
+compileTestJava.options.encoding("UTF-8")
+test.systemProperty("file.encoding", "UTF-8")
 
 /**
  * Allure settings
@@ -173,4 +169,14 @@ allure {
     aspectjVersion = '1.9.6'
     aspectjweaver = false
     allureJavaVersion = '2.13.6'
+}
+
+/**
+ * Robot Framework settings
+ */
+task robotFramework(type: JavaExec) {
+    main = 'org.robotframework.RobotFramework'
+    classpath = sourceSets.test.runtimeClasspath
+    args '--outputdir', 'build/reports/robotframework'
+    args 'src/test/resources/robotframework'
 }
