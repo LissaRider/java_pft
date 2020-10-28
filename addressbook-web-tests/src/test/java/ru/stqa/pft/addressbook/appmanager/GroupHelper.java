@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.models.GroupData;
@@ -34,6 +35,7 @@ public class GroupHelper extends HelperBase {
   private Groups groupCache = null;
 
   //<editor-fold desc="Methods">
+  @Step("Я получаю идентификатор для группы")
   public int id() {
     var groups = app.db().groups();
     int id;
@@ -46,52 +48,62 @@ public class GroupHelper extends HelperBase {
     return id;
   }
 
+  @Step("Я открываю страницу создания группы")
   public void initCreation() {
     click(addGroupBtnLoc);
   }
 
+  @Step("Я заполняю поля группы данными")
   public void fillForm(GroupData groupData) {
     clearAndType(groupNameLoc, groupData.getName());
     clearAndType(groupHeaderLoc, groupData.getHeader());
     clearAndType(groupFooterLoc, groupData.getFooter());
   }
 
+  @Step("Я подтверждаю создание группы")
   public void submitCreation() {
     click(createGroupBtnLoc);
     waitForPageLoad(); // IE
   }
 
+  @Step("Я выбираю группу по идентификатору")
   public void selectById(int id) {
     getElement(groupLoc(id)).click();
   }
 
+  @Step("Я подтверждаю удаление группы")
   public void submitDeletion() {
     click(deleteGroupBtnLoc);
     waitForPageLoad(); // IE
   }
 
+  @Step("Я возвращаюсь на страницу со списком групп")
   public void returnToGroupsPage() {
     click(returnToGroupsPageLinkLoc);
     waitForPageLoad(); // IE
   }
 
+  @Step("Я открываю страницу редактирования группы")
   public void initModification() {
     click(editGroupBtnLoc);
   }
 
+  @Step("Я подтверждаю все изменения группы")
   public void submitModification() {
     click(updateGroupBtnLoc);
     waitForPageLoad(); // IE
   }
 
+  @Step("Я выбираю все группы")
   private void selectAll() {
     var checkboxes = getElements(groupCheckboxLoc);
-    for(var checkbox : checkboxes){
-      if(!checkbox.isSelected())
+    for (var checkbox : checkboxes) {
+      if (!checkbox.isSelected())
         checkbox.click();
     }
   }
 
+  @Step("Я получаю актуальное количество групп")
   public int count() {
     try {
       implicitlyWait(0);
@@ -101,6 +113,7 @@ public class GroupHelper extends HelperBase {
     }
   }
 
+  @Step("Я создаю группу")
   public void create(GroupData group) {
     initCreation();
     fillForm(group);
@@ -110,6 +123,7 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
+  @Step("Я редактирую группу")
   public void modify(GroupData group) {
     selectById(group.getId());
     initModification();
@@ -120,6 +134,7 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
+  @Step("Я удаляю группу")
   public void delete(GroupData group) {
     selectById(group.getId());
     submitDeletion();
@@ -128,6 +143,7 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
+  @Step("Я удаляю все группы")
   public void deleteAll() {
     selectAll();
     submitDeletion();
@@ -136,6 +152,7 @@ public class GroupHelper extends HelperBase {
     returnToGroupsPage();
   }
 
+  @Step("Я получаю актуальный список групп")
   public Groups all() {
     if (groupCache != null)
       return new Groups(groupCache);

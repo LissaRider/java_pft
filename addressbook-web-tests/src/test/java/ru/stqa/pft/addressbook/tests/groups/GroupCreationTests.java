@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.tests.groups;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.GroupData;
 import ru.stqa.pft.addressbook.models.Groups;
@@ -10,6 +12,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
+  @Feature("Создание группы")
+  @Description("Проверка создания группы")
   @Test(testName = "Проверка создания группы")
   public void testGroupCreation() {
     app.goTo().groupsPage();
@@ -29,6 +33,8 @@ public class GroupCreationTests extends TestBase {
             .orElseThrow())))); /*java 11: getAsInt() to orElseThrow()*/
   }
 
+  @Feature("Создание группы")
+  @Description("Проверка создания некорректной группы")
   @Test(testName = "Проверка создания некорректной группы")
   public void testBadGroupCreation() {
     app.goTo().groupsPage();

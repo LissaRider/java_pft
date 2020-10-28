@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class NavigationHelper extends HelperBase {
@@ -20,6 +21,7 @@ public class NavigationHelper extends HelperBase {
     return getElement(pageTitleLoc).getText();
   }
 
+  @Step("Я перехожу на страницу со списком групп")
   public void groupsPage() {
     if (isAnyElementPresent(pageTitleLoc)
             && getPageTitle().equals("Groups")
@@ -30,6 +32,7 @@ public class NavigationHelper extends HelperBase {
     waitForPageLoad(); // IE
   }
 
+  @Step("Я перехожу на страницу создания/редактирования контакта")
   public void editPage() {
     if (isAnyElementPresent(pageTitleLoc)
             && getPageTitle().equals("Edit / add address book entry")
@@ -39,6 +42,7 @@ public class NavigationHelper extends HelperBase {
     click(editContactPageLinkLoc);
   }
 
+  @Step("Я перехожу на страницу со списком контактов")
   public void homePage() {
     if (isAnyElementPresent(app.contact().contactsTableLoc)) {
       return;

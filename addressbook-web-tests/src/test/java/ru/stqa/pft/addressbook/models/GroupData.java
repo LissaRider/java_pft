@@ -93,11 +93,12 @@ public class GroupData {
 
   @Override
   public String toString() {
-    return "GroupData{" +
-            "name='" + name + '\'' +
+    return "GroupData { " +
+            "id=" + id +
+            ", name='" + name + '\'' +
             ", header='" + header + '\'' +
             ", footer='" + footer + '\'' +
-            '}';
+            " }";
   }
 
   @Override

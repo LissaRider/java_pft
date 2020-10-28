@@ -168,8 +168,9 @@ buildscript {
 apply plugin: 'io.qameta.allure'
 
 allure {
-    version = '2.7.0'
+    version = '2.13.6'
     autoconfigure = true
-    aspectjweaver = true
+    aspectjVersion = '1.9.6'
+    aspectjweaver = false
     allureJavaVersion = '2.13.6'
 }

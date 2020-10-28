@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.tests.groups;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.GroupData;
@@ -9,6 +11,7 @@ import ru.stqa.pft.addressbook.tests.TestBase;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Feature("Редатирование группы")
 public class GroupModificationTests extends TestBase {
 
   @BeforeMethod
@@ -22,6 +25,7 @@ public class GroupModificationTests extends TestBase {
     if (app.group().all().size() == 0) app.group().create(newGroup);
   }
 
+  @Description("Проверка редактирования группы")
   @Test(testName = "Проверка редактирования группы")
   public void testGroupModification() {
     Groups before = app.group().all();
