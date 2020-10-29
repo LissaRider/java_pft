@@ -5,6 +5,6 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "classpath:bdd",
-        plugin = {"pretty", "html:build/reports/cucumber-report"})
+        plugin = {"pretty", "html:build/reports/cucumber-report.html"})
 public class GroupTests extends AbstractTestNGCucumberTests {
 }
