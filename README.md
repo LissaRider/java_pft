@@ -4,6 +4,7 @@ This is the java training repository.
 * selenium 3
 * testng 7.1.0
 * gradle 6.6
+* allure 2.13.6
 * hibernate
 * mysql
 * logback
@@ -13,3 +14,4 @@ This is the java training repository.
 * Robot Framework Sample
 * Data generators (csv, xml,json,yaml)
 * Data providers (csv, xml,json,yaml)
+* jenkins && selenium-grid
